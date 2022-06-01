@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6c69afb910cb24392079cfcdff9089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 6686069037882567892}
 --- !u!1 &2372150198879661034
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6686069037882567894}
-  melee_weapon: {fileID: 0}
+  state: 0
   feet: {fileID: 3491743436302012608}
 --- !u!1 &4047747162912907716
 GameObject:
@@ -248,6 +249,9 @@ MonoBehaviour:
   pivot: {fileID: 4047747162912907716}
   attack_point: {fileID: 4783141285471380193}
   direction: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+  facing_direction: {x: 1, y: 0}
+  melee_weapon: {fileID: 0}
   target_position: {x: 0, y: 0, z: 0}
   hitbox: {fileID: 1509339489}
   head_s: {fileID: 6686069038196305223}

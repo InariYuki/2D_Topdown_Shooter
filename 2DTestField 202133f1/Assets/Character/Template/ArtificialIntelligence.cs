@@ -132,21 +132,49 @@ public class ArtificialIntelligence : MonoBehaviour
         trigger = false;
     }
     GameObject current_enemy = null;
+    int attack_mode_substate = 0; //0 = aggresive , 1 = retreat
+    bool attack_mode_substate_decided = false;
+    bool attack_mode_substate_timer_start = false;
     void attack_mode(){
         if(current_enemy == null) return;
+        if(attack_mode_substate_decided == false){
+            attack_mode_substate_decided = true;
+            attack_mode_substate = Random.Range(0 , 2);
+            if(attack_mode_substate_timer_start == false){
+                attack_mode_substate_timer_start = true;
+                StartCoroutine(change_attack_substate());
+            }
+        }
         parent.target_position = current_enemy.transform.position;
         if(parent.melee_weapon != null){
             if((current_enemy.transform.position - transform.position).magnitude > 0.3f){
+                //if raycasthit == 0
                 parent.direction = current_enemy.transform.position - transform.position;
+                /*if(raycasthit == 1){
+                    go_to(current_enemy.transform.position)
+                }*/
             }
             else{
-                parent.direction = Vector2.zero;
-                parent.normal_attack();
+                switch(attack_mode_substate){
+                    case 0:
+                        parent.direction = Vector2.zero;
+                        parent.normal_attack();
+                        break;
+                    case 1:
+                        parent.velocity = (Quaternion.AngleAxis(Random.Range(-90 , 90) , Vector3.forward) * (transform.position - current_enemy.transform.position)).normalized * 40f;
+                        break;
+                }
             }
         }
+        //else if(parent.ranged_weapon != null)....
     }
-    Vector3 target_position;
-    void go_to(){
+    float attack_mode_substate_time = 1f;
+    IEnumerator change_attack_substate(){
+        yield return new WaitForSeconds(attack_mode_substate_time);
+        attack_mode_substate_decided = false;
+        attack_mode_substate_timer_start = false;
+    }
+    void go_to(Vector3 target_position){
         if((transform.position - target_position).magnitude < 0.1f){
             parent.direction = Vector3.zero;
             return;
