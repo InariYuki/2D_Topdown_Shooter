@@ -32,11 +32,17 @@ public class Character : MonoBehaviour
         handle_render_order();
     }
     public Melee melee_weapon;
+    public Ranged ranged_weapon;
     void equip_weapon(){
         if(weapon_ctrl.GetComponentInChildren<Melee>() != null){
             melee_weapon = weapon_ctrl.GetComponentInChildren<Melee>();
             weapon_ctrl.init();
             melee_weapon.init(this.gameObject);
+        }
+        else if(weapon_ctrl.GetComponentInChildren<Ranged>() != null){
+            ranged_weapon = weapon_ctrl.GetComponentInChildren<Ranged>();
+            weapon_ctrl.init();
+            ranged_weapon.init(this.gameObject);
         }
     }
     public Vector3 target_position = Vector3.zero;
@@ -47,17 +53,43 @@ public class Character : MonoBehaviour
     [SerializeField] Collider2D hitbox;
     public void normal_attack(){
         if(melee_weapon != null){
+            right_hand_s.enabled = false;
+            left_hand_s.enabled = false;
+            right_hand_v.enabled = false;
+            left_hand_v.enabled = false;
             hitbox.enabled = false;
             melee_weapon.normal_attack();
             StartCoroutine(hitbox_time(melee_weapon.cool_down_time));
+        }
+        else if(ranged_weapon != null){
+            ranged_weapon.normal_attack();
         }
         else{
             Debug.Log("Fist attack");
         }
     }
+    public void special_attack(){
+        if(melee_weapon != null){
+            Debug.Log("melee special attack");
+        }
+        else if(ranged_weapon != null){
+            ranged_weapon.draw_or_put_weapon();
+        }
+        else{
+            Debug.Log("Fist special attack");
+        }
+    }
     IEnumerator hitbox_time(float time){
         yield return new WaitForSeconds(time);
         hitbox.enabled = true;
+        if(looking_at == 0){
+            right_hand_s.enabled = true;
+            left_hand_s.enabled = true;
+        }
+        else{
+            right_hand_v.enabled = true;
+            left_hand_v.enabled = true;
+        }
     }
     void movement_loop(){
         direction = direction.normalized;

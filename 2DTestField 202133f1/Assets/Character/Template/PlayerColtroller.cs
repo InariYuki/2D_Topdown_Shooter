@@ -29,6 +29,9 @@ public class PlayerColtroller : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0)){
             character.normal_attack();
         }
+        else if(Input.GetKeyDown(KeyCode.Mouse1)){
+            character.special_attack();
+        }
         character.target_position = cam.ScreenToWorldPoint(Input.mousePosition);
     }
     public void hit(int damage , GameObject attacker){
