@@ -166,7 +166,15 @@ public class ArtificialIntelligence : MonoBehaviour
                 }
             }
         }
-        //else if(parent.ranged_weapon != null)....
+        else if(parent.ranged_weapon != null){
+            if((current_enemy.transform.position - transform.position).magnitude > 2f){
+                parent.direction = current_enemy.transform.position - transform.position;
+            }
+            else{
+                parent.direction = Vector2.zero;
+                parent.normal_attack();
+            }
+        }
     }
     float attack_mode_substate_time = 1f;
     IEnumerator change_attack_substate(){
@@ -209,6 +217,8 @@ public class ArtificialIntelligence : MonoBehaviour
         parent.velocity = (transform.position - attacker.transform.position).normalized * 40f;
         health -= damage;
         current_enemy = attacker;
-        Debug.Log("hit");
+        if(parent.ranged_weapon != null && parent.ranged_weapon.drawed == false){
+            parent.special_attack();
+        }
     }
 }

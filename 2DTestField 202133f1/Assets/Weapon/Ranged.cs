@@ -6,6 +6,7 @@ public class Ranged : MonoBehaviour
 {
     GameObject parent;
     SpriteRenderer sprite;
+    public int damage = 30;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class Ranged : MonoBehaviour
         parent = _parent;
         sprite = GetComponent<SpriteRenderer>();
     }
-    bool drawed = false;
+    public bool drawed = false;
     [SerializeField] GameObject weapon_on_hand;
     GameObject weapon_on_hand_instanced;
     public void draw_or_put_weapon(){
@@ -43,11 +44,25 @@ public class Ranged : MonoBehaviour
             drawed = true;
         }
     }
+    [SerializeField] GameObject bullet;
+    public float cool_down_time = 0.3f;
+    bool cooling_down = false;
     public void normal_attack(){
         if(drawed == false){
             Debug.Log("weapon not drawed");
             return;
         }
-        Debug.Log("bang");
+        if(cooling_down) return;
+        cooling_down = true;
+        weapon_on_hand_instanced.GetComponent<RangedOnHand>().animator.SetTrigger("fire");
+        bullet.GetComponent<DeflectableProjectile>().parent = parent;
+        bullet.GetComponent<DeflectableProjectile>().direction = (weapon_on_hand_instanced.GetComponent<RangedOnHand>().muzzle_position.position - weapon_on_hand_instanced.transform.position).normalized;
+        bullet.GetComponent<DeflectableProjectile>().damage = damage;
+        Instantiate(bullet , weapon_on_hand_instanced.GetComponent<RangedOnHand>().muzzle_position.position , parent.GetComponent<Character>().attack_point.transform.rotation);
+        StartCoroutine(weapon_cool_down(cool_down_time));
+    }
+    IEnumerator weapon_cool_down(float time){
+        yield return new WaitForSeconds(time);
+        cooling_down = false;
     }
 }

@@ -31,6 +31,10 @@ public class NormalSwing : MonoBehaviour
                 }
                 things.GetComponent<Hitbox>().hit(damage , parent);
             }
+            else if(things.GetComponent<DeflectableProjectile>() != null){
+                things.GetComponent<DeflectableProjectile>().direction = -things.GetComponent<DeflectableProjectile>().direction;
+                things.GetComponent<DeflectableProjectile>().parent = parent;
+            }
         }
     }
     public void recoil(GameObject attacker){
