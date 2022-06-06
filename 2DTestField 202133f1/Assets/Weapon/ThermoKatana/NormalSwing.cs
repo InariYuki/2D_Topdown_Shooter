@@ -7,15 +7,14 @@ public class NormalSwing : MonoBehaviour
     public int damage;
     public GameObject parent;
     public LayerMask attack_layer;
-    public Transform center;
-    [SerializeField] Hitbox hitbox;
+    [SerializeField] Vector3 center;
     // Start is called before the first frame update
     void Start()
     {
-        hitbox.parent = this.gameObject;
+
     }
     void OnDrawGizmosSelected(){
-        Gizmos.DrawWireSphere(center.position , 0.2f);
+        Gizmos.DrawWireSphere(transform.position + center , 0.2f);
     }
     // Update is called once per frame
     void Update()
@@ -23,7 +22,7 @@ public class NormalSwing : MonoBehaviour
 
     }
     void swing(){
-        Collider2D[] things_attacked = Physics2D.OverlapCircleAll(center.position , 0.2f , attack_layer);
+        Collider2D[] things_attacked = Physics2D.OverlapCircleAll(transform.position + center , 0.2f , attack_layer);
         foreach(Collider2D things in things_attacked){
             if(things.GetComponent<Hitbox>() != null){
                 if(things.GetComponent<Hitbox>().parent == parent){
@@ -34,6 +33,9 @@ public class NormalSwing : MonoBehaviour
             else if(things.GetComponent<DeflectableProjectile>() != null){
                 things.GetComponent<DeflectableProjectile>().direction = -things.GetComponent<DeflectableProjectile>().direction;
                 things.GetComponent<DeflectableProjectile>().parent = parent;
+            }
+            else if(things.GetComponent<NormalSwing>() != null){
+                things.GetComponent<NormalSwing>().recoil(parent);
             }
         }
     }

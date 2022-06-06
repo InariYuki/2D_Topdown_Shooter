@@ -22,8 +22,5 @@ public class Hitbox : MonoBehaviour
         else if(parent.GetComponent<PlayerColtroller>() != null){
             parent.GetComponent<PlayerColtroller>().hit(damage , attacker);
         }
-        else if(parent.GetComponent<NormalSwing>() != null){
-            parent.GetComponent<NormalSwing>().recoil(attacker);
-        }
     }
 }
