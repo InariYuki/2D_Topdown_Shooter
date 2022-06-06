@@ -251,7 +251,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   facing_direction: {x: 1, y: 0}
+  top_speed: 2
   melee_weapon: {fileID: 0}
+  ranged_weapon: {fileID: 0}
   target_position: {x: 0, y: 0, z: 0}
   hitbox: {fileID: 1509339489}
   head_s: {fileID: 6686069038196305223}

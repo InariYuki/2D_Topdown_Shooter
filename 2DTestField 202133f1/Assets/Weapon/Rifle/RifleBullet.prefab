@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  direction: {x: -0.9995321, y: -0.030587848, z: 0}
-  speed: 30
+  direction: {x: 0.9997638, y: 0.021734491, z: 0}
+  speed: 3.5
   ttl: 5
   damage: 30
   layermask:

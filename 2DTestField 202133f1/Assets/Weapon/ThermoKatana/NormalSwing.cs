@@ -7,14 +7,14 @@ public class NormalSwing : MonoBehaviour
     public int damage;
     public GameObject parent;
     public LayerMask attack_layer;
-    [SerializeField] Vector3 center;
+    [SerializeField] Transform center;
     // Start is called before the first frame update
     void Start()
     {
 
     }
     void OnDrawGizmosSelected(){
-        Gizmos.DrawWireSphere(transform.position + center , 0.2f);
+        Gizmos.DrawWireSphere(center.position , 0.2f);
     }
     // Update is called once per frame
     void Update()
@@ -22,7 +22,7 @@ public class NormalSwing : MonoBehaviour
 
     }
     void swing(){
-        Collider2D[] things_attacked = Physics2D.OverlapCircleAll(transform.position + center , 0.2f , attack_layer);
+        Collider2D[] things_attacked = Physics2D.OverlapCircleAll(center.position , 0.2f , attack_layer);
         foreach(Collider2D things in things_attacked){
             if(things.GetComponent<Hitbox>() != null){
                 if(things.GetComponent<Hitbox>().parent == parent){
@@ -41,7 +41,7 @@ public class NormalSwing : MonoBehaviour
     }
     public void recoil(GameObject attacker){
         if(attacker != parent.gameObject){
-            parent.GetComponent<Character>().velocity = (parent.transform.position - attacker.transform.position).normalized * 40f;
+            parent.GetComponent<Character>().velocity = (parent.transform.position - attacker.transform.position).normalized * 8f;
             Debug.Log("clink");
         }
     }

@@ -68,7 +68,7 @@ public class ArtificialIntelligence : MonoBehaviour
         return path;
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         attack_mode();
     }
@@ -135,6 +135,7 @@ public class ArtificialIntelligence : MonoBehaviour
     int attack_mode_substate = 0; //0 = aggresive , 1 = retreat
     bool attack_mode_substate_decided = false;
     bool attack_mode_substate_timer_start = false;
+    [SerializeField] bool is_elite;
     void attack_mode(){
         if(current_enemy == null) return;
         if(attack_mode_substate_decided == false){
@@ -148,6 +149,9 @@ public class ArtificialIntelligence : MonoBehaviour
         parent.target_position = current_enemy.transform.position;
         if(parent.melee_weapon != null){
             if((current_enemy.transform.position - transform.position).magnitude > 0.3f){
+                if(is_elite){
+                    deflect_bullet();
+                }
                 //if raycasthit == 0
                 parent.direction = current_enemy.transform.position - transform.position;
                 /*if(raycasthit == 1){
@@ -161,18 +165,35 @@ public class ArtificialIntelligence : MonoBehaviour
                         parent.normal_attack();
                         break;
                     case 1:
-                        parent.velocity = (Quaternion.AngleAxis(Random.Range(-90 , 90) , Vector3.forward) * (transform.position - current_enemy.transform.position)).normalized * 40f;
+                        parent.velocity = (Quaternion.AngleAxis(Random.Range(-90 , 90) , Vector3.forward) * (transform.position - current_enemy.transform.position)).normalized * 8f;
                         break;
                 }
             }
         }
         else if(parent.ranged_weapon != null){
+            /*if(raycast position to enemy's position hit){
+                go_to(current enemy's position);
+            }*/
             if((current_enemy.transform.position - transform.position).magnitude > 2f){
                 parent.direction = current_enemy.transform.position - transform.position;
             }
+            else if((current_enemy.transform.position - transform.position).magnitude < 1.8f){
+                parent.direction = transform.position - current_enemy.transform.position;
+            }
             else{
                 parent.direction = Vector2.zero;
+            }
+            parent.normal_attack();
+        }
+    }
+    [SerializeField] LayerMask attack_layer;
+    void deflect_bullet(){
+        Collider2D[] attacks = Physics2D.OverlapCircleAll(transform.position , 0.6f , attack_layer);
+        foreach(Collider2D attack in attacks){
+            if(attack.GetComponent<DeflectableProjectile>() != null && attack.GetComponent<DeflectableProjectile>().parent != gameObject){
+                parent.target_position = attack.transform.position;
                 parent.normal_attack();
+                break;
             }
         }
     }
@@ -214,7 +235,7 @@ public class ArtificialIntelligence : MonoBehaviour
         return dist_box_dict[distances[0]];
     }
     public void hit(int damage , GameObject attacker){
-        parent.velocity = (transform.position - attacker.transform.position).normalized * 40f;
+        parent.velocity = (transform.position - attacker.transform.position).normalized * 5f;
         health -= damage;
         current_enemy = attacker;
         if(parent.ranged_weapon != null && parent.ranged_weapon.drawed == false){

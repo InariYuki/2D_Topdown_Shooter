@@ -7,7 +7,8 @@ public class Character : MonoBehaviour
     public GameObject pivot , attack_point;
     Rigidbody2D char_ctrl;
     public Vector2 direction = Vector2.zero , velocity = Vector2.zero , facing_direction = Vector2.right;
-    float top_speed = 10f , speed = 0 , acceleration = 10f;
+    [SerializeField] float top_speed = 10f;
+    float speed = 0 , acceleration = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class Character : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         movement_loop();
         attack_loop();

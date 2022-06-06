@@ -23,7 +23,7 @@ public class DeflectableProjectile : MonoBehaviour
         Destroy(gameObject);
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         body.MovePosition(body.transform.position + direction * speed * Time.deltaTime);
         foreach(Collider2D thing in Physics2D.OverlapCircleAll(transform.position , radius , layermask)){

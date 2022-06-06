@@ -35,6 +35,6 @@ public class PlayerColtroller : MonoBehaviour
         character.target_position = cam.ScreenToWorldPoint(Input.mousePosition);
     }
     public void hit(int damage , GameObject attacker){
-        character.velocity = (transform.position - attacker.transform.position).normalized * 40f;
+        character.velocity = (transform.position - attacker.transform.position).normalized * 5f;
     }
 }
