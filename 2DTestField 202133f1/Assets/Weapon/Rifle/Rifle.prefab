@@ -97,5 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e2c1b6d6a323242837957f14be59ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hit_effect: {fileID: 8499676266109591988, guid: ceb1935a96ce8a94e9c15010a5312e47, type: 3}
+  damage: 30
+  drawed: 0
   weapon_on_hand: {fileID: 3960927974908288918, guid: 4bd56239eea2fd245b3ffe2fc14da0db, type: 3}
   bullet: {fileID: 5214728141125390697, guid: 770d6ccc69d9273429d3b85a03f18f03, type: 3}
+  cool_down_time: 0.3

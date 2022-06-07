@@ -5,7 +5,7 @@ using UnityEngine;
 public class NormalSwing : MonoBehaviour
 {
     public int damage;
-    public GameObject parent;
+    public GameObject parent , hit_effect;
     public LayerMask attack_layer;
     [SerializeField] Transform center;
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class NormalSwing : MonoBehaviour
                 if(things.GetComponent<Hitbox>().parent == parent){
                     continue;
                 }
-                things.GetComponent<Hitbox>().hit(damage , parent);
+                things.GetComponent<Hitbox>().hit(damage , parent , hit_effect);
             }
             else if(things.GetComponent<DeflectableProjectile>() != null){
                 things.GetComponent<DeflectableProjectile>().direction = -things.GetComponent<DeflectableProjectile>().direction;

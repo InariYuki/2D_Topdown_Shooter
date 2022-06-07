@@ -6,6 +6,7 @@ public class Ranged : MonoBehaviour
 {
     GameObject parent;
     SpriteRenderer sprite;
+    [SerializeField] GameObject hit_effect;
     public int damage = 30;
     // Start is called before the first frame update
     void Start()
@@ -58,6 +59,7 @@ public class Ranged : MonoBehaviour
         bullet.GetComponent<DeflectableProjectile>().parent = parent;
         bullet.GetComponent<DeflectableProjectile>().direction = (weapon_on_hand_instanced.GetComponent<RangedOnHand>().muzzle_position.position - weapon_on_hand_instanced.transform.position).normalized;
         bullet.GetComponent<DeflectableProjectile>().damage = damage;
+        bullet.GetComponent<DeflectableProjectile>().hit_effect = hit_effect;
         Instantiate(bullet , weapon_on_hand_instanced.GetComponent<RangedOnHand>().muzzle_position.position , parent.GetComponent<Character>().attack_point.transform.rotation);
         StartCoroutine(weapon_cool_down(cool_down_time));
     }

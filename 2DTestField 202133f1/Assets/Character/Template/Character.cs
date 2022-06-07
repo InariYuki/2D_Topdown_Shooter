@@ -51,14 +51,14 @@ public class Character : MonoBehaviour
         Vector2 facing = target_position - pivot.transform.position;
         pivot.transform.localRotation = Quaternion.Euler(0 , 0 , Mathf.Rad2Deg * Mathf.Atan2(facing.y , facing.x));
     }
-    [SerializeField] Collider2D hitbox;
+    [SerializeField] Hitbox hitbox;
     public void normal_attack(){
         if(melee_weapon != null){
             right_hand_s.enabled = false;
             left_hand_s.enabled = false;
             right_hand_v.enabled = false;
             left_hand_v.enabled = false;
-            hitbox.enabled = false;
+            hitbox.can_take_hit = false;
             melee_weapon.normal_attack();
             StartCoroutine(hitbox_time(melee_weapon.cool_down_time));
         }
@@ -82,7 +82,7 @@ public class Character : MonoBehaviour
     }
     IEnumerator hitbox_time(float time){
         yield return new WaitForSeconds(time);
-        hitbox.enabled = true;
+        hitbox.can_take_hit = true;
         if(looking_at == 0){
             right_hand_s.enabled = true;
             left_hand_s.enabled = true;

@@ -15,7 +15,10 @@ public class Hitbox : MonoBehaviour
     {
         
     }
-    public void hit(int damage , GameObject attacker){
+    public bool can_take_hit = true;
+    public void hit(int damage , GameObject attacker , GameObject hit_effect){
+        if(can_take_hit == false) return;
+        Instantiate(hit_effect , transform.position , Quaternion.identity);
         if(parent.GetComponent<ArtificialIntelligence>() != null){
             parent.GetComponent<ArtificialIntelligence>().hit(damage , attacker);
         }

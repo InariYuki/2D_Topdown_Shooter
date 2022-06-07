@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeflectableProjectile : MonoBehaviour
 {
-    public GameObject parent;
+    public GameObject parent , hit_effect;
     public Vector3 direction;
     public float speed = 10f , ttl = 5f;
     public int damage = 0;
@@ -30,8 +30,8 @@ public class DeflectableProjectile : MonoBehaviour
             if(thing == collision){
                 continue;
             }
-            if(thing.GetComponent<Hitbox>() != null){
-                thing.GetComponent<Hitbox>().hit(damage , parent);
+            if(thing.GetComponent<Hitbox>() != null && thing.GetComponent<Hitbox>().parent != parent){
+                thing.GetComponent<Hitbox>().hit(damage , parent , hit_effect);
                 Destroy(gameObject);
             }
             else if(thing.GetComponent<StaticObject>() != null){

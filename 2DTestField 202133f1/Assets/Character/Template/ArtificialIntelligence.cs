@@ -67,28 +67,38 @@ public class ArtificialIntelligence : MonoBehaviour
         path.Add(pos);
         return path;
     }
-    // Update is called once per frame
+    public int ai_state = 0; //0 = idle , 1 = attack
     void FixedUpdate()
     {
-        attack_mode();
+        switch(ai_state){
+            case 0:
+                free_roam();
+                break;
+            case 1:
+                attack_mode();
+                break;
+            default:
+                break;
+        }
     }
     float sight_distance = 2f , view_angle = 80;
     [SerializeField] LayerMask default_layer;
-    List<Character> sight(){
+    void sight(){
         Collider2D[] chatacter_colliders = Physics2D.OverlapCircleAll(transform.position , sight_distance , default_layer);
-        List<Character> detected_characters = new List<Character>();
         foreach(Collider2D character_collider in chatacter_colliders){
             if(! Physics2D.Raycast(transform.position , (character_collider.transform.position - transform.position).normalized , (character_collider.transform.position - transform.position).magnitude , Obstacle) && Vector3.Angle((character_collider.transform.position - transform.position).normalized , parent.facing_direction) <= view_angle){
-                detected_characters.Add(character_collider.GetComponent<Character>());
                 Debug.DrawLine(transform.position , character_collider.transform.position , Color.cyan);
+                if(enemies.Contains(character_collider.gameObject)){
+                    attack_mode_init(character_collider.gameObject);
+                }
             }
         }
-        return detected_characters;
     }
     NavBox previous = null , current = null;
     bool rest = false , trigger = false;
     public int stop_count = 3;
     public float stop_duration = 1f;
+    public bool idle = false;
     int step_count = 0;
     void free_roam_init(){
         previous = null;
@@ -96,10 +106,15 @@ public class ArtificialIntelligence : MonoBehaviour
         rest = false;
         trigger = false;
         step_count = 0;
+        if(parent.ranged_weapon != null && parent.ranged_weapon.drawed){
+            parent.special_attack();
+        }
     }
     void free_roam(){
+        sight();
+        if(idle) return;
         if(current == null) current = find_nearest_navbox(transform.position);
-        if((current.transform.position - transform.position).magnitude > 0.1f){
+        if((current.transform.position - transform.position).magnitude > 0.5f){
             parent.direction = current.transform.position - transform.position;
         }
         else{
@@ -133,9 +148,18 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     GameObject current_enemy = null;
     int attack_mode_substate = 0; //0 = aggresive , 1 = retreat
-    bool attack_mode_substate_decided = false;
-    bool attack_mode_substate_timer_start = false;
+    bool attack_mode_substate_decided = false , attack_mode_substate_timer_start = false;
     [SerializeField] bool is_elite;
+    void attack_mode_init(GameObject attacker){
+        attack_mode_substate = 0;
+        attack_mode_substate_decided = false;
+        attack_mode_substate_timer_start = false;
+        current_enemy = attacker;
+        if(parent.ranged_weapon != null && parent.ranged_weapon.drawed == false){
+            parent.special_attack();
+        }
+        ai_state = 1;
+    }
     void attack_mode(){
         if(current_enemy == null) return;
         if(attack_mode_substate_decided == false){
@@ -188,7 +212,7 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     [SerializeField] LayerMask attack_layer;
     void deflect_bullet(){
-        Collider2D[] attacks = Physics2D.OverlapCircleAll(transform.position , 0.6f , attack_layer);
+        Collider2D[] attacks = Physics2D.OverlapCircleAll(transform.position , 0.7f , attack_layer);
         foreach(Collider2D attack in attacks){
             if(attack.GetComponent<DeflectableProjectile>() != null && attack.GetComponent<DeflectableProjectile>().parent != gameObject){
                 parent.target_position = attack.transform.position;
@@ -234,12 +258,13 @@ public class ArtificialIntelligence : MonoBehaviour
         distances.Sort();
         return dist_box_dict[distances[0]];
     }
+    List<GameObject> enemies = new List<GameObject>();
     public void hit(int damage , GameObject attacker){
+        if(!enemies.Contains(attacker)){
+            enemies.Add(attacker);
+        }
         parent.velocity = (transform.position - attacker.transform.position).normalized * 5f;
         health -= damage;
-        current_enemy = attacker;
-        if(parent.ranged_weapon != null && parent.ranged_weapon.drawed == false){
-            parent.special_attack();
-        }
+        attack_mode_init(attacker);
     }
 }

@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6dfbcedc272594aac0118e6d68eaba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 25
+  hit_effect: {fileID: 8499676266109591988, guid: ceb1935a96ce8a94e9c15010a5312e47, type: 3}
   cooling_down: 0
   cool_down_time: 0.3
   first_swing: {fileID: 2650455238266538251, guid: 9d82e70e613e82043ae58d282f804ab4, type: 3}

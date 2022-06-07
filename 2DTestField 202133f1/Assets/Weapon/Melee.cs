@@ -5,6 +5,7 @@ using UnityEngine;
 public class Melee : MonoBehaviour
 {
     public int damage = 25;
+    [SerializeField] GameObject hit_effect;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +32,14 @@ public class Melee : MonoBehaviour
             if(combo_count == 1){
                 first_swing.GetComponent<NormalSwing>().parent = parent;
                 first_swing.GetComponent<NormalSwing>().damage = damage;
+                first_swing.GetComponent<NormalSwing>().hit_effect = hit_effect;
                 Instantiate(first_swing , parent.GetComponent<Character>().attack_point.transform.position , parent.GetComponent<Character>().attack_point.transform.rotation , parent.GetComponent<Character>().attack_point.transform);
                 combo_count++;
             }
             else{
                 second_swing.GetComponent<NormalSwing>().parent = parent;
                 second_swing.GetComponent<NormalSwing>().damage = damage;
+                second_swing.GetComponent<NormalSwing>().hit_effect = hit_effect;
                 Instantiate(second_swing , parent.GetComponent<Character>().attack_point.transform.position , parent.GetComponent<Character>().attack_point.transform.rotation , parent.GetComponent<Character>().attack_point.transform);
                 combo_count = 1;
             }
