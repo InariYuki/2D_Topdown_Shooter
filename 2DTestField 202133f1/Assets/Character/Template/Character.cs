@@ -7,17 +7,13 @@ public class Character : MonoBehaviour
     public GameObject pivot , attack_point;
     Rigidbody2D char_ctrl;
     public Vector2 direction = Vector2.zero , velocity = Vector2.zero , facing_direction = Vector2.right;
-    [SerializeField] float top_speed = 10f;
-    float speed = 0 , acceleration = 10f;
+    public float top_speed = 10f , speed = 0;
+    float acceleration = 10f;
     // Start is called before the first frame update
     void Start()
     {
         get_components();
-        initial_parameters();
         equip_weapon();
-    }
-    void initial_parameters(){
-        speed = top_speed;
     }
     void get_components(){
         char_ctrl = GetComponent<Rigidbody2D>();
@@ -35,14 +31,16 @@ public class Character : MonoBehaviour
     public Melee melee_weapon;
     public Ranged ranged_weapon;
     void equip_weapon(){
-        if(weapon_ctrl.GetComponentInChildren<Melee>() != null){
-            melee_weapon = weapon_ctrl.GetComponentInChildren<Melee>();
-            weapon_ctrl.init();
+        Transform weapon = weapon_ctrl.transform.GetChild(0);
+        if(weapon == null) return;
+        if(weapon.GetComponent<Melee>() != null){
+            melee_weapon = weapon.GetComponent<Melee>();
+            weapon_ctrl.weapon_sprite_renderer = weapon.GetComponent<SpriteRenderer>();
             melee_weapon.init(this.gameObject);
         }
-        else if(weapon_ctrl.GetComponentInChildren<Ranged>() != null){
-            ranged_weapon = weapon_ctrl.GetComponentInChildren<Ranged>();
-            weapon_ctrl.init();
+        else if(weapon.GetComponent<Ranged>() != null){
+            ranged_weapon = weapon.GetComponent<Ranged>();
+            weapon_ctrl.weapon_sprite_renderer = weapon.GetComponent<SpriteRenderer>();
             ranged_weapon.init(this.gameObject);
         }
     }

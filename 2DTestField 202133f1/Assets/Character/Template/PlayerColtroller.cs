@@ -11,7 +11,7 @@ public class PlayerColtroller : MonoBehaviour
         initial_parameters();
     }
     void initial_parameters(){
-
+        character.speed = character.top_speed;
     }
 
     // Update is called once per frame

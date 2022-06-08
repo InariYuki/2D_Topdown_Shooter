@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6686069037882567892}
+  can_take_hit: 1
 --- !u!1 &2372150198879661034
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,8 +118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6686069037882567894}
+  weapon_sprite_renderer: {fileID: 0}
   state: 0
-  feet: {fileID: 3491743436302012608}
 --- !u!1 &4047747162912907716
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +194,7 @@ GameObject:
   - component: {fileID: 6686069037882567895}
   - component: {fileID: 6686069037882567894}
   - component: {fileID: 1852860454597871231}
-  - component: {fileID: 8578973940497203193}
+  - component: {fileID: 1954299367624760489}
   m_Layer: 0
   m_Name: Kitsune
   m_TagString: Untagged
@@ -252,6 +253,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   facing_direction: {x: 1, y: 0}
   top_speed: 2
+  speed: 0
   melee_weapon: {fileID: 0}
   ranged_weapon: {fileID: 0}
   target_position: {x: 0, y: 0, z: 0}
@@ -298,8 +300,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &8578973940497203193
-BoxCollider2D:
+--- !u!70 &1954299367624760489
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -312,18 +314,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.07}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.04}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.1, y: 0.05}
+  m_Direction: 1
 --- !u!1 &6686069037913949864
 GameObject:
   m_ObjectHideFlags: 0

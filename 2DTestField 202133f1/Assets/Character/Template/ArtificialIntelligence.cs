@@ -12,6 +12,7 @@ public class ArtificialIntelligence : MonoBehaviour
     void Start()
     {
         initial_parameters();
+        free_roam_init();
     }
     void initial_parameters(){
         health = max_health;
@@ -67,7 +68,7 @@ public class ArtificialIntelligence : MonoBehaviour
         path.Add(pos);
         return path;
     }
-    public int ai_state = 0; //0 = idle , 1 = attack
+    public int ai_state = 0; //0 = idle , 1 = attack , 2 = search
     void FixedUpdate()
     {
         switch(ai_state){
@@ -76,6 +77,9 @@ public class ArtificialIntelligence : MonoBehaviour
                 break;
             case 1:
                 attack_mode();
+                break;
+            case 2:
+                search_mode();
                 break;
             default:
                 break;
@@ -106,15 +110,17 @@ public class ArtificialIntelligence : MonoBehaviour
         rest = false;
         trigger = false;
         step_count = 0;
+        parent.speed = parent.top_speed / 3;
         if(parent.ranged_weapon != null && parent.ranged_weapon.drawed){
             parent.special_attack();
         }
+        ai_state = 0;
     }
     void free_roam(){
         sight();
         if(idle) return;
         if(current == null) current = find_nearest_navbox(transform.position);
-        if((current.transform.position - transform.position).magnitude > 0.5f){
+        if((current.transform.position - transform.position).magnitude > 0.2f){
             parent.direction = current.transform.position - transform.position;
         }
         else{
@@ -155,6 +161,7 @@ public class ArtificialIntelligence : MonoBehaviour
         attack_mode_substate_decided = false;
         attack_mode_substate_timer_start = false;
         current_enemy = attacker;
+        parent.speed = parent.top_speed;
         if(parent.ranged_weapon != null && parent.ranged_weapon.drawed == false){
             parent.special_attack();
         }
@@ -162,6 +169,9 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     void attack_mode(){
         if(current_enemy == null) return;
+        if(Physics2D.Raycast(transform.position , (current_enemy.transform.position - transform.position).normalized , (current_enemy.transform.position - transform.position).magnitude , Obstacle)){
+            search_mode_init(current_enemy.transform.position);
+        }
         if(attack_mode_substate_decided == false){
             attack_mode_substate_decided = true;
             attack_mode_substate = Random.Range(0 , 2);
@@ -176,11 +186,7 @@ public class ArtificialIntelligence : MonoBehaviour
                 if(is_elite){
                     deflect_bullet();
                 }
-                //if raycasthit == 0
                 parent.direction = current_enemy.transform.position - transform.position;
-                /*if(raycasthit == 1){
-                    go_to(current_enemy.transform.position)
-                }*/
             }
             else{
                 switch(attack_mode_substate){
@@ -195,9 +201,6 @@ public class ArtificialIntelligence : MonoBehaviour
             }
         }
         else if(parent.ranged_weapon != null){
-            /*if(raycast position to enemy's position hit){
-                go_to(current enemy's position);
-            }*/
             if((current_enemy.transform.position - transform.position).magnitude > 2f){
                 parent.direction = current_enemy.transform.position - transform.position;
             }
@@ -226,6 +229,67 @@ public class ArtificialIntelligence : MonoBehaviour
         yield return new WaitForSeconds(attack_mode_substate_time);
         attack_mode_substate_decided = false;
         attack_mode_substate_timer_start = false;
+    }
+    Vector3 search_position , substate_2_search_position , before_search_position , substate_2_start_position;
+    int search_substate = 0 , substate_2_search_times = 0;
+    bool substate_2_search_position_picked = false;
+    void search_mode_init(Vector3 position){
+        search_position = position;
+        before_search_position = transform.position;
+        search_substate = 0;
+        substate_2_search_times = 0;
+        substate_2_search_position_picked = false;
+        parent.speed = parent.top_speed;
+        if(parent.ranged_weapon != null && parent.ranged_weapon.drawed){
+            parent.special_attack();
+        }
+        ai_state = 2;
+    }
+    void search_mode(){
+        sight();
+        switch(search_substate){
+            case 0:
+                Vector3 target_vector = search_position - transform.position;
+                if(Physics2D.Raycast(transform.position , target_vector.normalized , target_vector.magnitude , Obstacle)){
+                    go_to(search_position);
+                }
+                else{
+                    if(target_vector.magnitude > 0.2f){
+                        parent.direction = target_vector.normalized;
+                    }
+                    else{
+                        search_substate = 1;
+                        substate_2_start_position = transform.position;
+                        parent.speed = parent.top_speed/3;
+                        parent.direction = Vector3.zero;
+                        StartCoroutine(search_give_up());
+                    }
+                }
+                break;
+            case 1:
+                if(substate_2_search_position_picked == false){
+                    substate_2_search_position = substate_2_start_position + new Vector3(Random.Range(-0.05f , 0.05f) , Random.Range(-0.05f , 0.05f) , 0);
+                    if(! Physics2D.Raycast(transform.position , (substate_2_search_position - transform.position).normalized , (substate_2_search_position - transform.position).magnitude , Obstacle)){
+                        substate_2_search_position_picked = true;
+                    }
+                    return;
+                }
+                if((substate_2_search_position - transform.position).magnitude > 0.04f){
+                    parent.direction = (substate_2_search_position - transform.position).normalized;
+                }
+                else{
+                    parent.direction = Vector2.zero;
+                    substate_2_search_position_picked = false;
+                    substate_2_search_times++;
+                }
+                break;
+        }
+    }
+    IEnumerator search_give_up(){
+        yield return new WaitForSeconds(3);
+        if(ai_state == 2){
+            free_roam_init();
+        }
     }
     void go_to(Vector3 target_position){
         if((transform.position - target_position).magnitude < 0.1f){
@@ -265,6 +329,6 @@ public class ArtificialIntelligence : MonoBehaviour
         }
         parent.velocity = (transform.position - attacker.transform.position).normalized * 5f;
         health -= damage;
-        attack_mode_init(attacker);
+        search_mode_init(attacker.transform.position);
     }
 }
