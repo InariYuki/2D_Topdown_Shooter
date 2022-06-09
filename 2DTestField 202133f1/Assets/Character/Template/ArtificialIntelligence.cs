@@ -102,7 +102,7 @@ public class ArtificialIntelligence : MonoBehaviour
     bool rest = false , trigger = false;
     public int stop_count = 3;
     public float stop_duration = 1f;
-    public bool idle = false;
+    public bool idle = false , static_patrol = false;
     int step_count = 0;
     void free_roam_init(){
         previous = null;
@@ -170,7 +170,7 @@ public class ArtificialIntelligence : MonoBehaviour
     void attack_mode(){
         if(current_enemy == null) return;
         if(Physics2D.Raycast(transform.position , (current_enemy.transform.position - transform.position).normalized , (current_enemy.transform.position - transform.position).magnitude , Obstacle)){
-            search_mode_init(current_enemy.transform.position);
+            search_mode_init(current_enemy.GetComponent<Character>().feet.transform.position);
         }
         if(attack_mode_substate_decided == false){
             attack_mode_substate_decided = true;
@@ -231,10 +231,10 @@ public class ArtificialIntelligence : MonoBehaviour
         attack_mode_substate_timer_start = false;
     }
     Vector3 search_position , substate_2_search_position , before_search_position , substate_2_start_position;
-    int search_substate = 0 , substate_2_search_times = 0;
+    [SerializeField] int search_substate = 0 , substate_2_search_times = 0;
     bool substate_2_search_position_picked = false;
     void search_mode_init(Vector3 position){
-        search_position = position;
+        search_position = find_nearest_navbox(position).transform.position;
         before_search_position = transform.position;
         search_substate = 0;
         substate_2_search_times = 0;
@@ -250,20 +250,15 @@ public class ArtificialIntelligence : MonoBehaviour
         switch(search_substate){
             case 0:
                 Vector3 target_vector = search_position - transform.position;
-                if(Physics2D.Raycast(transform.position , target_vector.normalized , target_vector.magnitude , Obstacle)){
+                if(target_vector.magnitude > 0.1f){
                     go_to(search_position);
                 }
                 else{
-                    if(target_vector.magnitude > 0.2f){
-                        parent.direction = target_vector.normalized;
-                    }
-                    else{
-                        search_substate = 1;
-                        substate_2_start_position = transform.position;
-                        parent.speed = parent.top_speed/3;
-                        parent.direction = Vector3.zero;
-                        StartCoroutine(search_give_up());
-                    }
+                    search_substate = 1;
+                    substate_2_start_position = transform.position;
+                    parent.speed = parent.top_speed/3;
+                    parent.direction = Vector3.zero;
+                    StartCoroutine(search_give_up());
                 }
                 break;
             case 1:
@@ -283,12 +278,29 @@ public class ArtificialIntelligence : MonoBehaviour
                     substate_2_search_times++;
                 }
                 break;
+            case 2:
+                if(static_patrol){
+                    Vector3 vec = before_search_position - transform.position;
+                    if(vec.magnitude > 0.1f){
+                        go_to(before_search_position);
+                    }
+                    else{
+                        parent.direction = Vector3.zero;
+                        free_roam_init();
+                    }
+                }
+                else{
+                    parent.direction = Vector3.zero;
+                    free_roam_init();
+                }
+                break;
         }
     }
     IEnumerator search_give_up(){
         yield return new WaitForSeconds(3);
-        if(ai_state == 2){
-            free_roam_init();
+        search_substate = 2;
+        if(static_patrol){
+            parent.speed = parent.top_speed;
         }
     }
     void go_to(Vector3 target_position){
@@ -296,14 +308,30 @@ public class ArtificialIntelligence : MonoBehaviour
             parent.direction = Vector3.zero;
             return;
         }
-        List<Vector3> path = find_path(target_position);
-        if(! Physics2D.Raycast(transform.position , (path[1] - transform.position).normalized , (path[1] - transform.position).magnitude , Obstacle)){
-            parent.direction = (path[1] - transform.position).normalized;
-            Debug.DrawLine(transform.position , path[1] , Color.red);
+        Vector3 vec = target_position - parent.feet.position;
+        Vector3 upper_right = parent.feet.position + new Vector3(0.05f , 0.02f) , lower_right = parent.feet.position + new Vector3(0.05f , -0.02f) , upper_left = parent.feet.position + new Vector3(-0.05f , 0.02f) , lower_left = parent.feet.position + new Vector3(-0.05f , -0.02f);
+        if(Physics2D.Raycast(upper_right , vec.normalized , vec.magnitude , Obstacle) ||
+            Physics2D.Raycast(upper_left , vec.normalized , vec.magnitude , Obstacle) ||
+            Physics2D.Raycast(lower_right , vec.normalized , vec.magnitude , Obstacle) ||
+            Physics2D.Raycast(lower_left , vec.normalized , vec.magnitude , Obstacle)){
+            List<Vector3> path = find_path(target_position);
+            for(int i = 0; i < path.Count - 1; i++){
+                Debug.DrawLine(path[i] , path[i+1] , Color.green);
+            }
+            if(! Physics2D.Raycast(upper_right , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle) &&
+               ! Physics2D.Raycast(upper_left , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle) &&
+               ! Physics2D.Raycast(lower_right , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle) &&
+               ! Physics2D.Raycast(lower_left , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle)){
+                parent.direction = (path[1] - parent.feet.position).normalized;
+                Debug.DrawLine(parent.feet.position , path[1] , Color.red);
+            }
+            else{
+                parent.direction = (path[0] - transform.position).normalized;
+                Debug.DrawLine(parent.feet.position , path[0] , Color.red);
+            }
         }
         else{
-            parent.direction = (path[0] - transform.position).normalized;
-            Debug.DrawLine(transform.position , path[0] , Color.red);
+            parent.direction = vec.normalized;
         }
     }
     float radius = 0.5f;

@@ -6,7 +6,7 @@ public class Character : MonoBehaviour
 {
     public GameObject pivot , attack_point;
     Rigidbody2D char_ctrl;
-    public Vector2 direction = Vector2.zero , velocity = Vector2.zero , facing_direction = Vector2.right;
+    public Vector2 direction = Vector3.zero , velocity = Vector3.zero , facing_direction = Vector3.right;
     public float top_speed = 10f , speed = 0;
     float acceleration = 10f;
     // Start is called before the first frame update
@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
     void FixedUpdate()
     {
         movement_loop();
+        soft_collision();
         attack_loop();
         body_sprite_ctrl();
         handle_render_order();
@@ -92,8 +93,18 @@ public class Character : MonoBehaviour
     }
     void movement_loop(){
         direction = direction.normalized;
-        velocity = Vector2.Lerp(velocity , direction * speed , acceleration * Time.deltaTime);
+        velocity = Vector3.Lerp(velocity , direction * speed , acceleration * Time.deltaTime);
         char_ctrl.MovePosition(char_ctrl.position + velocity * Time.deltaTime);
+    }
+    float soft_collision_radius = 0.05f;
+    [SerializeField] LayerMask soft_layer;
+    void soft_collision(){
+        Collider2D[] clds = Physics2D.OverlapCircleAll(feet.position , soft_collision_radius , soft_layer);
+        foreach(Collider2D cld in clds){
+            Vector2 collision_vector = cld.transform.position - feet.transform.position;
+            Vector2 hit_point_normal = Physics2D.Raycast(feet.position , collision_vector.normalized , collision_vector.magnitude , soft_layer).normal;
+            velocity += hit_point_normal.normalized * 0.1f;
+        }
     }
     public SpriteRenderer head_s , head_f , head_b , body_s , body_f , body_b , right_hand_s , left_hand_s , right_leg_s , left_leg_s , right_hand_v , left_hand_v , right_leg_v , left_leg_v;
     public Animator left_leg_animator , right_leg_animator , left_leg_animator_v , right_leg_animator_v;
