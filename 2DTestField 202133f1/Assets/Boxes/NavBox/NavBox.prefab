@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95eab13af998704f8b65de1f945bd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 0.5
   Navbox:
     serializedVersion: 2
     m_Bits: 128

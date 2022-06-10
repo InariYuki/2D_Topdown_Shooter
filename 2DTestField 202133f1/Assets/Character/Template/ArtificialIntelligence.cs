@@ -133,6 +133,7 @@ public class ArtificialIntelligence : MonoBehaviour
                 }
                 return;
             }
+            before_search_position = current.transform.position;
             List<NavBox> nexts = new List<NavBox>();
             foreach(NavBox box in current.next_hops){
                 nexts.Add(box);
@@ -235,7 +236,6 @@ public class ArtificialIntelligence : MonoBehaviour
     bool substate_2_search_position_picked = false;
     void search_mode_init(Vector3 position){
         search_position = find_nearest_navbox(position).transform.position;
-        before_search_position = transform.position;
         search_substate = 0;
         substate_2_search_times = 0;
         substate_2_search_position_picked = false;
@@ -315,9 +315,9 @@ public class ArtificialIntelligence : MonoBehaviour
             Physics2D.Raycast(lower_right , vec.normalized , vec.magnitude , Obstacle) ||
             Physics2D.Raycast(lower_left , vec.normalized , vec.magnitude , Obstacle)){
             List<Vector3> path = find_path(target_position);
-            for(int i = 0; i < path.Count - 1; i++){
+            /*for(int i = 0; i < path.Count - 1; i++){
                 Debug.DrawLine(path[i] , path[i+1] , Color.green);
-            }
+            }*/
             if(! Physics2D.Raycast(upper_right , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle) &&
                ! Physics2D.Raycast(upper_left , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle) &&
                ! Physics2D.Raycast(lower_right , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle) &&

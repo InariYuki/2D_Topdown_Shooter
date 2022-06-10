@@ -20,8 +20,11 @@ public class NavBox : MonoBehaviour
             if(neighbor == collision){
                 continue;
             }
-            RaycastHit2D hit = Physics2D.Raycast(transform.position , (neighbor.transform.position - transform.position).normalized , (neighbor.transform.position - transform.position).magnitude , Obstacle);
-            if(!hit){
+            Vector2 vec = neighbor.transform.position - transform.position;
+            if(!Physics2D.Raycast(transform.position + new Vector3(0.07f , 0.07f), vec.normalized , vec.magnitude , Obstacle) &&
+                !Physics2D.Raycast(transform.position + new Vector3(-0.07f , 0.07f) , vec.normalized , vec.magnitude , Obstacle) &&
+                !Physics2D.Raycast(transform.position + new Vector3(0.07f , -0.07f) , vec.normalized , vec.magnitude , Obstacle) &&
+                !Physics2D.Raycast(transform.position + new Vector3(-0.07f , -0.07f) , vec.normalized , vec.magnitude , Obstacle)){
                 Debug.DrawLine(transform.position , neighbor.transform.position , Color.blue , 100f);
                 next_hops.Add(neighbor.GetComponent<NavBox>());
             }
