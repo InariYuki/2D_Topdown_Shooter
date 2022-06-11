@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4739169989810011955
+--- !u!1 &3787659602026258408
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4739169989810011954}
-  - component: {fileID: 4739169989810011953}
-  - component: {fileID: 4739169989810011952}
+  - component: {fileID: 3787659602026258413}
+  - component: {fileID: 3787659602026258414}
+  - component: {fileID: 3787659602026258415}
+  - component: {fileID: 3787659602026258412}
   m_Layer: 0
-  m_Name: ThermoKatana
+  m_Name: ThermoKatanaDashSlash_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4739169989810011954
+--- !u!4 &3787659602026258413
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4739169989810011955}
+  m_GameObject: {fileID: 3787659602026258408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4739169989810011953
+--- !u!212 &3787659602026258414
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4739169989810011955}
+  m_GameObject: {fileID: 3787659602026258408}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,39 +74,54 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -4
-  m_Sprite: {fileID: 573233873, guid: 3ba23c15cc93df842902954e7db0eb67, type: 3}
+  m_SortingOrder: 32767
+  m_Sprite: {fileID: -1636743257, guid: 61f098f2408dbc4478777cf0af46f51c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1.28, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4739169989810011952
+--- !u!95 &3787659602026258415
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3787659602026258408}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3b77d756d61a8644da9b55e4feafbf9f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3787659602026258412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4739169989810011955}
+  m_GameObject: {fileID: 3787659602026258408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b6dfbcedc272594aac0118e6d68eaba, type: 3}
+  m_Script: {fileID: 11500000, guid: 595afb0b20340f743a8def9213899032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
-  special_attack_damage: 50
+  parent: {fileID: 0}
   hit_effect: {fileID: 8499676266109591988, guid: ceb1935a96ce8a94e9c15010a5312e47, type: 3}
-  cooling_down: 0
-  cool_down_time: 0.3
-  first_swing: {fileID: 2650455238266538251, guid: 9d82e70e613e82043ae58d282f804ab4, type: 3}
-  second_swing: {fileID: 2650455238266538251, guid: 28bbfd0d8e9a5864f90574bec4c5faba, type: 3}
-  special_swing: {fileID: 3787659602026258408, guid: b27d8f28306067742ab1238ee5406255, type: 3}
-  special_attack_cooldown_time: 0.6
-  obstacle:
+  damage: 50
+  rotation: 0
+  attack_mask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8

@@ -53,11 +53,7 @@ public class Character : MonoBehaviour
     [SerializeField] Hitbox hitbox;
     public void normal_attack(){
         if(melee_weapon != null){
-            right_hand_s.enabled = false;
-            left_hand_s.enabled = false;
-            right_hand_v.enabled = false;
-            left_hand_v.enabled = false;
-            hitbox.can_take_hit = false;
+            disable_hand_sprite_and_hitbox();
             melee_weapon.normal_attack();
             StartCoroutine(hitbox_time(melee_weapon.cool_down_time));
         }
@@ -70,7 +66,9 @@ public class Character : MonoBehaviour
     }
     public void special_attack(){
         if(melee_weapon != null){
-            Debug.Log("melee special attack");
+            disable_hand_sprite_and_hitbox();
+            melee_weapon.special_attack();
+            StartCoroutine(hitbox_time(melee_weapon.special_attack_cooldown_time));
         }
         else if(ranged_weapon != null){
             ranged_weapon.draw_or_put_weapon();
@@ -78,6 +76,13 @@ public class Character : MonoBehaviour
         else{
             Debug.Log("Fist special attack");
         }
+    }
+    void disable_hand_sprite_and_hitbox(){
+        right_hand_s.enabled = false;
+        left_hand_s.enabled = false;
+        right_hand_v.enabled = false;
+        left_hand_v.enabled = false;
+        hitbox.can_take_hit = false;
     }
     IEnumerator hitbox_time(float time){
         yield return new WaitForSeconds(time);
