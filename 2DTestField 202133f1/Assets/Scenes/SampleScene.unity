@@ -3000,11 +3000,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fd8aef7f171e9d4a84829e40d3f613c, type: 3}
---- !u!4 &627414730 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1003185273868199572, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
-  m_PrefabInstance: {fileID: 431966298}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &645005009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1525353107907852442, guid: 0fd8aef7f171e9d4a84829e40d3f613c, type: 3}
@@ -5082,63 +5077,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fd8aef7f171e9d4a84829e40d3f613c, type: 3}
---- !u!1001 &1186548016
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 627414730}
-    m_Modifications:
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011954, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739169989810011955, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-      propertyPath: m_Name
-      value: ThermoKatana
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
 --- !u!1001 &1231697190
 PrefabInstance:
   m_ObjectHideFlags: 0

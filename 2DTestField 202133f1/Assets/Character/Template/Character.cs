@@ -51,9 +51,13 @@ public class Character : MonoBehaviour
         pivot.transform.localRotation = Quaternion.Euler(0 , 0 , Mathf.Rad2Deg * Mathf.Atan2(facing.y , facing.x));
     }
     [SerializeField] Hitbox hitbox;
+    [SerializeField] GameObject punch;
+    bool punch_cooling_down = false;
+    float punch_cool_down_time = 0.2f;
     public void normal_attack(){
         if(melee_weapon != null){
-            disable_hand_sprite_and_hitbox();
+            disable_hand_sprite();
+            hitbox.can_take_hit = false;
             melee_weapon.normal_attack();
             StartCoroutine(hitbox_time(melee_weapon.cool_down_time));
         }
@@ -61,12 +65,23 @@ public class Character : MonoBehaviour
             ranged_weapon.normal_attack();
         }
         else{
-            Debug.Log("Fist attack");
+            if(punch_cooling_down) return;
+            punch_cooling_down = true;
+            disable_hand_sprite();
+            punch.GetComponent<Punch>().parent = gameObject;
+            Instantiate(punch , attack_point.transform.position , attack_point.transform.rotation , attack_point.transform);
+            StartCoroutine(punch_cool_down(punch_cool_down_time));
         }
+    }
+    IEnumerator punch_cool_down(float time){
+        yield return new WaitForSeconds(time);
+        punch_cooling_down = false;
+        enable_hand_sprite();
     }
     public void special_attack(){
         if(melee_weapon != null){
-            disable_hand_sprite_and_hitbox();
+            disable_hand_sprite();
+            hitbox.can_take_hit = false;
             melee_weapon.special_attack();
             StartCoroutine(hitbox_time(melee_weapon.special_attack_cooldown_time));
         }
@@ -77,16 +92,18 @@ public class Character : MonoBehaviour
             Debug.Log("Fist special attack");
         }
     }
-    void disable_hand_sprite_and_hitbox(){
+    IEnumerator hitbox_time(float time){
+        yield return new WaitForSeconds(time);
+        enable_hand_sprite();
+        hitbox.can_take_hit = true;
+    }
+    void disable_hand_sprite(){
         right_hand_s.enabled = false;
         left_hand_s.enabled = false;
         right_hand_v.enabled = false;
         left_hand_v.enabled = false;
-        hitbox.can_take_hit = false;
     }
-    IEnumerator hitbox_time(float time){
-        yield return new WaitForSeconds(time);
-        hitbox.can_take_hit = true;
+    void enable_hand_sprite(){
         if(looking_at == 0){
             right_hand_s.enabled = true;
             left_hand_s.enabled = true;
