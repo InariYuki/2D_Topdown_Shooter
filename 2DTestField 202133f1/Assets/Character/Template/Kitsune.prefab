@@ -257,10 +257,10 @@ MonoBehaviour:
   melee_weapon: {fileID: 0}
   ranged_weapon: {fileID: 0}
   target_position: {x: 0, y: 0, z: 0}
-  hitbox: {fileID: 1509339489}
+  hitbox: {fileID: 5531822909316732030}
   soft_layer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1
   head_s: {fileID: 6686069038196305223}
   head_f: {fileID: 6686069038504325532}
   head_b: {fileID: 6686069038273286928}

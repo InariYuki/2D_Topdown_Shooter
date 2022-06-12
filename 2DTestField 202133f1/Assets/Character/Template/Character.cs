@@ -106,6 +106,7 @@ public class Character : MonoBehaviour
     void soft_collision(){
         Collider2D[] clds = Physics2D.OverlapCircleAll(feet.position , soft_collision_radius , soft_layer);
         foreach(Collider2D cld in clds){
+            if(cld.GetComponent<Character>()!= null && cld.GetComponent<Character>() == this) continue;
             Vector2 collision_vector = cld.transform.position - feet.transform.position;
             Vector2 hit_point_normal = Physics2D.Raycast(feet.position , collision_vector.normalized , collision_vector.magnitude , soft_layer).normal;
             velocity += hit_point_normal.normalized * 0.1f;

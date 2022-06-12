@@ -20,7 +20,7 @@ public class DashSlash : MonoBehaviour
     }
     [SerializeField] LayerMask attack_mask;
     void slash(){
-        Collider2D[] hits = Physics2D.OverlapCapsuleAll(transform.position , new Vector2(1f , 0.3f) , CapsuleDirection2D.Horizontal , rotation ,  attack_mask);
+        Collider2D[] hits = Physics2D.OverlapCapsuleAll(transform.position , new Vector2(1.2f , 0.3f) , CapsuleDirection2D.Horizontal , rotation ,  attack_mask);
         foreach(Collider2D things in hits){
             if(things.GetComponent<Hitbox>() != null){
                 if(things.GetComponent<Hitbox>().parent == parent){

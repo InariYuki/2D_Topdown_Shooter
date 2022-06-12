@@ -5,7 +5,7 @@ using UnityEngine;
 public class NormalSwing : MonoBehaviour
 {
     public int damage;
-    public GameObject parent , hit_effect;
+    public GameObject parent , hit_effect , clink_effect;
     public LayerMask attack_layer;
     [SerializeField] Transform center;
     // Start is called before the first frame update
@@ -33,16 +33,17 @@ public class NormalSwing : MonoBehaviour
             else if(things.GetComponent<DeflectableProjectile>() != null){
                 things.GetComponent<DeflectableProjectile>().direction = -things.GetComponent<DeflectableProjectile>().direction;
                 things.GetComponent<DeflectableProjectile>().parent = parent;
+                Instantiate(clink_effect , things.transform.position , Quaternion.identity);
             }
-            else if(things.GetComponent<NormalSwing>() != null){
+            else if(things.GetComponent<NormalSwing>() != null && things.GetComponent<NormalSwing>().parent != parent){
                 things.GetComponent<NormalSwing>().recoil(parent);
+                Instantiate(clink_effect , (things.transform.position + center.transform.position)/2 , Quaternion.identity);
             }
         }
     }
     public void recoil(GameObject attacker){
         if(attacker != parent.gameObject){
             parent.GetComponent<Character>().velocity = (parent.transform.position - attacker.transform.position).normalized * 8f;
-            Debug.Log("clink");
         }
     }
     void end(){

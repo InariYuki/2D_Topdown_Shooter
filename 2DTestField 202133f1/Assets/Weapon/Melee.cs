@@ -6,7 +6,7 @@ public class Melee : MonoBehaviour
 {
     public int damage = 25;
     public int special_attack_damage = 50;
-    [SerializeField] GameObject hit_effect;
+    [SerializeField] GameObject hit_effect , clink_effect;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +36,7 @@ public class Melee : MonoBehaviour
                 swing_1.parent = parent;
                 swing_1.damage = damage;
                 swing_1.hit_effect = hit_effect;
+                swing_1.clink_effect = clink_effect;
                 Instantiate(first_swing , parent_char.attack_point.transform.position , parent_char.attack_point.transform.rotation , parent_char.attack_point.transform);
                 combo_count++;
             }
@@ -44,6 +45,7 @@ public class Melee : MonoBehaviour
                 swing_2.parent = parent;
                 swing_2.damage = damage;
                 swing_2.hit_effect = hit_effect;
+                swing_2.clink_effect = clink_effect;
                 Instantiate(second_swing , parent_char.attack_point.transform.position , parent_char.attack_point.transform.rotation , parent_char.attack_point.transform);
                 combo_count = 1;
             }
@@ -66,7 +68,7 @@ public class Melee : MonoBehaviour
         swing_sp.parent = parent;
         swing_sp.damage = special_attack_damage;
         swing_sp.hit_effect = hit_effect;
-        swing_sp.rotation = dash_point.y > 0 ? Vector2.Angle(dash_point , Vector2.right) : -Vector2.Angle(dash_point , Vector2.right);
+        swing_sp.rotation = parent_char.attack_point.transform.position.y - parent_char.pivot.transform.position.y > 0 ? Vector2.Angle(dash_point - parent_char.pivot.transform.position , Vector2.right) : -Vector2.Angle(dash_point - parent_char.pivot.transform.position , Vector2.right);
         sprite.enabled = false;
         Instantiate(special_swing , (dash_point + parent_char.attack_point.transform.position)/2 , parent_char.attack_point.transform.rotation);
         parent.transform.position = dash_point;
