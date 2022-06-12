@@ -32,8 +32,8 @@ public class Character : MonoBehaviour
     public Melee melee_weapon;
     public Ranged ranged_weapon;
     void equip_weapon(){
+        if(weapon_ctrl.transform.childCount == 0) return;
         Transform weapon = weapon_ctrl.transform.GetChild(0);
-        if(weapon == null) return;
         if(weapon.GetComponent<Melee>() != null){
             melee_weapon = weapon.GetComponent<Melee>();
             weapon_ctrl.weapon_sprite_renderer = weapon.GetComponent<SpriteRenderer>();
@@ -118,7 +118,7 @@ public class Character : MonoBehaviour
         velocity = Vector3.Lerp(velocity , direction * speed , acceleration * Time.deltaTime);
         char_ctrl.MovePosition(char_ctrl.position + velocity * Time.deltaTime);
     }
-    float soft_collision_radius = 0.05f;
+    float soft_collision_radius = 0.025f;
     [SerializeField] LayerMask soft_layer;
     void soft_collision(){
         Collider2D[] clds = Physics2D.OverlapCircleAll(feet.position , soft_collision_radius , soft_layer);

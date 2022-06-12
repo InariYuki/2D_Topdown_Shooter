@@ -357,6 +357,15 @@ public class ArtificialIntelligence : MonoBehaviour
         }
         parent.velocity = (transform.position - attacker.transform.position).normalized * 5f;
         health -= damage;
+        if(health < 0){
+            health = 0;
+            die();
+        }
         search_mode_init(attacker.transform.position);
+    }
+    [SerializeField] GameObject corpse;
+    void die(){
+        Instantiate(corpse , transform.position , Quaternion.identity);
+        Destroy(gameObject);
     }
 }
