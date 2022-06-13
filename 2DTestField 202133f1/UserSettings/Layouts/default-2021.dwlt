@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 21
+  controlID: 127
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 66
+  controlID: 20
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 67
+  controlID: 26
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -244,8 +244,8 @@ MonoBehaviour:
     y: 0
     width: 453
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -506,7 +506,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Weapon
+    - Assets/Weapon/ThermoKatana
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -520,7 +520,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 88610000
     m_LastClickedID: 24968
-    m_ExpandedIDs: 00000000ac650000ae650000b0650000b2650000b4650000b6650000
+    m_ExpandedIDs: 00000000e8630000ea630000ec630000ee630000f0630000f2630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -545,10 +545,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 398}
+    scrollPos: {x: 0, y: 550}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000ac650000ae650000b0650000b2650000b4650000b6650000
+    m_ExpandedIDs: ffffffff00000000e8630000ea630000ec630000ee630000f0630000f2630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -943,9 +943,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.15139939, y: 0.7000679, z: -0.008603895}
+    m_Target: {x: 0.48284027, y: 0.99906856, z: -0.0069812182}
     speed: 2
-    m_Value: {x: -0.15139939, y: 0.7000679, z: -0.008603895}
+    m_Value: {x: 0.48284027, y: 0.99906856, z: -0.0069812182}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1056,7 +1056,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 12f9ffffeaf9ffff5a630000
+      m_ExpandedIDs: 5cfaffff2cfbffffd8600000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

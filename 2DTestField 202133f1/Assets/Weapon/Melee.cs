@@ -32,21 +32,13 @@ public class Melee : MonoBehaviour
         if(cooling_down == false){
             Character parent_char = parent.GetComponent<Character>();
             if(combo_count == 1){
-                NormalSwing swing_1 = first_swing.GetComponent<NormalSwing>();
-                swing_1.parent = parent;
-                swing_1.damage = damage;
-                swing_1.hit_effect = hit_effect;
-                swing_1.clink_effect = clink_effect;
-                Instantiate(first_swing , parent_char.attack_point.transform.position , parent_char.attack_point.transform.rotation , parent_char.attack_point.transform);
+                GameObject swing_1 = Instantiate(first_swing , parent_char.attack_point.transform.position , parent_char.attack_point.transform.rotation , parent_char.attack_point.transform);
+                swing_1.GetComponent<NormalSwing>().init(parent , damage , hit_effect , clink_effect);
                 combo_count++;
             }
             else{
-                NormalSwing swing_2 = second_swing.GetComponent<NormalSwing>();
-                swing_2.parent = parent;
-                swing_2.damage = damage;
-                swing_2.hit_effect = hit_effect;
-                swing_2.clink_effect = clink_effect;
-                Instantiate(second_swing , parent_char.attack_point.transform.position , parent_char.attack_point.transform.rotation , parent_char.attack_point.transform);
+                GameObject swing_2 = Instantiate(first_swing, parent_char.attack_point.transform.position, parent_char.attack_point.transform.rotation, parent_char.attack_point.transform);
+                swing_2.GetComponent<NormalSwing>().init(parent, damage, hit_effect, clink_effect);
                 combo_count = 1;
             }
             sprite.enabled = false;
@@ -64,13 +56,9 @@ public class Melee : MonoBehaviour
         Vector2 vec = dash_point - parent.transform.position;
         if(Physics2D.Raycast(parent.transform.position , vec.normalized , vec.magnitude , obstacle)) return;
         special_attack_cooling_down = true;
-        DashSlash swing_sp = special_swing.GetComponent<DashSlash>();
-        swing_sp.parent = parent;
-        swing_sp.damage = special_attack_damage;
-        swing_sp.hit_effect = hit_effect;
-        swing_sp.rotation = parent_char.attack_point.transform.position.y - parent_char.pivot.transform.position.y > 0 ? Vector2.Angle(dash_point - parent_char.pivot.transform.position , Vector2.right) : -Vector2.Angle(dash_point - parent_char.pivot.transform.position , Vector2.right);
         sprite.enabled = false;
-        Instantiate(special_swing , (dash_point + parent_char.attack_point.transform.position)/2 , parent_char.attack_point.transform.rotation);
+        GameObject special_swing_instanced = Instantiate(special_swing , (dash_point + parent_char.attack_point.transform.position)/2 , parent_char.attack_point.transform.rotation);
+        special_swing_instanced.GetComponent<DashSlash>().init(parent , special_attack_damage , parent_char.attack_point.transform.position.y - parent_char.pivot.transform.position.y > 0 ? Vector2.Angle(dash_point - parent_char.pivot.transform.position, Vector2.right) : -Vector2.Angle(dash_point - parent_char.pivot.transform.position, Vector2.right) , hit_effect);
         parent.transform.position = dash_point;
         StartCoroutine(wait_for_special_cooldown(special_attack_cooldown_time));
     }

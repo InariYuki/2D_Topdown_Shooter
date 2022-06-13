@@ -10,13 +10,21 @@ public class DashSlash : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        slash();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void init(GameObject _parent , int _damage , float _rotation , GameObject _hit_effect)
+    {
+        parent = _parent;
+        damage = _damage;
+        rotation = _rotation;
+        hit_effect = _hit_effect;
+        slash();
     }
     [SerializeField] LayerMask attack_mask;
     void slash(){

@@ -21,6 +21,13 @@ public class NormalSwing : MonoBehaviour
     {
 
     }
+    public void init(GameObject _parent , int _damage, GameObject _hit_effect , GameObject _clink_effect)
+    {
+        parent = _parent;
+        damage = _damage;
+        hit_effect = _hit_effect;
+        clink_effect = _clink_effect;
+    }
     void swing(){
         Collider2D[] things_attacked = Physics2D.OverlapCircleAll(center.position , 0.2f , attack_layer);
         foreach(Collider2D things in things_attacked){
