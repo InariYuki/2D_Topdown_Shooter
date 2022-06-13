@@ -39,6 +39,13 @@ public class DeflectableProjectile : MonoBehaviour
             }
         }
     }
+    public void init(GameObject _parent , Vector3 _direction , int _damage , GameObject _hit_effect)
+    {
+        parent = _parent;
+        direction = _direction;
+        damage = _damage;
+        hit_effect = _hit_effect;
+    }
     void OnDrawGizmos(){
         Gizmos.DrawWireSphere(transform.position , radius);
     }

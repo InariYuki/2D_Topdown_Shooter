@@ -56,11 +56,8 @@ public class Ranged : MonoBehaviour
         if(cooling_down) return;
         cooling_down = true;
         weapon_on_hand_instanced.GetComponent<RangedOnHand>().animator.SetTrigger("fire");
-        bullet.GetComponent<DeflectableProjectile>().parent = parent;
-        bullet.GetComponent<DeflectableProjectile>().direction = (weapon_on_hand_instanced.GetComponent<RangedOnHand>().muzzle_position.position - weapon_on_hand_instanced.transform.position).normalized;
-        bullet.GetComponent<DeflectableProjectile>().damage = damage;
-        bullet.GetComponent<DeflectableProjectile>().hit_effect = hit_effect;
-        Instantiate(bullet , weapon_on_hand_instanced.GetComponent<RangedOnHand>().muzzle_position.position , parent.GetComponent<Character>().attack_point.transform.rotation);
+        GameObject bullet_instanced = Instantiate(bullet , weapon_on_hand_instanced.GetComponent<RangedOnHand>().muzzle_position.position , parent.GetComponent<Character>().attack_point.transform.rotation);
+        bullet_instanced.GetComponent<DeflectableProjectile>().init(parent , (weapon_on_hand_instanced.GetComponent<RangedOnHand>().muzzle_position.position - weapon_on_hand_instanced.transform.position).normalized , damage , hit_effect);
         StartCoroutine(weapon_cool_down(cool_down_time));
     }
     IEnumerator weapon_cool_down(float time){
