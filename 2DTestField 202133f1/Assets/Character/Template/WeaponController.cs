@@ -7,12 +7,6 @@ public class WeaponController : MonoBehaviour
     public Character parent;
     public SpriteRenderer weapon_sprite_renderer;
     public int state = 0; //0 down 1 up
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-    // Update is called once per frame
     void Update()
     {
         check_state_value();

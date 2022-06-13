@@ -8,13 +8,9 @@ public class Ranged : MonoBehaviour
     SpriteRenderer sprite;
     [SerializeField] GameObject hit_effect;
     public int damage = 30;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Awake(){
+        sprite = GetComponent<SpriteRenderer>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(weapon_on_hand_instanced == null) return;
@@ -27,7 +23,6 @@ public class Ranged : MonoBehaviour
     }
     public void init(GameObject _parent){
         parent = _parent;
-        sprite = GetComponent<SpriteRenderer>();
     }
     public bool drawed = false;
     [SerializeField] GameObject weapon_on_hand;
@@ -50,7 +45,6 @@ public class Ranged : MonoBehaviour
     bool cooling_down = false;
     public void normal_attack(){
         if(drawed == false){
-            Debug.Log("weapon not drawed");
             return;
         }
         if(cooling_down) return;

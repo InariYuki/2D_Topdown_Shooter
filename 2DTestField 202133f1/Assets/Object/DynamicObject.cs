@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class DynamicObject : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer sprite;
+    SpriteRenderer sprite;
     [SerializeField] Transform feet;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Awake(){
+        sprite = GetComponent<SpriteRenderer>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         sprite.sortingOrder = (int)(-feet.position.y * 100);

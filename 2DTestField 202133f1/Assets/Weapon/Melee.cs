@@ -7,24 +7,15 @@ public class Melee : MonoBehaviour
     public int damage = 25;
     public int special_attack_damage = 50;
     [SerializeField] GameObject hit_effect , clink_effect;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     GameObject parent;
     SpriteRenderer sprite;
     public bool cooling_down = false;
     public float cool_down_time = 0.3f;
+    void Awake(){
+        sprite = GetComponent<SpriteRenderer>();
+    }
     public void init(GameObject _parent){
         parent = _parent;
-        sprite = GetComponent<SpriteRenderer>();
     }
     public GameObject first_swing , second_swing , special_swing;
     int combo_count = 1;

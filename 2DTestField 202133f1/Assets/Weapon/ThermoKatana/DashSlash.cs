@@ -30,11 +30,12 @@ public class DashSlash : MonoBehaviour
     void slash(){
         Collider2D[] hits = Physics2D.OverlapCapsuleAll(transform.position , new Vector2(1.2f , 0.3f) , CapsuleDirection2D.Horizontal , rotation ,  attack_mask);
         foreach(Collider2D things in hits){
-            if(things.GetComponent<Hitbox>() != null){
-                if(things.GetComponent<Hitbox>().parent == parent){
+            Hitbox things_hitbox = things.GetComponent<Hitbox>();
+            if(things_hitbox != null){
+                if(things_hitbox.parent == parent){
                     continue;
                 }
-                things.GetComponent<Hitbox>().hit(damage , parent , hit_effect);
+                things_hitbox.hit(damage , parent , hit_effect);
             }
         }
     }

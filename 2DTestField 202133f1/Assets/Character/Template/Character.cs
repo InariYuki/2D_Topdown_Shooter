@@ -9,18 +9,14 @@ public class Character : MonoBehaviour
     public Vector2 direction = Vector3.zero , velocity = Vector3.zero , facing_direction = Vector3.right;
     public float top_speed = 10f , speed = 0;
     float acceleration = 10f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        get_components();
-        equip_weapon();
-    }
-    void get_components(){
+    void Awake(){
         char_ctrl = GetComponent<Rigidbody2D>();
         weapon_ctrl = GetComponentInChildren<WeaponController>();
     }
-
-    // Update is called once per frame
+    void Start()
+    {
+        equip_weapon();
+    }
     void FixedUpdate()
     {
         movement_loop();
@@ -29,20 +25,17 @@ public class Character : MonoBehaviour
         body_sprite_ctrl();
         handle_render_order();
     }
-    public Melee melee_weapon;
-    public Ranged ranged_weapon;
+    public Melee melee_weapon = null;
+    public Ranged ranged_weapon = null;
     void equip_weapon(){
         if(weapon_ctrl.transform.childCount == 0) return;
         Transform weapon = weapon_ctrl.transform.GetChild(0);
-        if(weapon.GetComponent<Melee>() != null){
-            melee_weapon = weapon.GetComponent<Melee>();
+        melee_weapon = weapon.GetComponent<Melee>();
+        ranged_weapon = weapon.GetComponent<Ranged>();
+        if(melee_weapon != null || ranged_weapon != null){
             weapon_ctrl.weapon_sprite_renderer = weapon.GetComponent<SpriteRenderer>();
-            melee_weapon.init(this.gameObject);
-        }
-        else if(weapon.GetComponent<Ranged>() != null){
-            ranged_weapon = weapon.GetComponent<Ranged>();
-            weapon_ctrl.weapon_sprite_renderer = weapon.GetComponent<SpriteRenderer>();
-            ranged_weapon.init(this.gameObject);
+            if(melee_weapon != null) melee_weapon.init(this.gameObject);
+            else ranged_weapon.init(this.gameObject);
         }
     }
     public Vector3 target_position = Vector3.zero;
@@ -123,7 +116,8 @@ public class Character : MonoBehaviour
     void soft_collision(){
         Collider2D[] clds = Physics2D.OverlapCircleAll(feet.position , soft_collision_radius , soft_layer);
         foreach(Collider2D cld in clds){
-            if(cld.GetComponent<Character>()!= null && cld.GetComponent<Character>() == this) continue;
+            Character cld_char = cld.GetComponent<Character>();
+            if(cld_char!= null && cld_char == this) continue;
             Vector2 collision_vector = cld.transform.position - feet.transform.position;
             Vector2 hit_point_normal = Physics2D.Raycast(feet.position , collision_vector.normalized , collision_vector.magnitude , soft_layer).normal;
             velocity += hit_point_normal.normalized * 0.1f;
@@ -244,5 +238,13 @@ public class Character : MonoBehaviour
                 left_leg_v.sortingOrder = order - 3;
                 break;
         }
+    }
+    [SerializeField] GameObject corpse;
+    bool _dead = false;
+    public bool dead{get{return _dead;}}
+    public void die(){
+        _dead = true;
+        Instantiate(corpse , transform.position , Quaternion.identity);
+        Destroy(gameObject);
     }
 }

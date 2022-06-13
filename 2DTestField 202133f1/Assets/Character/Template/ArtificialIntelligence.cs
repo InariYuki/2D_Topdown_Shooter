@@ -16,6 +16,7 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     void initial_parameters(){
         health = max_health;
+        before_search_position = find_nearest_navbox(transform.position).transform.position;
     }
     NavBox start_navbox , end_navbox;
     List<Vector3> find_path(Vector3 pos){
@@ -103,49 +104,69 @@ public class ArtificialIntelligence : MonoBehaviour
     public int stop_count = 3;
     public float stop_duration = 1f;
     public bool idle = false , static_patrol = false;
-    int step_count = 0;
+    int step_count = 0 , free_roam_substate = 0; //static patrol NPC is 1 , non static is 0
     void free_roam_init(){
         previous = null;
         current = null;
         rest = false;
         trigger = false;
         step_count = 0;
-        parent.speed = parent.top_speed / 3;
-        if(parent.ranged_weapon != null && parent.ranged_weapon.drawed){
-            parent.special_attack();
-        }
+        if(parent.ranged_weapon != null && parent.ranged_weapon.drawed) parent.special_attack();
         ai_state = 0;
+        if(static_patrol){
+            parent.speed = parent.top_speed;
+            free_roam_substate = 1;
+        }
+        else{
+            parent.speed = parent.top_speed / 3;
+            free_roam_substate = 0;
+        }
     }
     void free_roam(){
         sight();
-        if(idle) return;
-        if(current == null) current = find_nearest_navbox(transform.position);
-        if((current.transform.position - transform.position).magnitude > 0.2f){
-            parent.direction = current.transform.position - transform.position;
-        }
-        else{
-            if(rest){
-                parent.direction = Vector2.zero;
-                previous = null;
-                if(trigger == false){
-                    trigger = true;
-                    StartCoroutine(rest_for_a_while(stop_duration));
+        switch(free_roam_substate){
+            case 0:
+                if(idle) return;
+                if(current == null) current = find_nearest_navbox(transform.position);
+                if((current.transform.position - transform.position).magnitude > 0.2f){
+                    parent.direction = current.transform.position - transform.position;
                 }
-                return;
-            }
-            before_search_position = current.transform.position;
-            List<NavBox> nexts = new List<NavBox>();
-            foreach(NavBox box in current.next_hops){
-                nexts.Add(box);
-            }
-            if(nexts.Count > 1) nexts.Remove(previous);
-            previous = current;
-            current = nexts[Random.Range(0 , nexts.Count)];
-            if(stop_count != 0) step_count++;
-            if(step_count == stop_count && stop_count != 0){
-                rest = true;
-                step_count = 0;
-            }
+                else{
+                    if(rest){
+                        parent.direction = Vector2.zero;
+                        previous = null;
+                        if(trigger == false){
+                            trigger = true;
+                            StartCoroutine(rest_for_a_while(stop_duration));
+                        }
+                        return;
+                    }
+                    before_search_position = current.transform.position;
+                    List<NavBox> nexts = new List<NavBox>();
+                    foreach(NavBox box in current.next_hops){
+                        nexts.Add(box);
+                    }
+                    if(nexts.Count > 1) nexts.Remove(previous);
+                    previous = current;
+                    current = nexts[Random.Range(0 , nexts.Count)];
+                    if(stop_count != 0) step_count++;
+                    if(step_count == stop_count && stop_count != 0){
+                        rest = true;
+                        step_count = 0;
+                    }
+                }
+                break;
+            case 1:
+                Vector3 vec = before_search_position - transform.position;
+                if(vec.magnitude > 0.1f){
+                    go_to(before_search_position);
+                }
+                else{
+                    parent.direction = Vector3.zero;
+                    parent.speed = parent.top_speed / 3;
+                    free_roam_substate = 0;
+                }
+                break;
         }
     }
     IEnumerator rest_for_a_while(float time){
@@ -154,6 +175,7 @@ public class ArtificialIntelligence : MonoBehaviour
         trigger = false;
     }
     GameObject current_enemy = null;
+    Character current_enemy_character = null;
     int attack_mode_substate = 0; //0 = aggresive , 1 = retreat
     bool attack_mode_substate_decided = false , attack_mode_substate_timer_start = false;
     [SerializeField] bool is_elite;
@@ -162,6 +184,7 @@ public class ArtificialIntelligence : MonoBehaviour
         attack_mode_substate_decided = false;
         attack_mode_substate_timer_start = false;
         current_enemy = attacker;
+        current_enemy_character = current_enemy.GetComponent<Character>();
         parent.speed = parent.top_speed;
         if(parent.ranged_weapon != null && parent.ranged_weapon.drawed == false){
             parent.special_attack();
@@ -169,9 +192,14 @@ public class ArtificialIntelligence : MonoBehaviour
         ai_state = 1;
     }
     void attack_mode(){
-        if(current_enemy == null) return;
+        if(current_enemy == null || current_enemy_character.dead){
+            current_enemy = null;
+            current_enemy_character = null;
+            free_roam_init();
+            return;
+        }
         if(Physics2D.Raycast(transform.position , (current_enemy.transform.position - transform.position).normalized , (current_enemy.transform.position - transform.position).magnitude , Obstacle)){
-            search_mode_init(current_enemy.GetComponent<Character>().feet.transform.position);
+            search_mode_init(current_enemy_character.feet.transform.position);
         }
         if(attack_mode_substate_decided == false){
             attack_mode_substate_decided = true;
@@ -218,7 +246,8 @@ public class ArtificialIntelligence : MonoBehaviour
     void deflect_bullet(){
         Collider2D[] attacks = Physics2D.OverlapCircleAll(transform.position , 0.7f , attack_layer);
         foreach(Collider2D attack in attacks){
-            if(attack.GetComponent<DeflectableProjectile>() != null && attack.GetComponent<DeflectableProjectile>().parent != gameObject){
+            DeflectableProjectile incomming = attack.GetComponent<DeflectableProjectile>();
+            if(incomming != null && incomming.parent != gameObject){
                 parent.target_position = attack.transform.position;
                 parent.normal_attack();
                 break;
@@ -278,30 +307,11 @@ public class ArtificialIntelligence : MonoBehaviour
                     substate_2_search_times++;
                 }
                 break;
-            case 2:
-                if(static_patrol){
-                    Vector3 vec = before_search_position - transform.position;
-                    if(vec.magnitude > 0.1f){
-                        go_to(before_search_position);
-                    }
-                    else{
-                        parent.direction = Vector3.zero;
-                        free_roam_init();
-                    }
-                }
-                else{
-                    parent.direction = Vector3.zero;
-                    free_roam_init();
-                }
-                break;
         }
     }
     IEnumerator search_give_up(){
         yield return new WaitForSeconds(3);
-        search_substate = 2;
-        if(static_patrol){
-            parent.speed = parent.top_speed;
-        }
+        free_roam_init();
     }
     void go_to(Vector3 target_position){
         if((transform.position - target_position).magnitude < 0.1f){
@@ -357,15 +367,10 @@ public class ArtificialIntelligence : MonoBehaviour
         }
         parent.velocity = (transform.position - attacker.transform.position).normalized * 5f;
         health -= damage;
-        if(health < 0){
+        if(health <= 0){
             health = 0;
-            die();
+            parent.die();
         }
         search_mode_init(attacker.transform.position);
-    }
-    [SerializeField] GameObject corpse;
-    void die(){
-        Instantiate(corpse , transform.position , Quaternion.identity);
-        Destroy(gameObject);
     }
 }

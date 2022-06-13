@@ -6,15 +6,8 @@ public class RangedOnHand : MonoBehaviour
 {
     public Animator animator;
     public Transform muzzle_position;
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -31,19 +31,22 @@ public class NormalSwing : MonoBehaviour
     void swing(){
         Collider2D[] things_attacked = Physics2D.OverlapCircleAll(center.position , 0.2f , attack_layer);
         foreach(Collider2D things in things_attacked){
-            if(things.GetComponent<Hitbox>() != null){
-                if(things.GetComponent<Hitbox>().parent == parent){
+            Hitbox things_hitbox = things.GetComponent<Hitbox>();
+            DeflectableProjectile things_defelectable_projectile = things.GetComponent<DeflectableProjectile>();
+            NormalSwing things_normal_swing = things.GetComponent<NormalSwing>();
+            if(things_hitbox != null){
+                if(things_hitbox.parent == parent){
                     continue;
                 }
-                things.GetComponent<Hitbox>().hit(damage , parent , hit_effect);
+                things_hitbox.hit(damage , parent , hit_effect);
             }
-            else if(things.GetComponent<DeflectableProjectile>() != null){
-                things.GetComponent<DeflectableProjectile>().direction = -things.GetComponent<DeflectableProjectile>().direction;
-                things.GetComponent<DeflectableProjectile>().parent = parent;
+            else if(things_defelectable_projectile != null){
+                things_defelectable_projectile.direction = -things_defelectable_projectile.direction;
+                things_defelectable_projectile.parent = parent;
                 Instantiate(clink_effect , things.transform.position , Quaternion.identity);
             }
-            else if(things.GetComponent<NormalSwing>() != null && things.GetComponent<NormalSwing>().parent != parent){
-                things.GetComponent<NormalSwing>().recoil(parent);
+            else if(things_normal_swing != null && things_normal_swing.parent != parent){
+                things_normal_swing.recoil(parent);
                 Instantiate(clink_effect , (things.transform.position + center.transform.position)/2 , Quaternion.identity);
             }
         }

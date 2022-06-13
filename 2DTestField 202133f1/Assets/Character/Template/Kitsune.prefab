@@ -283,6 +283,7 @@ MonoBehaviour:
   weapon: {fileID: 1003185273868199572}
   feet: {fileID: 3491743436302012608}
   order: 0
+  corpse: {fileID: 1129639512143834257, guid: 35396cd96cef29d48901b56bb46157aa, type: 3}
 --- !u!50 &1852860454597871231
 Rigidbody2D:
   serializedVersion: 4

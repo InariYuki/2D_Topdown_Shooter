@@ -12,17 +12,17 @@ public class DeflectableProjectile : MonoBehaviour
     float radius = 0.05f;
     [SerializeField] LayerMask layermask;
     [SerializeField] Collider2D collision;
-    // Start is called before the first frame update
+    void Awake(){
+        body = GetComponent<Rigidbody2D>();
+    }
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
         StartCoroutine(time_to_live(ttl));
     }
     IEnumerator time_to_live(float time){
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
-    // Update is called once per frame
     void FixedUpdate()
     {
         body.MovePosition(body.transform.position + direction * speed * Time.deltaTime);
@@ -30,8 +30,14 @@ public class DeflectableProjectile : MonoBehaviour
             if(thing == collision){
                 continue;
             }
-            if(thing.GetComponent<Hitbox>() != null && thing.GetComponent<Hitbox>().parent != parent){
-                thing.GetComponent<Hitbox>().hit(damage , parent , hit_effect);
+            Hitbox thing_hitbox = thing.GetComponent<Hitbox>();
+            if(thing_hitbox != null && thing_hitbox.parent != parent){
+                if(parent == null){
+                    thing_hitbox.hit(damage , gameObject , hit_effect);
+                }
+                else{
+                    thing_hitbox.hit(damage , parent , hit_effect);
+                }
                 Destroy(gameObject);
             }
             else if(thing.GetComponent<StaticObject>() != null){
