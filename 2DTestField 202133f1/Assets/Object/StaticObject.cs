@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class StaticObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        sprite_ctrl();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    [SerializeField] SpriteRenderer horizontal , vertical;
+    [SerializeField] SpriteRenderer sprite_renderer;
     [SerializeField] Transform feet;
-    void sprite_ctrl(){
-        horizontal.sortingOrder = (int)(-feet.position.y * 100);
-        vertical.sortingOrder = (int)(-feet.position.y * 100);
+    [SerializeField] Collider2D collision;
+    private void Awake() {
+        sprite_renderer = GetComponent<SpriteRenderer>();
+        collision = GetComponent<Collider2D>();
+        feet = transform.GetChild(0);
+    }
+    void Start(){
+        sprite_renderer.sortingOrder = (int)(-feet.position.y * 100);
+        if(sprite_renderer.flipX){
+            Vector2 offset = collision.offset;
+            collision.offset = new Vector2(-offset.x , offset.y);
+        }
     }
 }

@@ -15,8 +15,7 @@ public class Character : MonoBehaviour
         weapon_ctrl = GetComponentInChildren<WeaponController>();
         collision = GetComponent<Collider2D>();
     }
-    void Start()
-    {
+    void Start(){
         equip_weapon();
     }
     void FixedUpdate()
@@ -57,9 +56,7 @@ public class Character : MonoBehaviour
             melee_weapon.normal_attack();
             StartCoroutine(hitbox_time(melee_weapon.cool_down_time));
         }
-        else if(ranged_weapon != null){
-            ranged_weapon.normal_attack();
-        }
+        else if(ranged_weapon != null) ranged_weapon.normal_attack();
         else{
             if(punch_cooling_down) return;
             punch_cooling_down = true;
@@ -81,12 +78,7 @@ public class Character : MonoBehaviour
             melee_weapon.special_attack();
             StartCoroutine(hitbox_time(melee_weapon.special_attack_cooldown_time));
         }
-        else if(ranged_weapon != null){
-            ranged_weapon.draw_or_put_weapon();
-        }
-        else{
-            Debug.Log("Fist special attack");
-        }
+        else if(ranged_weapon != null) ranged_weapon.draw_or_put_weapon();
     }
     IEnumerator hitbox_time(float time){
         yield return new WaitForSeconds(time);
@@ -249,10 +241,7 @@ public class Character : MonoBehaviour
         if (_dead) return;
         _dead = true;
         Instantiate(corpse , transform.position , Quaternion.identity);
-        foreach(Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
+        foreach(Transform child in transform) Destroy(child.gameObject);
         StartCoroutine(wait_to_destroy(5f));
     }
     IEnumerator wait_to_destroy(float time)
