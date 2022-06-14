@@ -72,6 +72,7 @@ public class ArtificialIntelligence : MonoBehaviour
     public int ai_state = 0; //0 = idle , 1 = attack , 2 = search
     void FixedUpdate()
     {
+        if (parent.dead) return;
         switch(ai_state){
             case 0:
                 free_roam();

@@ -6,12 +6,14 @@ public class Character : MonoBehaviour
 {
     public GameObject pivot , attack_point;
     Rigidbody2D char_ctrl;
+    Collider2D collision;
     public Vector2 direction = Vector3.zero , velocity = Vector3.zero , facing_direction = Vector3.right;
     public float top_speed = 10f , speed = 0;
     float acceleration = 10f;
     void Awake(){
         char_ctrl = GetComponent<Rigidbody2D>();
         weapon_ctrl = GetComponentInChildren<WeaponController>();
+        collision = GetComponent<Collider2D>();
     }
     void Start()
     {
@@ -19,6 +21,7 @@ public class Character : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (dead) return;
         movement_loop();
         soft_collision();
         attack_loop();
@@ -243,9 +246,13 @@ public class Character : MonoBehaviour
     bool _dead = false;
     public bool dead{get{return _dead;}}
     public void die(){
+        if (_dead) return;
         _dead = true;
         Instantiate(corpse , transform.position , Quaternion.identity);
-        gameObject.SetActive(false);
+        foreach(Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
         StartCoroutine(wait_to_destroy(5f));
     }
     IEnumerator wait_to_destroy(float time)
