@@ -245,6 +245,12 @@ public class Character : MonoBehaviour
     public void die(){
         _dead = true;
         Instantiate(corpse , transform.position , Quaternion.identity);
+        gameObject.SetActive(false);
+        StartCoroutine(wait_to_destroy(5f));
+    }
+    IEnumerator wait_to_destroy(float time)
+    {
+        yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
 }
