@@ -28,7 +28,7 @@ public class Melee : MonoBehaviour
                 combo_count++;
             }
             else{
-                GameObject swing_2 = Instantiate(first_swing, parent_char.attack_point.transform.position, parent_char.attack_point.transform.rotation, parent_char.attack_point.transform);
+                GameObject swing_2 = Instantiate(second_swing, parent_char.attack_point.transform.position, parent_char.attack_point.transform.rotation, parent_char.attack_point.transform);
                 swing_2.GetComponent<NormalSwing>().init(parent, damage, hit_effect, clink_effect);
                 combo_count = 1;
             }
