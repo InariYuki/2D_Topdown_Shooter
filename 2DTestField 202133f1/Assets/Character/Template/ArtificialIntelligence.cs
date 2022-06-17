@@ -129,7 +129,7 @@ public class ArtificialIntelligence : MonoBehaviour
             case 0:
                 if(idle) return;
                 if(current == null) current = find_nearest_navbox(transform.position);
-                if((current.transform.position - transform.position).magnitude > 0.2f){
+                if((current.transform.position - transform.position).magnitude > 0.1f){
                     parent.direction = current.transform.position - transform.position;
                 }
                 else{
@@ -351,10 +351,15 @@ public class ArtificialIntelligence : MonoBehaviour
     NavBox find_nearest_navbox(Vector3 pos){
         Collider2D[] neighbors = Physics2D.OverlapCircleAll(pos , radius , Navbox);
         if(neighbors.Length == 0) return null;
+        List<Collider2D> accessable_navbox = new List<Collider2D>();
+        foreach(Collider2D neighbor in neighbors){
+            Vector2 vec = neighbor.transform.position - pos;
+            if(!Physics2D.Raycast(pos , vec.normalized , vec.magnitude , Obstacle)) accessable_navbox.Add(neighbor);
+        }
         List<float> distances = new List<float>();
         Dictionary<float , NavBox> dist_box_dict = new Dictionary<float, NavBox>();
-        foreach(Collider2D neighbor in neighbors){
-            float dist = (neighbor.transform.position - transform.position).magnitude;
+        foreach(Collider2D neighbor in accessable_navbox){
+            float dist = (neighbor.transform.position - pos).magnitude;
             distances.Add(dist);
             dist_box_dict[dist] = neighbor.GetComponent<NavBox>();
         }
