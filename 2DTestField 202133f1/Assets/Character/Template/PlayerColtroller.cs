@@ -20,6 +20,7 @@ public class PlayerColtroller : MonoBehaviour
         player_input();
     }
     private void FixedUpdate() {
+        character.target_position = cam.ScreenToWorldPoint(Input.mousePosition);
         search_interactable_object();
     }
     Vector2 direction;
@@ -35,7 +36,9 @@ public class PlayerColtroller : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Mouse1)){
             character.special_attack();
         }
-        character.target_position = cam.ScreenToWorldPoint(Input.mousePosition);
+        else if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
+            nearest_interactable_object.GetComponent<InteractableBox>().interacted();
+        }
     }
     public void hit(int damage , GameObject attacker){
         character.velocity = (transform.position - attacker.transform.position).normalized * 5f;

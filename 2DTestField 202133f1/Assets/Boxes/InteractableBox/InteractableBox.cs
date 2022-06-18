@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class InteractableBox : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    Computer computer;
+    private void Awake() {
+        computer = GetComponent<Computer>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void interacted(){
+        if(computer != null) computer.interacted();
     }
 }

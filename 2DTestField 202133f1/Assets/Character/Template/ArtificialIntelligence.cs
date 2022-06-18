@@ -201,6 +201,7 @@ public class ArtificialIntelligence : MonoBehaviour
         }
         if(Physics2D.Raycast(transform.position , (current_enemy.transform.position - transform.position).normalized , (current_enemy.transform.position - transform.position).magnitude , Obstacle)){
             search_mode_init(current_enemy_character.feet.transform.position);
+            return;
         }
         if(attack_mode_substate_decided == false){
             attack_mode_substate_decided = true;
