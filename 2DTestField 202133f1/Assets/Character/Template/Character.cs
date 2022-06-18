@@ -6,7 +6,7 @@ public class Character : MonoBehaviour
 {
     public GameObject pivot , attack_point;
     Rigidbody2D char_ctrl;
-    Collider2D collision;
+    public Collider2D collision;
     public Vector2 direction = Vector3.zero , velocity = Vector3.zero , facing_direction = Vector3.right;
     public float top_speed = 10f , speed = 0;
     float acceleration = 10f;
