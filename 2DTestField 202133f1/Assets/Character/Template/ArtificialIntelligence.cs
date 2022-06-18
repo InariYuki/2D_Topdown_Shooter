@@ -312,7 +312,7 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     IEnumerator search_give_up(){
         yield return new WaitForSeconds(3);
-        free_roam_init();
+        if(ai_state == 2 && search_substate == 1) free_roam_init();
     }
     void go_to(Vector3 target_position){
         if((transform.position - target_position).magnitude < 0.1f){
