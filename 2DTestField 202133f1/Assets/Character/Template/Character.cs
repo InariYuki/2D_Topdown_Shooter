@@ -220,5 +220,4 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
-
 }
