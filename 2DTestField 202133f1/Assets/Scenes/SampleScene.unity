@@ -2185,18 +2185,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1509339488, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
-      propertyPath: m_RootOrder
-      value: 17
-      objectReference: {fileID: 0}
     - target: {fileID: 6686069037882567892, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: m_Name
       value: Kitsune
       objectReference: {fileID: 0}
-    - target: {fileID: 6686069037882567894, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
-      propertyPath: hitbox
-      value: 
-      objectReference: {fileID: 850634364}
+    - target: {fileID: 6686069037882567892, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6686069037882567895, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4075,6 +4071,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kitsune (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6686069037882567892, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6686069037882567895, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -5544,6 +5544,10 @@ PrefabInstance:
     - target: {fileID: 6686069037882567892, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: m_Name
       value: Kitsune (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686069037882567892, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6686069037882567895, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: m_RootOrder

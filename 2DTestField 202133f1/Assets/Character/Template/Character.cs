@@ -76,7 +76,7 @@ public class Character : MonoBehaviour
             disable_hand_sprite();
             hitbox.can_take_hit = false;
             melee_weapon.special_attack();
-            StartCoroutine(hitbox_time(melee_weapon.special_attack_cooldown_time));
+            StartCoroutine(hitbox_time(melee_weapon.cool_down_time));
         }
         else if(ranged_weapon != null) ranged_weapon.draw_or_put_weapon();
     }
@@ -86,20 +86,12 @@ public class Character : MonoBehaviour
         hitbox.can_take_hit = true;
     }
     void disable_hand_sprite(){
-        right_hand_s.enabled = false;
-        left_hand_s.enabled = false;
-        right_hand_v.enabled = false;
-        left_hand_v.enabled = false;
+        right_hand.enabled = false;
+        left_hand.enabled = false;
     }
     void enable_hand_sprite(){
-        if(looking_at == 0){
-            right_hand_s.enabled = true;
-            left_hand_s.enabled = true;
-        }
-        else{
-            right_hand_v.enabled = true;
-            left_hand_v.enabled = true;
-        }
+        left_hand.enabled = true;
+        right_hand.enabled = true;
     }
     void movement_loop(){
         direction = direction.normalized;
@@ -118,119 +110,98 @@ public class Character : MonoBehaviour
             velocity += hit_point_normal.normalized * 0.1f;
         }
     }
-    public SpriteRenderer head_s , head_f , head_b , body_s , body_f , body_b , right_hand_s , left_hand_s , right_leg_s , left_leg_s , right_hand_v , left_hand_v , right_leg_v , left_leg_v;
-    public Animator left_leg_animator , right_leg_animator , left_leg_animator_v , right_leg_animator_v;
+    public Sprite head_s , head_f , head_b , body_s , body_f , body_b , right_hand_s , left_hand_s , right_leg_s , left_leg_s , right_hand_v , left_hand_v , right_leg_v , left_leg_v;
+    public SpriteRenderer head , body , right_hand , left_hand , right_leg , left_leg;
+    public Animator left_leg_animator , right_leg_animator;
     WeaponController weapon_ctrl;
     public Transform weapon , feet;
     public int order;
-    int looking_at = 0; //0 horizontal 1 down 2 up
+    int looking_at = 0;
     void body_sprite_ctrl(){
         if(direction != Vector2.zero){
             facing_direction = direction;
             if(direction.x >= 0.5f || direction.x <= -0.5f){
+                right_leg_animator.Play("WalkH1");
+                left_leg_animator.Play("WalkH2");
+                head.sprite = head_s;
+                body.sprite = body_s;
+                right_hand.sprite = right_hand_s;
+                left_hand.sprite = left_hand_s;
+                right_leg.sprite = right_leg_s;
+                left_leg.sprite = left_leg_s;
                 looking_at = 0;
                 weapon_ctrl.state = 0;
-                right_leg_animator.SetBool("moving" , true);
-                left_leg_animator.SetBool("moving" , true);
-                head_s.enabled = true;
-                head_f.enabled = false;
-                head_b.enabled = false;
-                body_s.enabled = true;
-                body_f.enabled = false;
-                body_b.enabled = false;
-                right_hand_s.enabled = true;
-                left_hand_s.enabled = true;
-                right_leg_s.enabled = true;
-                left_leg_s.enabled = true;
-                right_hand_v.enabled = false;
-                left_hand_v.enabled = false;
-                right_leg_v.enabled = false;
-                left_leg_v.enabled = false;
                 if(direction.x > 0){
+                    head.flipX = false;
+                    body.flipX = false;
+                    right_hand.flipX = false;
+                    left_hand.flipX = false;
+                    right_leg.flipX = false;
+                    left_leg.flipX = false;
                     weapon.localPosition = new Vector2(-0.01f , -0.02f);
-                    head_s.flipX = false;
-                    body_s.flipX = false;
-                    right_hand_s.flipX = false;
-                    left_hand_s.flipX = false;
-                    right_leg_s.flipX = false;
-                    left_leg_s.flipX = false;
                 }
                 else{
+                    head.flipX = true;
+                    body.flipX = true;
+                    right_hand.flipX = true;
+                    left_hand.flipX = true;
+                    right_leg.flipX = true;
+                    left_leg.flipX = true;
                     weapon.localPosition = new Vector2(0.01f , -0.02f);
-                    head_s.flipX = true;
-                    body_s.flipX = true;
-                    right_hand_s.flipX = true;
-                    left_hand_s.flipX = true;
-                    right_leg_s.flipX = true;
-                    left_leg_s.flipX = true;
                 }
             }
             else{
-                left_leg_animator_v.SetBool("moving" , true);
-                right_leg_animator_v.SetBool("moving" , true);
-                head_s.enabled = false;
-                body_s.enabled = false;
-                right_hand_s.enabled = false;
-                left_hand_s.enabled = false;
-                right_leg_s.enabled = false;
-                left_leg_s.enabled = false;
-                right_hand_v.enabled = true;
-                left_hand_v.enabled = true;
-                right_leg_v.enabled = true;
-                left_leg_v.enabled = true;
+                right_leg_animator.Play("WalkV1");
+                left_leg_animator.Play("WalkV2");
+                right_hand.sprite = right_hand_v;
+                left_hand.sprite = left_hand_v;
+                right_leg.sprite = right_leg_v;
+                left_leg.sprite = left_leg_v;
                 if(direction.y > 0){
+                    head.sprite = head_b;
+                    body.sprite = body_b;
                     looking_at = 2;
                     weapon_ctrl.state = 1;
                     weapon.localPosition = new Vector2(0f , -0.03f);
-                    head_b.enabled = true;
-                    head_f.enabled = false;
-                    body_f.enabled = false;
-                    body_b.enabled = true;
                 }
                 else{
+                    head.sprite = head_f;
+                    body.sprite = body_f;
                     looking_at = 1;
                     weapon_ctrl.state = 0;
                     weapon.localPosition = new Vector2(0f , -0.01f);
-                    head_f.enabled = true;
-                    head_b.enabled = false;
-                    body_f.enabled = true;
-                    body_b.enabled = false;
                 }
             }
         }
         else{
-            right_leg_animator.SetBool("moving" , false);
-            left_leg_animator.SetBool("moving" , false);
-            left_leg_animator_v.SetBool("moving" , false);
-            right_leg_animator_v.SetBool("moving" , false);
+            right_leg_animator.Play("Idle");
+            left_leg_animator.Play("Idle");
         }
     }
     void handle_render_order(){
         order = (int)(-feet.position.y * 100);
-        head_s.sortingOrder = order;
-        head_f.sortingOrder = order;
-        head_b.sortingOrder = order;
-        body_s.sortingOrder = order + 2;
-        body_f.sortingOrder = order + 2;
-        body_b.sortingOrder = order - 2;
-        switch(looking_at){
+        head.sortingOrder = order;
+        switch(looking_at){ //0 horizontal 1 down 2 up
             case 0:
-                right_hand_s.sortingOrder = order + 3;
-                left_hand_s.sortingOrder = order + 1;
-                right_leg_s.sortingOrder = order + 3;
-                left_leg_s.sortingOrder = order + 1;
+                body.sortingOrder = order + 2;
+                right_hand.sortingOrder = order + 3;
+                left_hand.sortingOrder = order + 1;
+                right_leg.sortingOrder = order + 3;
+                left_leg.sortingOrder = order + 1;
                 break;
             case 1:
-                right_hand_v.sortingOrder = order + 3;
-                left_hand_v.sortingOrder = order + 3;
-                right_leg_v.sortingOrder = order + 3;
-                left_leg_v.sortingOrder = order + 3;
+                body.sortingOrder = order + 1;
+                right_hand.sortingOrder = order + 2;
+                left_hand.sortingOrder = order + 2;
+                right_leg.sortingOrder = order + 2;
+                left_leg.sortingOrder = order + 2;
                 break;
             case 2:
-                right_hand_v.sortingOrder = order - 3;
-                left_hand_v.sortingOrder = order - 3;
-                right_leg_v.sortingOrder = order - 3;
-                left_leg_v.sortingOrder = order - 3;
+                body.sortingOrder = order - 1;
+                right_hand.sortingOrder = order - 2;
+                left_hand.sortingOrder = order - 2;
+                right_leg.sortingOrder = order - 2;
+                left_leg.sortingOrder = order - 2;
                 break;
         }
     }
@@ -249,4 +220,5 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
+
 }
