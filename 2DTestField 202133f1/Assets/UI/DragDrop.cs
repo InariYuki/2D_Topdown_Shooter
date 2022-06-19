@@ -8,15 +8,15 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
     RectTransform rect_transform;
     CanvasGroup canvas_group;
     public Canvas ui;
-    public Transform parent;
     private void Awake() {
         rect_transform = GetComponent<RectTransform>();
         canvas_group = GetComponent<CanvasGroup>();
     }
     public void OnPointerDown(PointerEventData eventData){
-        transform.SetParent(parent);
+
     }
     public void OnBeginDrag(PointerEventData eventData){
+        transform.SetParent(ui.transform);
         canvas_group.blocksRaycasts = false;
         canvas_group.alpha = 0.6f;
     }
@@ -26,5 +26,8 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
     public void OnEndDrag(PointerEventData eventData){
         canvas_group.blocksRaycasts = true;
         canvas_group.alpha = 1f;
+        if(transform.parent.GetComponent<Slot>() == null){
+            print("item dropped");
+        }
     }
 }

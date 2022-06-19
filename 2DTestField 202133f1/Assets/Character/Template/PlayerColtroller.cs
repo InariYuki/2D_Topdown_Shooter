@@ -40,12 +40,12 @@ public class PlayerColtroller : MonoBehaviour
             if(inventory_opened) return;
             character.special_attack();
         }
-        else if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
-            if(inventory_opened) return;
-            nearest_interactable_object.GetComponent<InteractableBox>().interacted(this);
-        }
         else if(Input.GetKeyDown(KeyCode.I)){
             inventory_opened = ui.toggle_backpack();
+        }
+        if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
+            if(inventory_opened) return;
+            nearest_interactable_object.GetComponent<InteractableBox>().interacted(this);
         }
     }
     public void hit(int damage , GameObject attacker){

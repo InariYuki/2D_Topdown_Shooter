@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour , IDropHandler
 {
+    public UI ui;
     public void OnDrop(PointerEventData eventData){
         if(eventData.pointerDrag != null){
             eventData.pointerDrag.transform.SetParent(transform);
