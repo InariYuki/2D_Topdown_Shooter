@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0a24b70378733244c97b8a46db21c32a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - thermo_katana: {fileID: 4739169989810011955, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
+  - thermo_katana_item: {fileID: 8123128921334461341, guid: b143b6abdf0ef3249b2689c2095ebc54, type: 3}
+  - thermo_katana_image: {fileID: 4913772372196364078, guid: 413e33be0e9a1874bb38046041c291b6, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

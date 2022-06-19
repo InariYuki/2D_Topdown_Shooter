@@ -26,18 +26,26 @@ public class PlayerColtroller : MonoBehaviour
     Vector2 direction;
     public Character character;
     public Camera cam;
+    bool inventory_opened = false;
+    public UI ui;
     void player_input(){
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
         character.direction = direction.normalized;
         if(Input.GetKeyDown(KeyCode.Mouse0)){
+            if(inventory_opened) return;
             character.normal_attack();
         }
         else if(Input.GetKeyDown(KeyCode.Mouse1)){
+            if(inventory_opened) return;
             character.special_attack();
         }
         else if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
-            nearest_interactable_object.GetComponent<InteractableBox>().interacted();
+            if(inventory_opened) return;
+            nearest_interactable_object.GetComponent<InteractableBox>().interacted(this);
+        }
+        else if(Input.GetKeyDown(KeyCode.I)){
+            inventory_opened = ui.toggle_backpack();
         }
     }
     public void hit(int damage , GameObject attacker){
