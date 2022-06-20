@@ -32,7 +32,7 @@ public class ArtificialIntelligence : MonoBehaviour
         Dictionary<NavBox , NavBox> box_parent_dict = new Dictionary<NavBox, NavBox>();
         picked_navboxes.Add(current_navbox);
         box_parent_dict[current_navbox] = current_navbox;
-        while(current_navbox != end_navbox){
+        while(current_navbox != end_navbox){ //Bug ¦b³o¸Ì
             Dictionary<float , NavBox> cost_box_dict = new Dictionary<float, NavBox>();
             List<float> cost = new List<float>();
             for(int i = 0; i < current_navbox.next_hops.Count; i++){
@@ -40,12 +40,13 @@ public class ArtificialIntelligence : MonoBehaviour
                     unpicked_navboxes.Add(current_navbox.next_hops[i]);
                 }
             }
-            for(int i = 1; i < unpicked_navboxes.Count; i++){
+            for(int i = 0; i < unpicked_navboxes.Count; i++){
                 if(! box_parent_dict.ContainsKey(unpicked_navboxes[i])){
                     box_parent_dict[unpicked_navboxes[i]] = current_navbox;
                 }
-                cost_box_dict[(unpicked_navboxes[i].transform.position - transform.position).magnitude + (unpicked_navboxes[i].transform.position - end_navbox.transform.position).magnitude] = unpicked_navboxes[i];
-                cost.Add((unpicked_navboxes[i].transform.position - transform.position).magnitude + (unpicked_navboxes[i].transform.position - end_navbox.transform.position).magnitude);
+                float total_cost = (unpicked_navboxes[i].transform.position - transform.position).magnitude + (unpicked_navboxes[i].transform.position - end_navbox.transform.position).magnitude;
+                cost_box_dict[total_cost] = unpicked_navboxes[i];
+                cost.Add(total_cost);
             }
             cost.Sort();
             current_navbox = cost_box_dict[cost[0]];
@@ -72,7 +73,8 @@ public class ArtificialIntelligence : MonoBehaviour
     public int ai_state = 0; //0 = idle , 1 = attack , 2 = search
     void FixedUpdate()
     {
-        if (parent.dead) return;
+        if (current_enemy != null) find_path(current_enemy.transform.position);
+        /*if (parent.dead) return;
         switch(ai_state){
             case 0:
                 free_roam();
@@ -85,7 +87,7 @@ public class ArtificialIntelligence : MonoBehaviour
                 break;
             default:
                 break;
-        }
+        }*/
     }
     float sight_distance = 2f , view_angle = 80;
     [SerializeField] LayerMask default_layer;
@@ -369,7 +371,8 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     List<GameObject> enemies = new List<GameObject>();
     public void hit(int damage , GameObject attacker){
-        if(!enemies.Contains(attacker)){
+        current_enemy = attacker; //
+        /*if(!enemies.Contains(attacker)){
             enemies.Add(attacker);
         }
         parent.velocity = (transform.position - attacker.transform.position).normalized * 5f;
@@ -378,6 +381,6 @@ public class ArtificialIntelligence : MonoBehaviour
             health = 0;
             parent.die();
         }
-        search_mode_init(attacker.GetComponent<Character>().feet.position);
+        search_mode_init(attacker.GetComponent<Character>().feet.position);*/
     }
 }
