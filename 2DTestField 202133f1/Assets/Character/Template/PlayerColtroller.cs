@@ -7,7 +7,8 @@ public class PlayerColtroller : MonoBehaviour
     /*
         manually input:
             ui
-            camera
+            camera controller
+            target
     */
     Hitbox hitbox;
     private void Awake() {
@@ -22,19 +23,17 @@ public class PlayerColtroller : MonoBehaviour
     void initial_parameters(){
         character.speed = character.top_speed;
     }
-
-    // Update is called once per frame
     void Update()
     {
         player_input();
     }
     private void FixedUpdate() {
-        character.target_position = cam.ScreenToWorldPoint(Input.mousePosition);
+        character.target_position = camera_controller.cam.ScreenToWorldPoint(Input.mousePosition);
         search_interactable_object();
     }
     Vector2 direction;
     Character character;
-    public Camera cam;
+    public CameraController camera_controller;
     bool inventory_opened = false;
     public UI ui;
     void player_input(){
@@ -51,6 +50,7 @@ public class PlayerColtroller : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.I)){
             inventory_opened = ui.toggle_backpack();
+            camera_controller.is_dynamic = !inventory_opened;
         }
         if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
             if(inventory_opened) return;

@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Transform cam;
-    Camera camera_instanced;
+    /*
+        manually set:
+            cam
+            target
+            speed
+    */
+    public Camera cam;
     [SerializeField] Transform target;
     [SerializeField] float speed;
-    // Start is called before the first frame update
-    private void Awake() {
-        camera_instanced = cam.GetComponent<Camera>();
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    Vector3 deviation = Vector2.zero;
+    public bool is_dynamic = true;
     void FixedUpdate()
     {
-        Vector2 final_position = Vector2.Lerp(cam.position , target.position + (camera_instanced.ScreenToWorldPoint(Input.mousePosition) - target.position)/3 , speed * Time.deltaTime);
-        cam.position = new Vector3(final_position.x , final_position.y , -10f);
+        if(is_dynamic) deviation = (cam.ScreenToWorldPoint(Input.mousePosition) - target.position) / 3;
+        else deviation = Vector3.zero;
+        Vector2 final_position = Vector2.Lerp(cam.transform.position , target.position + deviation , speed * Time.deltaTime);
+        cam.transform.position = new Vector3(final_position.x , final_position.y , -10f);
     }
 }
