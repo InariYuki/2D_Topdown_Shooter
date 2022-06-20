@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class PlayerColtroller : MonoBehaviour
 {
-    [SerializeField] Hitbox hitbox;
-    // Start is called before the first frame update
+    /*
+        manually input:
+            ui
+            camera
+    */
+    Hitbox hitbox;
+    private void Awake() {
+        hitbox = GetComponentInChildren<Hitbox>();
+        obstacle = LayerMask.GetMask("Obstacle");
+        character = GetComponent<Character>();
+    }
     void Start()
     {
         initial_parameters();
@@ -24,7 +33,7 @@ public class PlayerColtroller : MonoBehaviour
         search_interactable_object();
     }
     Vector2 direction;
-    public Character character;
+    Character character;
     public Camera cam;
     bool inventory_opened = false;
     public UI ui;
@@ -51,7 +60,7 @@ public class PlayerColtroller : MonoBehaviour
     public void hit(int damage , GameObject attacker){
         character.velocity = (transform.position - attacker.transform.position).normalized * 5f;
     }
-    [SerializeField] LayerMask obstacle;
+    LayerMask obstacle;
     GameObject nearest_interactable_object = null;
     void search_interactable_object(){
         Collider2D[] nearby_objects = Physics2D.OverlapCircleAll(character.feet.position , 0.1f);

@@ -3,7 +3,39 @@ guid: 26c77fde3a95dee4abebbf26714b7aa3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pivot: {instanceID: 0}
+  - attack_point: {instanceID: 0}
+  - collision: {instanceID: 0}
+  - melee_weapon: {instanceID: 0}
+  - ranged_weapon: {instanceID: 0}
+  - hitbox: {instanceID: 0}
+  - punch: {fileID: 5077202013484140094, guid: 48d6f0c0ccc0cd441aedf10f8c6dd8f4, type: 3}
+  - head_s: {instanceID: 0}
+  - head_f: {instanceID: 0}
+  - head_b: {instanceID: 0}
+  - body_s: {instanceID: 0}
+  - body_f: {instanceID: 0}
+  - body_b: {instanceID: 0}
+  - right_hand_s: {instanceID: 0}
+  - left_hand_s: {instanceID: 0}
+  - right_leg_s: {instanceID: 0}
+  - left_leg_s: {instanceID: 0}
+  - right_hand_v: {instanceID: 0}
+  - left_hand_v: {instanceID: 0}
+  - right_leg_v: {instanceID: 0}
+  - left_leg_v: {instanceID: 0}
+  - head: {instanceID: 0}
+  - body: {instanceID: 0}
+  - right_hand: {instanceID: 0}
+  - left_hand: {instanceID: 0}
+  - right_leg: {instanceID: 0}
+  - left_leg: {instanceID: 0}
+  - left_leg_animator: {instanceID: 0}
+  - right_leg_animator: {instanceID: 0}
+  - weapon: {instanceID: 0}
+  - feet: {instanceID: 0}
+  - corpse: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

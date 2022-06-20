@@ -4,11 +4,27 @@ using UnityEngine;
 
 public class ArtificialIntelligence : MonoBehaviour
 {
-    [SerializeField] Hitbox hitbox;
+    /*summary
+        manually input:
+            max_health
+            stop_count
+            stop_diration
+            idle
+            static_patrol
+            is_elite
+    */
+    Hitbox hitbox;
     public int max_health = 100;
     int health;
-    [SerializeField] Character parent;
-    // Start is called before the first frame update
+    Character parent;
+    private void Awake() {
+        hitbox = GetComponentInChildren<Hitbox>();
+        parent = GetComponent<Character>();
+        default_layer = LayerMask.GetMask("Default");
+        attack_layer = LayerMask.GetMask("Attack");
+        Navbox = LayerMask.GetMask("Navigation");
+        Obstacle = LayerMask.GetMask("Obstacle");
+    }
     void Start()
     {
         initial_parameters();
@@ -16,11 +32,11 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     void initial_parameters(){
         health = max_health;
-        before_search_position = find_nearest_navbox(transform.position).transform.position;
+        before_search_position = find_nearest_navbox(parent.feet.position).transform.position;
     }
     NavBox start_navbox , end_navbox;
     List<Vector3> find_path(Vector3 pos){
-        start_navbox = find_nearest_navbox(transform.position);
+        start_navbox = find_nearest_navbox(parent.feet.position);
         end_navbox = find_nearest_navbox(pos);
         if(start_navbox == null || end_navbox == null){
             Debug.Log("Destination or start position is not set");
@@ -89,12 +105,13 @@ public class ArtificialIntelligence : MonoBehaviour
         }
     }
     float sight_distance = 2f , view_angle = 80;
-    [SerializeField] LayerMask default_layer;
+    LayerMask default_layer;
     void sight(){
         Collider2D[] chatacter_colliders = Physics2D.OverlapCircleAll(transform.position , sight_distance , default_layer);
         for(int i = 0; i < chatacter_colliders.Length; i++){
-            if(! Physics2D.Raycast(transform.position , (chatacter_colliders[i].transform.position - transform.position).normalized , (chatacter_colliders[i].transform.position - transform.position).magnitude , Obstacle) && Vector3.Angle((chatacter_colliders[i].transform.position - transform.position).normalized , parent.facing_direction) <= view_angle){
-                Debug.DrawLine(transform.position , chatacter_colliders[i].transform.position , Color.cyan);
+            Vector2 vec = chatacter_colliders[i].transform.position - transform.position;
+            if(! Physics2D.Raycast(parent.feet.position , vec.normalized , vec.magnitude , Obstacle) && Vector3.Angle(vec.normalized , parent.facing_direction) <= view_angle){
+                Debug.DrawLine(parent.feet.position , chatacter_colliders[i].transform.position , Color.cyan);
                 if(enemies.Contains(chatacter_colliders[i].gameObject)){
                     attack_mode_init(chatacter_colliders[i].gameObject);
                 }
@@ -108,6 +125,7 @@ public class ArtificialIntelligence : MonoBehaviour
     public bool idle = false , static_patrol = false;
     int step_count = 0 , free_roam_substate = 0; //static patrol NPC is 1 , non static is 0
     void free_roam_init(){
+        StopAllCoroutines();
         previous = null;
         current = null;
         rest = false;
@@ -129,7 +147,7 @@ public class ArtificialIntelligence : MonoBehaviour
         switch(free_roam_substate){
             case 0:
                 if(idle) return;
-                if(current == null) current = find_nearest_navbox(transform.position);
+                if(current == null) current = find_nearest_navbox(parent.feet.position);
                 if((current.transform.position - transform.position).magnitude > 0.1f){
                     parent.direction = current.transform.position - transform.position;
                 }
@@ -182,6 +200,7 @@ public class ArtificialIntelligence : MonoBehaviour
     bool attack_mode_substate_decided = false , attack_mode_substate_timer_start = false;
     [SerializeField] bool is_elite;
     void attack_mode_init(GameObject attacker){
+        StopAllCoroutines();
         attack_mode_substate = 0;
         attack_mode_substate_decided = false;
         attack_mode_substate_timer_start = false;
@@ -200,7 +219,8 @@ public class ArtificialIntelligence : MonoBehaviour
             free_roam_init();
             return;
         }
-        if(Physics2D.Raycast(transform.position , (current_enemy.transform.position - transform.position).normalized , (current_enemy.transform.position - transform.position).magnitude , Obstacle)){
+        Vector2 vec = current_enemy.transform.position - transform.position;
+        if(Physics2D.Raycast(parent.feet.position , vec.normalized , vec.magnitude , Obstacle)){
             search_mode_init(current_enemy_character.feet.transform.position);
             return;
         }
@@ -245,7 +265,7 @@ public class ArtificialIntelligence : MonoBehaviour
             parent.normal_attack();
         }
     }
-    [SerializeField] LayerMask attack_layer;
+    LayerMask attack_layer;
     void deflect_bullet(){
         Collider2D[] attacks = Physics2D.OverlapCircleAll(transform.position , 0.7f , attack_layer);
         for(int i = 0; i < attacks.Length; i++){
@@ -264,9 +284,10 @@ public class ArtificialIntelligence : MonoBehaviour
         attack_mode_substate_timer_start = false;
     }
     Vector3 search_position , substate_2_search_position , before_search_position , substate_2_start_position;
-    [SerializeField] int search_substate = 0 , substate_2_search_times = 0;
+    int search_substate = 0 , substate_2_search_times = 0;
     bool substate_2_search_position_picked = false;
     void search_mode_init(Vector3 position){
+        StopAllCoroutines();
         search_position = find_nearest_navbox(position).transform.position;
         search_substate = 0;
         substate_2_search_times = 0;
@@ -281,7 +302,7 @@ public class ArtificialIntelligence : MonoBehaviour
         sight();
         switch(search_substate){
             case 0:
-                Vector3 target_vector = search_position - transform.position;
+                Vector3 target_vector = search_position - parent.feet.position;
                 if(target_vector.magnitude > 0.1f){
                     go_to(search_position);
                 }
@@ -348,8 +369,7 @@ public class ArtificialIntelligence : MonoBehaviour
         }
     }
     float radius = 0.5f;
-    [SerializeField] LayerMask Navbox;
-    [SerializeField] LayerMask Obstacle;
+    LayerMask Navbox , Obstacle;
     NavBox find_nearest_navbox(Vector3 pos){
         Collider2D[] neighbors = Physics2D.OverlapCircleAll(pos , radius , Navbox);
         if(neighbors.Length == 0) return null;
@@ -357,6 +377,12 @@ public class ArtificialIntelligence : MonoBehaviour
         for(int i = 0; i < neighbors.Length ; i++){
             Vector2 vec = neighbors[i].transform.position - pos;
             if(!Physics2D.Raycast(pos , vec.normalized , vec.magnitude , Obstacle)) accessable_navbox.Add(neighbors[i]);
+        }
+        if(accessable_navbox.Count == 0){
+            for(int i = 0; i < neighbors.Length; i++){
+                Debug.DrawLine(pos , neighbors[i].transform.position);
+            }
+            return null;
         }
         List<float> distances = new List<float>();
         Dictionary<float , NavBox> dist_box_dict = new Dictionary<float, NavBox>();

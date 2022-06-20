@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
-{
+{   
     public GameObject pivot , attack_point;
     Rigidbody2D char_ctrl;
     public Collider2D collision;
@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
         char_ctrl = GetComponent<Rigidbody2D>();
         weapon_ctrl = GetComponentInChildren<WeaponController>();
         collision = GetComponent<Collider2D>();
+        hitbox = GetComponentInChildren<Hitbox>();
     }
     void Start(){
         equip_weapon();
