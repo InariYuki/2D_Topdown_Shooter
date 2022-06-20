@@ -8,18 +8,8 @@ public class NormalSwing : MonoBehaviour
     public GameObject parent , hit_effect , clink_effect;
     public LayerMask attack_layer;
     [SerializeField] Transform center;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
     void OnDrawGizmosSelected(){
         Gizmos.DrawWireSphere(center.position , 0.2f);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
     public void init(GameObject _parent , int _damage, GameObject _hit_effect , GameObject _clink_effect)
     {
@@ -30,10 +20,10 @@ public class NormalSwing : MonoBehaviour
     }
     void swing(){
         Collider2D[] things_attacked = Physics2D.OverlapCircleAll(center.position , 0.2f , attack_layer);
-        foreach(Collider2D things in things_attacked){
-            Hitbox things_hitbox = things.GetComponent<Hitbox>();
-            DeflectableProjectile things_defelectable_projectile = things.GetComponent<DeflectableProjectile>();
-            NormalSwing things_normal_swing = things.GetComponent<NormalSwing>();
+        for(int i = 0; i < things_attacked.Length; i++){
+            Hitbox things_hitbox = things_attacked[i].GetComponent<Hitbox>();
+            DeflectableProjectile things_defelectable_projectile = things_attacked[i].GetComponent<DeflectableProjectile>();
+            NormalSwing things_normal_swing = things_attacked[i].GetComponent<NormalSwing>();
             if(things_hitbox != null){
                 if(things_hitbox.parent == parent){
                     continue;
@@ -43,11 +33,11 @@ public class NormalSwing : MonoBehaviour
             else if(things_defelectable_projectile != null){
                 things_defelectable_projectile.direction = -things_defelectable_projectile.direction;
                 things_defelectable_projectile.parent = parent;
-                Instantiate(clink_effect , things.transform.position , Quaternion.identity);
+                Instantiate(clink_effect , things_attacked[i].transform.position , Quaternion.identity);
             }
             else if(things_normal_swing != null && things_normal_swing.parent != parent){
                 things_normal_swing.recoil(parent);
-                Instantiate(clink_effect , (things.transform.position + center.transform.position)/2 , Quaternion.identity);
+                Instantiate(clink_effect , (things_attacked[i].transform.position + center.transform.position)/2 , Quaternion.identity);
             }
         }
     }

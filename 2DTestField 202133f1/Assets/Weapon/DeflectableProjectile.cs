@@ -26,16 +26,17 @@ public class DeflectableProjectile : MonoBehaviour
     void FixedUpdate()
     {
         body.MovePosition(body.transform.position + direction * speed * Time.deltaTime);
-        foreach(Collider2D thing in Physics2D.OverlapCircleAll(transform.position , radius , layermask)){
-            if(thing == collision){
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position , radius , layermask);
+        for(int i = 0; i < hits.Length; i++){
+            if(hits[0] == collision){
                 continue;
             }
-            Hitbox thing_hitbox = thing.GetComponent<Hitbox>();
+            Hitbox thing_hitbox = hits[0].GetComponent<Hitbox>();
             if(thing_hitbox != null && thing_hitbox.parent != parent){
                 thing_hitbox.hit(damage , parent , hit_effect);
                 Destroy(gameObject);
             }
-            else if(thing.GetComponent<StaticObject>() != null){
+            else if(hits[0].GetComponent<StaticObject>() != null){
                 Destroy(gameObject);
             }
         }

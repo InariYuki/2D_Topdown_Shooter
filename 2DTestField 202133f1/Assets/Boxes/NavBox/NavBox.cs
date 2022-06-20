@@ -16,17 +16,17 @@ public class NavBox : MonoBehaviour
     }
     void connect(){
         Collider2D[] neighbors = Physics2D.OverlapCircleAll(transform.position , radius , Navbox);
-        foreach(Collider2D neighbor in neighbors){
-            if(neighbor == collision){
+        for(int i = 0; i < neighbors.Length; i++){
+            if(neighbors[i] == collision){
                 continue;
             }
-            Vector2 vec = neighbor.transform.position - transform.position;
+            Vector2 vec = neighbors[i].transform.position - transform.position;
             if(!Physics2D.Raycast(transform.position + new Vector3(0.07f , 0.07f), vec.normalized , vec.magnitude , Obstacle) &&
                 !Physics2D.Raycast(transform.position + new Vector3(-0.07f , 0.07f) , vec.normalized , vec.magnitude , Obstacle) &&
                 !Physics2D.Raycast(transform.position + new Vector3(0.07f , -0.07f) , vec.normalized , vec.magnitude , Obstacle) &&
                 !Physics2D.Raycast(transform.position + new Vector3(-0.07f , -0.07f) , vec.normalized , vec.magnitude , Obstacle)){
-                Debug.DrawLine(transform.position , neighbor.transform.position , Color.blue , 100f);
-                next_hops.Add(neighbor.GetComponent<NavBox>());
+                Debug.DrawLine(transform.position , neighbors[i].transform.position , Color.blue , 100f);
+                next_hops.Add(neighbors[i].GetComponent<NavBox>());
             }
         }
     }

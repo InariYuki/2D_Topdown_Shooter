@@ -102,10 +102,10 @@ public class Character : MonoBehaviour
     [SerializeField] LayerMask soft_layer;
     void soft_collision(){
         Collider2D[] clds = Physics2D.OverlapCircleAll(feet.position , soft_collision_radius , soft_layer);
-        foreach(Collider2D cld in clds){
-            Character cld_char = cld.GetComponent<Character>();
+        for(int i = 0; i < clds.Length; i++){
+            Character cld_char = clds[i].GetComponent<Character>();
             if(cld_char!= null && cld_char == this) continue;
-            Vector2 collision_vector = cld.transform.position - feet.transform.position;
+            Vector2 collision_vector = clds[i].transform.position - feet.transform.position;
             Vector2 hit_point_normal = Physics2D.Raycast(feet.position , collision_vector.normalized , collision_vector.magnitude , soft_layer).normal;
             velocity += hit_point_normal.normalized * 0.1f;
         }
@@ -212,7 +212,7 @@ public class Character : MonoBehaviour
         if (_dead) return;
         _dead = true;
         Instantiate(corpse , transform.position , Quaternion.identity);
-        foreach(Transform child in transform) Destroy(child.gameObject);
+        for(int i = 0; i < transform.childCount ; i++) Destroy(transform.GetChild(0).gameObject);
         StartCoroutine(wait_to_destroy(5f));
     }
     IEnumerator wait_to_destroy(float time)

@@ -35,17 +35,18 @@ public class ArtificialIntelligence : MonoBehaviour
         while(current_navbox != end_navbox){
             Dictionary<float , NavBox> cost_box_dict = new Dictionary<float, NavBox>();
             List<float> cost = new List<float>();
-            foreach(NavBox nav_box in current_navbox.next_hops){
-                if(! unpicked_navboxes.Contains(nav_box) && ! picked_navboxes.Contains(nav_box)){
-                    unpicked_navboxes.Add(nav_box);
+            for(int i = 0; i < current_navbox.next_hops.Count; i++){
+                if(! unpicked_navboxes.Contains(current_navbox.next_hops[i]) && ! picked_navboxes.Contains(current_navbox.next_hops[i])){
+                    unpicked_navboxes.Add(current_navbox.next_hops[i]);
                 }
             }
-            foreach(NavBox nav_box in unpicked_navboxes){
-                if(! box_parent_dict.ContainsKey(nav_box)){
-                    box_parent_dict[nav_box] = current_navbox;
+            for(int i = 0; i < unpicked_navboxes.Count; i++){
+                if(! box_parent_dict.ContainsKey(unpicked_navboxes[i])){
+                    box_parent_dict[unpicked_navboxes[i]] = current_navbox;
                 }
-                cost_box_dict[(nav_box.transform.position - transform.position).magnitude + (nav_box.transform.position - end_navbox.transform.position).magnitude] = nav_box;
-                cost.Add((nav_box.transform.position - transform.position).magnitude + (nav_box.transform.position - end_navbox.transform.position).magnitude);
+                float box_cost = (unpicked_navboxes[i].transform.position - transform.position).magnitude + (unpicked_navboxes[i].transform.position - end_navbox.transform.position).magnitude;
+                cost_box_dict[box_cost] = unpicked_navboxes[i];
+                cost.Add(box_cost);
             }
             cost.Sort();
             current_navbox = cost_box_dict[cost[0]];
@@ -59,8 +60,8 @@ public class ArtificialIntelligence : MonoBehaviour
         }
         box_path.Add(current_navbox);
         List<Vector3> reversed_path = new List<Vector3>();
-        foreach(NavBox box in box_path){
-            reversed_path.Add(box.transform.position);
+        for(int i = 0; i < box_path.Count; i++){
+            reversed_path.Add(box_path[i].transform.position);
         }
         List<Vector3> path = new List<Vector3>();
         for(int i = reversed_path.Count - 1; i >=0;i--){
@@ -91,11 +92,11 @@ public class ArtificialIntelligence : MonoBehaviour
     [SerializeField] LayerMask default_layer;
     void sight(){
         Collider2D[] chatacter_colliders = Physics2D.OverlapCircleAll(transform.position , sight_distance , default_layer);
-        foreach(Collider2D character_collider in chatacter_colliders){
-            if(! Physics2D.Raycast(transform.position , (character_collider.transform.position - transform.position).normalized , (character_collider.transform.position - transform.position).magnitude , Obstacle) && Vector3.Angle((character_collider.transform.position - transform.position).normalized , parent.facing_direction) <= view_angle){
-                Debug.DrawLine(transform.position , character_collider.transform.position , Color.cyan);
-                if(enemies.Contains(character_collider.gameObject)){
-                    attack_mode_init(character_collider.gameObject);
+        for(int i = 0; i < chatacter_colliders.Length; i++){
+            if(! Physics2D.Raycast(transform.position , (chatacter_colliders[i].transform.position - transform.position).normalized , (chatacter_colliders[i].transform.position - transform.position).magnitude , Obstacle) && Vector3.Angle((chatacter_colliders[i].transform.position - transform.position).normalized , parent.facing_direction) <= view_angle){
+                Debug.DrawLine(transform.position , chatacter_colliders[i].transform.position , Color.cyan);
+                if(enemies.Contains(chatacter_colliders[i].gameObject)){
+                    attack_mode_init(chatacter_colliders[i].gameObject);
                 }
             }
         }
@@ -144,8 +145,8 @@ public class ArtificialIntelligence : MonoBehaviour
                     }
                     before_search_position = current.transform.position;
                     List<NavBox> nexts = new List<NavBox>();
-                    foreach(NavBox box in current.next_hops){
-                        nexts.Add(box);
+                    for(int i = 0; i < current.next_hops.Count; i++){
+                        nexts.Add(current.next_hops[i]);
                     }
                     if(nexts.Count > 1) nexts.Remove(previous);
                     previous = current;
@@ -247,10 +248,10 @@ public class ArtificialIntelligence : MonoBehaviour
     [SerializeField] LayerMask attack_layer;
     void deflect_bullet(){
         Collider2D[] attacks = Physics2D.OverlapCircleAll(transform.position , 0.7f , attack_layer);
-        foreach(Collider2D attack in attacks){
-            DeflectableProjectile incomming = attack.GetComponent<DeflectableProjectile>();
+        for(int i = 0; i < attacks.Length; i++){
+            DeflectableProjectile incomming = attacks[i].GetComponent<DeflectableProjectile>();
             if(incomming != null && incomming.parent != gameObject){
-                parent.target_position = attack.transform.position;
+                parent.target_position = attacks[i].transform.position;
                 parent.normal_attack();
                 break;
             }
@@ -353,16 +354,16 @@ public class ArtificialIntelligence : MonoBehaviour
         Collider2D[] neighbors = Physics2D.OverlapCircleAll(pos , radius , Navbox);
         if(neighbors.Length == 0) return null;
         List<Collider2D> accessable_navbox = new List<Collider2D>();
-        foreach(Collider2D neighbor in neighbors){
-            Vector2 vec = neighbor.transform.position - pos;
-            if(!Physics2D.Raycast(pos , vec.normalized , vec.magnitude , Obstacle)) accessable_navbox.Add(neighbor);
+        for(int i = 0; i < neighbors.Length ; i++){
+            Vector2 vec = neighbors[i].transform.position - pos;
+            if(!Physics2D.Raycast(pos , vec.normalized , vec.magnitude , Obstacle)) accessable_navbox.Add(neighbors[i]);
         }
         List<float> distances = new List<float>();
         Dictionary<float , NavBox> dist_box_dict = new Dictionary<float, NavBox>();
-        foreach(Collider2D neighbor in accessable_navbox){
-            float dist = (neighbor.transform.position - pos).magnitude;
+        for(int i = 0; i < accessable_navbox.Count ; i++){
+            float dist = (accessable_navbox[i].transform.position - pos).magnitude;
             distances.Add(dist);
-            dist_box_dict[dist] = neighbor.GetComponent<NavBox>();
+            dist_box_dict[dist] = accessable_navbox[i].GetComponent<NavBox>();
         }
         distances.Sort();
         return dist_box_dict[distances[0]];
