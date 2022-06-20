@@ -210,9 +210,10 @@ public class Character : MonoBehaviour
     public bool dead{get{return _dead;}}
     public void die(){
         if (_dead) return;
+        StopAllCoroutines();
         _dead = true;
         Instantiate(corpse , transform.position , Quaternion.identity);
-        for(int i = 0; i < transform.childCount ; i++) Destroy(transform.GetChild(0).gameObject);
+        for(int i = 0; i < transform.childCount ; i++) Destroy(transform.GetChild(i).gameObject);
         StartCoroutine(wait_to_destroy(5f));
     }
     IEnumerator wait_to_destroy(float time)
