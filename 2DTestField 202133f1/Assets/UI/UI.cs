@@ -29,6 +29,7 @@ public class UI : MonoBehaviour
     public void add_item_to_backpack(int item_id){
         for(int i = 0; i < items_in_backpack.Length; i++){
             if(items_in_backpack[i] == 0){
+                print("1");
                 items_in_backpack[i] = item_id;
                 GameObject item_image = Instantiate(item_database.item_id_to_image(item_id) , backpack_script.slots[i].transform.position , Quaternion.identity ,  backpack_script.slots[i].transform);
                 backpack_script.slots[i] = item_image;

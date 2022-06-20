@@ -57,13 +57,13 @@ public class PlayerColtroller : MonoBehaviour
         Collider2D[] nearby_objects = Physics2D.OverlapCircleAll(character.feet.position , 0.1f);
         Dictionary<float , GameObject> dist_obj_dict = new Dictionary<float, GameObject>();
         List<float> dist = new List<float>();
-        foreach(Collider2D obj in nearby_objects){
-            if(obj.GetComponent<InteractableBox>() == null) continue;
-            Vector2 vec = obj.transform.position - character.feet.position;
+        for(int i = 0; i < nearby_objects.Length; i++){
+            if(nearby_objects[i].GetComponent<InteractableBox>() == null) continue;
+            Vector2 vec = nearby_objects[i].transform.position - character.feet.position;
             RaycastHit2D hit = Physics2D.Raycast(character.feet.position , vec.normalized , vec.magnitude , obstacle);
-            if(!hit || hit.collider.gameObject == obj.gameObject){
+            if(!hit || hit.collider.gameObject == nearby_objects[i].gameObject){
                 dist.Add(vec.magnitude);
-                dist_obj_dict[vec.magnitude] = obj.gameObject;
+                dist_obj_dict[vec.magnitude] = nearby_objects[i].gameObject;
             }
         }
         if(dist.Count == 0){
