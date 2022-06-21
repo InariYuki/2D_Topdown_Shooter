@@ -15,6 +15,7 @@ public class PlayerColtroller : MonoBehaviour
         hitbox = GetComponentInChildren<Hitbox>();
         obstacle = LayerMask.GetMask("Obstacle");
         character = GetComponent<Character>();
+        ui.player = character;
     }
     void Start()
     {
@@ -37,24 +38,34 @@ public class PlayerColtroller : MonoBehaviour
     bool inventory_opened = false;
     public UI ui;
     void player_input(){
+        if(Input.GetKeyDown(KeyCode.I)){
+            inventory_opened = ui.toggle_backpack();
+            camera_controller.is_dynamic = !inventory_opened;
+        }
+        if(inventory_opened) return;
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
         character.direction = direction.normalized;
         if(Input.GetKeyDown(KeyCode.Mouse0)){
-            if(inventory_opened) return;
             character.normal_attack();
         }
         else if(Input.GetKeyDown(KeyCode.Mouse1)){
-            if(inventory_opened) return;
             character.special_attack();
         }
-        else if(Input.GetKeyDown(KeyCode.I)){
-            inventory_opened = ui.toggle_backpack();
-            camera_controller.is_dynamic = !inventory_opened;
-        }
         if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
-            if(inventory_opened) return;
             nearest_interactable_object.GetComponent<InteractableBox>().interacted(this);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha1)){
+            ui.use_hotbar_item(20);
+        } 
+        else if(Input.GetKeyDown(KeyCode.Alpha2)){
+            ui.use_hotbar_item(21);
+        } 
+        else if(Input.GetKeyDown(KeyCode.Alpha3)){
+            ui.use_hotbar_item(22);
+        } 
+        else if(Input.GetKeyDown(KeyCode.Alpha4)){
+            ui.use_hotbar_item(23);
         }
     }
     public void hit(int damage , GameObject attacker){

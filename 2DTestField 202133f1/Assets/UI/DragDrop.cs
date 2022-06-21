@@ -30,7 +30,9 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
         canvas_group.alpha = 1f;
         Slot slot = transform.parent.GetComponent<Slot>();
         if(slot == null){
-            print("item dropped");
+            Instantiate(ui.item_database.item_id_to_item(item_id) , ui.player.feet.position , Quaternion.identity);
+            ui.items_in_backpack[current_in_slot_id] = 0;
+            Destroy(gameObject);
         }
         else{
             if(ui.items_in_backpack[slot.slot_id] == 0){
@@ -43,5 +45,8 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
                 transform.position = ui.slots[current_in_slot_id].transform.position;
             }
         }
+    }
+    public void use(){
+        print(current_in_slot_id + " " + item_id);
     }
 }
