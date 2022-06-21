@@ -10,6 +10,7 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
     public Canvas ui_canvas;
     public UI ui;
     public int current_in_slot_id = 0 , item_id = 0;
+    public bool is_weapon = false , is_armor = false , usable = false;
     private void Awake() {
         rect_transform = GetComponent<RectTransform>();
         canvas_group = GetComponent<CanvasGroup>();
@@ -18,6 +19,10 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
 
     }
     public void OnBeginDrag(PointerEventData eventData){
+        if(current_in_slot_id == 24) ui.player.unequip_weapon();
+        if(current_in_slot_id == 25){
+            //unequip armor
+        }
         transform.SetParent(ui_canvas.transform);
         canvas_group.blocksRaycasts = false;
         canvas_group.alpha = 0.6f;
@@ -36,14 +41,58 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
         }
         else{
             if(ui.items_in_backpack[slot.slot_id] == 0){
-                ui.items_in_backpack[current_in_slot_id] = 0;
-                ui.items_in_backpack[slot.slot_id] = item_id;
-                current_in_slot_id = slot.slot_id;
+                if(slot.slot_id == 24){
+                    if(is_weapon){
+                        switch_slot(slot);
+                        if(ui.player.weapon.childCount == 0){
+                            Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.weapon.transform.position , Quaternion.identity , ui.player.weapon);
+                            ui.player.equip_weapon();
+                        }
+                    }
+                    else{
+                        go_back_to_old_slot();
+                    }
+                }
+                else if(slot.slot_id == 25){
+                    if(is_armor){
+                        switch_slot(slot);
+                        //equip armor
+                    }
+                    else{
+                        go_back_to_old_slot();
+                    }
+                }
+                else if(slot.slot_id == 20 || slot.slot_id == 21 || slot.slot_id == 22 || slot.slot_id == 23){
+                    if(usable){
+                        switch_slot(slot);
+                    }
+                    else{
+                        go_back_to_old_slot();
+                    }
+                }
+                else{
+                    switch_slot(slot);
+                }
             }
             else{
-                transform.SetParent(ui.slots[current_in_slot_id].transform);
-                transform.position = ui.slots[current_in_slot_id].transform.position;
+                go_back_to_old_slot();
             }
+        }
+    }
+    void switch_slot(Slot desired_slot){
+        ui.items_in_backpack[current_in_slot_id] = 0;
+        ui.items_in_backpack[desired_slot.slot_id] = item_id;
+        current_in_slot_id = desired_slot.slot_id;
+    }
+    void go_back_to_old_slot(){
+        transform.SetParent(ui.slots[current_in_slot_id].transform);
+        transform.position = ui.slots[current_in_slot_id].transform.position;
+        if(current_in_slot_id == 24){
+            Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.weapon.transform.position , Quaternion.identity , ui.player.weapon);
+            ui.player.equip_weapon();
+        }
+        else if(current_in_slot_id == 25){
+            //equip armor
         }
     }
     public void use(){

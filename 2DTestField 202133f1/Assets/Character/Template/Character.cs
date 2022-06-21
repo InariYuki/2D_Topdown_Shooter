@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
     }
     public Melee melee_weapon = null;
     public Ranged ranged_weapon = null;
-    void equip_weapon(){
+    public void equip_weapon(){
         if(weapon_ctrl.transform.childCount == 0) return;
         Transform weapon = weapon_ctrl.transform.GetChild(0);
         melee_weapon = weapon.GetComponent<Melee>();
@@ -40,6 +40,12 @@ public class Character : MonoBehaviour
             if(melee_weapon != null) melee_weapon.init(this.gameObject);
             else ranged_weapon.init(this.gameObject);
         }
+    }
+    public void unequip_weapon(){
+        Destroy(weapon.GetChild(0).gameObject);
+        melee_weapon = null;
+        ranged_weapon = null;
+        weapon_ctrl.weapon_sprite_renderer = null;
     }
     public Vector3 target_position = Vector3.zero;
     void attack_loop(){
