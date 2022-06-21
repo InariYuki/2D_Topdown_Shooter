@@ -5,8 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour , IDropHandler
 {
-    public UI ui;
-    public int slot_id = 0;
+    public int slot_id;
     public void OnDrop(PointerEventData eventData){
         if(eventData.pointerDrag != null){
             Transform dragged_item = eventData.pointerDrag.transform;

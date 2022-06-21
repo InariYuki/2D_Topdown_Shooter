@@ -7,7 +7,8 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
 {
     RectTransform rect_transform;
     CanvasGroup canvas_group;
-    public Canvas ui;
+    public Canvas ui_canvas;
+    public UI ui;
     public int current_in_slot_id = 0 , item_id = 0;
     private void Awake() {
         rect_transform = GetComponent<RectTransform>();
@@ -17,14 +18,12 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
 
     }
     public void OnBeginDrag(PointerEventData eventData){
-        transform.SetParent(ui.transform);
+        transform.SetParent(ui_canvas.transform);
         canvas_group.blocksRaycasts = false;
         canvas_group.alpha = 0.6f;
-        ui.GetComponent<UI>().items_in_backpack[current_in_slot_id] = 0;
-        ui.GetComponent<UI>().backpack.slots[current_in_slot_id] = null;
     }
     public void OnDrag(PointerEventData eventData){
-        rect_transform.anchoredPosition += eventData.delta / ui.scaleFactor;
+        rect_transform.anchoredPosition += eventData.delta / ui_canvas.scaleFactor;
     }
     public void OnEndDrag(PointerEventData eventData){
         canvas_group.blocksRaycasts = true;
@@ -34,9 +33,15 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
             print("item dropped");
         }
         else{
-            current_in_slot_id = slot.slot_id;
-            ui.GetComponent<UI>().items_in_backpack[current_in_slot_id] = item_id;
-            ui.GetComponent<UI>().backpack.slots[current_in_slot_id] = gameObject;
+            if(ui.items_in_backpack[slot.slot_id] == 0){
+                ui.items_in_backpack[current_in_slot_id] = 0;
+                ui.items_in_backpack[slot.slot_id] = item_id;
+                current_in_slot_id = slot.slot_id;
+            }
+            else{
+                transform.SetParent(ui.slots[current_in_slot_id].transform);
+                transform.position = ui.slots[current_in_slot_id].transform.position;
+            }
         }
     }
 }

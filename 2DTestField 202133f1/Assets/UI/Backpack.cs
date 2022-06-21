@@ -5,5 +5,5 @@ using UnityEngine.UI;
 
 public class Backpack : MonoBehaviour
 {
-    public GameObject[] slots = new GameObject[20];
+    
 }

@@ -342,6 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!4 &17263463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1525353107907852442, guid: 0fd8aef7f171e9d4a84829e40d3f613c, type: 3}
@@ -685,6 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &77961400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1028,6 +1030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!4 &125308753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1525353107907852442, guid: 0fd8aef7f171e9d4a84829e40d3f613c, type: 3}
@@ -1416,6 +1419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &184425602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2269,6 +2273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1 &341494699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,6 +2364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &342967055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2506,6 +2512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &358518373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2720,6 +2727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!4 &376257054 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1525353107907852442, guid: 0fd8aef7f171e9d4a84829e40d3f613c, type: 3}
@@ -3176,6 +3184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3975,6 +3984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1 &650789396
 GameObject:
   m_ObjectHideFlags: 0
@@ -4065,6 +4075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &651468374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4465,6 +4476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &739590614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5065,6 +5077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &800420580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5217,6 +5230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &806440978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7202,6 +7216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &1215548330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8021,6 +8036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1 &1337745368
 GameObject:
   m_ObjectHideFlags: 0
@@ -8396,6 +8412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &1359633631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9354,6 +9371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &1545235881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9702,6 +9720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &1575785237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10112,6 +10131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &1780813190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10630,6 +10650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3086a617b1e72ba4e90daefa8bf10b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backpack: {fileID: 1828918914}
   items_in_backpack: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &1821847401
 MonoBehaviour:
@@ -10657,7 +10678,6 @@ GameObject:
   - component: {fileID: 1828918914}
   - component: {fileID: 1828918916}
   - component: {fileID: 1828918915}
-  - component: {fileID: 1828918917}
   m_Layer: 5
   m_Name: Backpack
   m_TagString: Untagged
@@ -10743,39 +10763,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828918913}
   m_CullTransparentMesh: 1
---- !u!114 &1828918917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828918913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce2bb25a3aa54f4b89a71cb0498eaaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slots:
-  - {fileID: 1564290800}
-  - {fileID: 341494699}
-  - {fileID: 647396679}
-  - {fileID: 1543857568}
-  - {fileID: 650789396}
-  - {fileID: 360634026}
-  - {fileID: 1357466497}
-  - {fileID: 354712194}
-  - {fileID: 1334804752}
-  - {fileID: 800939507}
-  - {fileID: 1196448540}
-  - {fileID: 183108448}
-  - {fileID: 332297119}
-  - {fileID: 123595550}
-  - {fileID: 2009552399}
-  - {fileID: 16975817}
-  - {fileID: 1899804533}
-  - {fileID: 1847839008}
-  - {fileID: 74337157}
-  - {fileID: 1967174138}
 --- !u!1001 &1830758166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11057,6 +11044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &1852355428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11385,6 +11373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &1921231088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11661,6 +11650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &1967630501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11994,6 +11984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  slot_id: 0
 --- !u!1001 &2039388869
 PrefabInstance:
   m_ObjectHideFlags: 0
