@@ -12,6 +12,6 @@ public class InteractableBox : MonoBehaviour
     }
     public void interacted(PlayerColtroller player){
         if(computer != null) computer.interacted();
-        if(item != null) item.interacted(player);
+        else if(item != null) item.interacted(player);
     }
 }

@@ -23,6 +23,14 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
         if(current_in_slot_id == 25){
             //unequip armor
         }
+        if(current_in_slot_id > 25 && current_in_slot_id < 46){
+            for(int i = 0; i < ui.current_interacting_npc.items_in_backpack.Length; i++){
+                if(ui.current_interacting_npc.items_in_backpack[i] == item_id){
+                    ui.current_interacting_npc.items_in_backpack[i] = 0;
+                    break;
+                }
+            }
+        }
         transform.SetParent(ui_canvas.transform);
         canvas_group.blocksRaycasts = false;
         canvas_group.alpha = 0.6f;
