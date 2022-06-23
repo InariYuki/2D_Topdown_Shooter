@@ -37,14 +37,19 @@ public class PlayerColtroller : MonoBehaviour
     public CameraController camera_controller;
     public UI ui;
     void player_input(){
-        if(Input.GetKeyDown(KeyCode.I)){
+        if(Input.GetKeyDown(KeyCode.Tab)){
             ui.toggle_backpack();
             if(ui.npc_backpack_opened){
                 ui.toggle_NPC_backpack(null);
             }
+            if (ui.interaction_menu_opened)
+            {
+                ui.toggle_interaction_menu(null);
+                camera_controller.is_dynamic = !ui.interaction_menu_opened;
+            }
             camera_controller.is_dynamic = !ui.backpack_opened;
         }
-        if(ui.backpack_opened) return;
+        if(ui.backpack_opened || ui.npc_backpack_opened) return;
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
         character.direction = direction.normalized;

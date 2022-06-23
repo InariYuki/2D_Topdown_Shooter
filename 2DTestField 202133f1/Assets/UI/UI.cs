@@ -81,7 +81,7 @@ public class UI : MonoBehaviour
         }
         for(int i = 0; i < npc.interact_methods.Length; i++){
             GameObject button_instanced = Instantiate(interaction_menu_button , interaction_menu.position , Quaternion.identity , interaction_menu);
-            button_instanced.GetComponentInChildren<TextMeshProUGUI>().text = npc.interact_methods[i];
+            button_instanced.GetComponentInChildren<TextMeshProUGUI>().text = npc.interact_methods[i] + " " + (npc.action_success_rate[i] == 0 ? "" : npc.action_success_rate[i] + "%");
             InteractiomMenuButton button = button_instanced.GetComponent<InteractiomMenuButton>();
             button.ui = this;
             button.player = player.GetComponent<PlayerColtroller>();

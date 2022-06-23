@@ -11,6 +11,7 @@ public class NPC : MonoBehaviour
         AI = GetComponent<ArtificialIntelligence>();
     }
     public string[] interact_methods = {"Chat" , "Intimidate" , "Steal" , "Assassinate"};
+    public int[] action_success_rate = {0 , 0 , 50 , 50};
     public int[] items_in_backpack = {1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1};
     string dialogue = "Hi I am a kitsune";
     public void interacted(PlayerColtroller player , string action_string){

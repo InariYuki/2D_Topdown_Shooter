@@ -2234,6 +2234,7 @@ MonoBehaviour:
   - Steal
   - Assassinate
   items_in_backpack: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  action_success_rate: 00000000000000003200000032000000
 --- !u!1001 &230791808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2665,6 +2666,7 @@ MonoBehaviour:
   - Steal
   - Assassinate
   items_in_backpack: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  action_success_rate: 00000000000000003200000032000000
 --- !u!1 &332297119
 GameObject:
   m_ObjectHideFlags: 0
@@ -10391,8 +10393,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 81.78653, y: -29.215942}
-  m_SizeDelta: {x: -701.5276, y: -430.4319}
+  m_AnchoredPosition: {x: 114.51381, y: -29.215942}
+  m_SizeDelta: {x: -636.073, y: -430.4319}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443002135
 MonoBehaviour:
@@ -10452,7 +10454,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 95, y: 16}
+  m_CellSize: {x: 160, y: 16}
   m_Spacing: {x: 0, y: 2}
   m_Constraint: 1
   m_ConstraintCount: 1
@@ -12792,6 +12794,7 @@ MonoBehaviour:
   interaction_menu_button: {fileID: 7377661190382102716, guid: 4c369f499f7e9234f88bf73918b5de41, type: 3}
   interaction_menu_opened: 0
   npc_backpack_opened: 0
+  current_interacting_npc: {fileID: 0}
 --- !u!114 &1821847401
 MonoBehaviour:
   m_ObjectHideFlags: 0
