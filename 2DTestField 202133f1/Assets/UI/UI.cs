@@ -28,6 +28,7 @@ public class UI : MonoBehaviour
             Slot slot = slots[i].GetComponent<Slot>();
             slot.slot_id = i;
         }
+        //generate_map(4 , 4);
     }
     private void Start() {
         backpack.gameObject.SetActive(false);
@@ -108,5 +109,16 @@ public class UI : MonoBehaviour
             item.ui = this;
         }
         current_interacting_npc = npc;
+    }
+    [SerializeField] GameObject[] sectors = new GameObject[0];
+    void generate_map(int map_width , int map_height)
+    {
+        for (int i = 0; i < map_height; i++)
+        {
+            for (int j = 0; j < map_width; j++)
+            {
+                Instantiate(sectors[Random.Range(0 , sectors.Length)] , new Vector2(i , j) * 6.4f , Quaternion.identity);
+            }
+        }
     }
 }
