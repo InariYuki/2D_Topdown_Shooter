@@ -42,6 +42,10 @@ public class Character : MonoBehaviour
         }
     }
     public void unequip_weapon(){
+        if(ranged_weapon != null && ranged_weapon.drawed)
+        {
+            ranged_weapon.draw_or_put_weapon();
+        }
         Destroy(weapon.GetChild(0).gameObject);
         melee_weapon = null;
         ranged_weapon = null;
