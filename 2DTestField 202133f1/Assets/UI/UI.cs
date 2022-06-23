@@ -121,4 +121,17 @@ public class UI : MonoBehaviour
             }
         }
     }
+    [SerializeField] GameObject dialogue_box;
+    public void add_dialogue(string dialogue)
+    {
+        TextMeshProUGUI dialogue_box_instanced = Instantiate(dialogue_box , transform.position , Quaternion.identity , transform).GetComponent<TextMeshProUGUI>();
+        dialogue_box_instanced.text = dialogue;
+        StartCoroutine(dialogue_disappear(dialogue_box_instanced));
+
+    }
+    IEnumerator dialogue_disappear(TextMeshProUGUI dialogue_box_instanced)
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(dialogue_box_instanced);
+    }
 }

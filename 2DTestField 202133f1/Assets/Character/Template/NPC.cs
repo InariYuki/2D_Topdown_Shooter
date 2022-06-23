@@ -17,7 +17,7 @@ public class NPC : MonoBehaviour
     public void interacted(PlayerColtroller player , string action_string){
         switch(action_string){
             case "Chat":
-                talk();
+                talk(player);
                 break;
             case "Intimidate":
                 intimidate(player);
@@ -30,8 +30,8 @@ public class NPC : MonoBehaviour
                 break;
         }
     }
-    void talk(){
-        print(dialogue);
+    void talk(PlayerColtroller player){
+        player.ui.add_dialogue(dialogue);
     }
     void intimidate(PlayerColtroller player){
         AI.hit(0 , player.gameObject);

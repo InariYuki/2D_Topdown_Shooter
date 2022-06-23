@@ -12854,6 +12854,7 @@ MonoBehaviour:
   current_interacting_npc: {fileID: 0}
   sectors:
   - {fileID: 172041766}
+  dialogue_box: {fileID: 2410945555881310929, guid: 391350df53941954a8774a566ccbe1cc, type: 3}
 --- !u!114 &1821847401
 MonoBehaviour:
   m_ObjectHideFlags: 0
