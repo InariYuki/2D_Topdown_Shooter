@@ -20,28 +20,38 @@ public class NPC : MonoBehaviour
                 talk();
                 break;
             case "Intimidate":
-                intimidate();
+                intimidate(player);
                 break;
             case "Steal":
                 steal(player);
                 break;
             case "Assassinate":
-                assassinate();
+                assassinate(player);
                 break;
         }
     }
     void talk(){
-        print(dialogue + gameObject);
+        print(dialogue);
     }
-    void intimidate(){
-        print("I am so angry" + gameObject);
+    void intimidate(PlayerColtroller player){
+        AI.hit(0 , player.gameObject);
     }
     void steal(PlayerColtroller player){
+        if (Random.Range(0 , 100) > action_success_rate[2])
+        {
+            AI.hit(0 , player.gameObject);
+            return;
+        }
         player.ui.toggle_NPC_backpack(this);
         player.ui.toggle_backpack();
         player.camera_controller.is_dynamic = false;
     }
-    void assassinate(){
-        print("X_X" + gameObject);
+    void assassinate(PlayerColtroller player){
+        if (Random.Range(0, 100) > action_success_rate[3])
+        {
+            AI.hit(0, player.gameObject);
+            return;
+        }
+        character.die();
     }
 }
