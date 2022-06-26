@@ -19,18 +19,6 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
 
     }
     public void OnBeginDrag(PointerEventData eventData){
-        if(current_in_slot_id == 24) ui.player.unequip_weapon();
-        if(current_in_slot_id == 25){
-            //unequip armor
-        }
-        if(current_in_slot_id > 25 && current_in_slot_id < 46){
-            for(int i = 0; i < ui.current_interacting_npc.items_in_backpack.Length; i++){
-                if(ui.current_interacting_npc.items_in_backpack[i] == item_id){
-                    ui.current_interacting_npc.items_in_backpack[i] = 0;
-                    break;
-                }
-            }
-        }
         transform.SetParent(ui_canvas.transform);
         canvas_group.blocksRaycasts = false;
         canvas_group.alpha = 0.6f;
@@ -42,68 +30,83 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
         canvas_group.blocksRaycasts = true;
         canvas_group.alpha = 1f;
         Slot slot = transform.parent.GetComponent<Slot>();
-        if(slot == null){
+        if(slot == null){ //drop item
+            if(current_in_slot_id == 24){
+                ui.player.unequip_weapon();
+            }
+            if(current_in_slot_id == 25){
+                //unequip armor
+            }
             Instantiate(ui.item_database.item_id_to_item(item_id) , ui.player.feet.position , Quaternion.identity);
             ui.items_in_backpack[current_in_slot_id] = 0;
             Destroy(gameObject);
         }
-        else{
-            if(ui.items_in_backpack[slot.slot_id] == 0){
-                if(slot.slot_id == 24){
-                    if(is_weapon){
-                        switch_slot(slot);
-                        if(ui.player.weapon.childCount == 0){
-                            Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.weapon.transform.position , Quaternion.identity , ui.player.weapon);
-                            ui.player.equip_weapon();
-                        }
-                    }
-                    else{
-                        go_back_to_old_slot();
-                    }
-                }
-                else if(slot.slot_id == 25){
-                    if(is_armor){
-                        switch_slot(slot);
-                        //equip armor
-                    }
-                    else{
-                        go_back_to_old_slot();
-                    }
-                }
-                else if(slot.slot_id == 20 || slot.slot_id == 21 || slot.slot_id == 22 || slot.slot_id == 23){
-                    if(usable){
-                        switch_slot(slot);
-                    }
-                    else{
-                        go_back_to_old_slot();
-                    }
-                }
-                else{
-                    switch_slot(slot);
-                }
+        else if(slot.slot_id > 19 && slot.slot_id < 24){
+            if(usable){
+                move_item_to_slot(slot);
             }
             else{
-                go_back_to_old_slot();
+                return_to_original_slot();
+            }
+        }
+        else if(slot.slot_id == 24){
+            if(is_weapon){
+                ui.player.unequip_weapon();
+                move_item_to_slot(slot);
+                Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.weapon.transform.position , Quaternion.identity , ui.player.weapon.transform);
+                StartCoroutine(wait_to_change_weapon());
+            }
+            else{
+                return_to_original_slot();
+            }
+        }
+        else if(slot.slot_id == 25){
+            if(is_armor){
+                //unequip armor
+                move_item_to_slot(slot);
+                //instantiate armor
+                //equip armor
+            }
+            else{
+                return_to_original_slot();
+            }
+        }
+        else{
+            move_item_to_slot(slot);
+            if(current_in_slot_id == 24){
+                ui.player.unequip_weapon();
+            }
+            else if(current_in_slot_id == 25){
+                //unequip armor
             }
         }
     }
-    void switch_slot(Slot desired_slot){
-        ui.items_in_backpack[current_in_slot_id] = 0;
-        ui.items_in_backpack[desired_slot.slot_id] = item_id;
-        current_in_slot_id = desired_slot.slot_id;
+    IEnumerator wait_to_change_weapon(){
+        yield return new WaitForSeconds(0.001f);
+        ui.player.equip_weapon();
     }
-    void go_back_to_old_slot(){
-        transform.SetParent(ui.slots[current_in_slot_id].transform);
+    void move_item_to_slot(Slot target_slot){
+        if(ui.items_in_backpack[target_slot.slot_id] == 0){
+            ui.items_in_backpack[target_slot.slot_id] = item_id;
+            ui.items_in_backpack[current_in_slot_id] = 0;
+        }
+        else{
+            int temp = ui.items_in_backpack[target_slot.slot_id];
+            ui.items_in_backpack[target_slot.slot_id] = item_id;
+            ui.items_in_backpack[current_in_slot_id] = temp;
+            DragDrop image_in_target_slot = target_slot.transform.GetChild(0).GetComponent<DragDrop>();
+            image_in_target_slot.transform.position = ui.slots[current_in_slot_id].transform.position;
+            image_in_target_slot.transform.SetParent(ui.slots[current_in_slot_id].transform);
+            image_in_target_slot.current_in_slot_id = current_in_slot_id;
+        }
+        current_in_slot_id = target_slot.slot_id;
+    }
+    void return_to_original_slot(){
         transform.position = ui.slots[current_in_slot_id].transform.position;
-        if(current_in_slot_id == 24){
-            Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.weapon.transform.position , Quaternion.identity , ui.player.weapon);
-            ui.player.equip_weapon();
-        }
-        else if(current_in_slot_id == 25){
-            //equip armor
-        }
+        transform.SetParent(ui.slots[current_in_slot_id].transform);
     }
     public void use(){
+        if(!usable) return;
         print(current_in_slot_id + " " + item_id);
     }
 }

@@ -46,7 +46,7 @@ public class UI : MonoBehaviour
         backpack_opened = backpack.gameObject.activeSelf;
     }
     public void add_item_to_backpack(int item_id){
-        for(int i = 0; i < items_in_backpack.Length - 4; i++){
+        for(int i = 0; i < 20; i++){
             if(items_in_backpack[i] == 0){
                 items_in_backpack[i] = item_id;
                 GameObject item_image = Instantiate(item_database.item_id_to_image(item_id) , slots[i].transform.position , Quaternion.identity ,  slots[i].transform);
@@ -60,7 +60,7 @@ public class UI : MonoBehaviour
         }
     }
     public bool backpack_is_full(){
-        for(int i = 0; i < items_in_backpack.Length - 4;i++){
+        for(int i = 0; i < 20;i++){
             if(items_in_backpack[i] != 0) return false;
         }
         return true;
@@ -96,7 +96,14 @@ public class UI : MonoBehaviour
     public void toggle_NPC_backpack(NPC npc){
         npc_backpack.gameObject.SetActive(!npc_backpack.gameObject.activeSelf);
         npc_backpack_opened = npc_backpack.gameObject.activeSelf;
-        if(!npc_backpack.gameObject.activeSelf) return;
+        if(!npc_backpack.gameObject.activeSelf){
+            int[] override_backpack = new int[20];
+            for(int i = 0; i < 20 ; i++){
+                override_backpack[i] = items_in_backpack[i+26];
+            }
+            current_interacting_npc.items_in_backpack = override_backpack;
+            return;
+        }
         for(int i = 0 ; i < npc_backpack.childCount ; i++){
             if(slots[i+26].transform.childCount != 0) Destroy(slots[i+26].transform.GetChild(0).gameObject);
         }
@@ -107,6 +114,7 @@ public class UI : MonoBehaviour
             item.current_in_slot_id = i + 26;
             item.item_id = npc.items_in_backpack[i];
             item.ui = this;
+            item.ui.items_in_backpack[i + 26] = npc.items_in_backpack[i];
         }
         current_interacting_npc = npc;
     }

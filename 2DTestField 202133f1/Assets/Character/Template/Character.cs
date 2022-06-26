@@ -42,6 +42,7 @@ public class Character : MonoBehaviour
         }
     }
     public void unequip_weapon(){
+        if(weapon_ctrl.transform.childCount == 0) return;
         if(ranged_weapon != null && ranged_weapon.drawed)
         {
             ranged_weapon.draw_or_put_weapon();

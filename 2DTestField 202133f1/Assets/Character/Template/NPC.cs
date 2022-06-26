@@ -37,8 +37,7 @@ public class NPC : MonoBehaviour
         AI.hit(0 , player.gameObject);
     }
     void steal(PlayerColtroller player){
-        if (Random.Range(0 , 100) > action_success_rate[2])
-        {
+        if (Random.Range(0 , 100) > action_success_rate[2]){
             AI.hit(0 , player.gameObject);
             return;
         }
@@ -47,8 +46,7 @@ public class NPC : MonoBehaviour
         player.camera_controller.is_dynamic = false;
     }
     void assassinate(PlayerColtroller player){
-        if (Random.Range(0, 100) > action_success_rate[3])
-        {
+        if (Random.Range(0, 100) > action_success_rate[3]){
             AI.hit(0, player.gameObject);
             return;
         }
