@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NPC : MonoBehaviour
 {
@@ -30,8 +31,16 @@ public class NPC : MonoBehaviour
                 break;
         }
     }
+    [SerializeField] Transform dialogue_box;
     void talk(PlayerColtroller player){
-        player.ui.add_dialogue(dialogue);
+        StopCoroutine(dialogue_disappear());
+        dialogue_box.GetChild(0).GetComponent<TextMeshProUGUI>().text = dialogue;
+        dialogue_box.gameObject.SetActive(true);
+        StartCoroutine(dialogue_disappear());
+    }
+    IEnumerator dialogue_disappear(){
+        yield return new WaitForSeconds(2f);
+        dialogue_box.gameObject.SetActive(false);
     }
     void intimidate(PlayerColtroller player){
         AI.hit(0 , player.gameObject);
