@@ -288,7 +288,12 @@ public class ArtificialIntelligence : MonoBehaviour
     bool substate_2_search_position_picked = false;
     void search_mode_init(Vector3 position){
         StopAllCoroutines();
-        search_position = find_nearest_navbox(position).transform.position;
+        NavBox nearest_navbox = find_nearest_navbox(position);
+        if(nearest_navbox == null){
+            free_roam_init();
+            return;
+        }
+        search_position = nearest_navbox.transform.position;
         search_substate = 0;
         substate_2_search_times = 0;
         substate_2_search_position_picked = false;

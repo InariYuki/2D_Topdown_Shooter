@@ -33,7 +33,6 @@ public class UI : MonoBehaviour
     private void Start() {
         backpack.gameObject.SetActive(false);
         equipment.gameObject.SetActive(false);
-        interaction_menu.gameObject.SetActive(false);
         npc_backpack.gameObject.SetActive(false);
     }
     [SerializeField] Transform backpack , hotbar , equipment , npc_backpack;
@@ -69,27 +68,6 @@ public class UI : MonoBehaviour
         Transform slot = slots[slot_id].transform;
         if(slot.childCount == 0) return;
         slot.GetChild(0).GetComponent<DragDrop>().use();
-    }
-    [SerializeField] RectTransform interaction_menu; //each button buttom -18px
-    [SerializeField] GameObject interaction_menu_button;
-    public bool interaction_menu_opened = false;
-    public void toggle_interaction_menu(NPC npc){
-        interaction_menu.gameObject.SetActive(!interaction_menu.gameObject.activeSelf);
-        interaction_menu_opened = interaction_menu.gameObject.activeSelf;
-        if(!interaction_menu_opened) return;
-        for(int i = 0; i < interaction_menu.childCount; i++){
-            Destroy(interaction_menu.GetChild(i).gameObject);
-        }
-        for(int i = 0; i < npc.interact_methods.Length; i++){
-            GameObject button_instanced = Instantiate(interaction_menu_button , interaction_menu.position , Quaternion.identity , interaction_menu);
-            button_instanced.GetComponentInChildren<TextMeshProUGUI>().text = npc.interact_methods[i] + " " + (npc.action_success_rate[i] == 0 ? "" : npc.action_success_rate[i] + "%");
-            InteractiomMenuButton button = button_instanced.GetComponent<InteractiomMenuButton>();
-            button.ui = this;
-            button.player = player.GetComponent<PlayerColtroller>();
-            button.action_string = npc.interact_methods[i];
-            button.npc = npc;
-        }
-        interaction_menu.offsetMin = new Vector2(interaction_menu.offsetMin.x , 186 - 18 * (npc.interact_methods.Length - 1));
     }
     public bool npc_backpack_opened;
     public NPC current_interacting_npc;

@@ -36,16 +36,12 @@ public class PlayerColtroller : MonoBehaviour
     Character character;
     public CameraController camera_controller;
     public UI ui;
+    public bool attack_locked;
     void player_input(){
         if(Input.GetKeyDown(KeyCode.Tab)){
             ui.toggle_backpack();
             if(ui.npc_backpack_opened){
                 ui.toggle_NPC_backpack(null);
-            }
-            if (ui.interaction_menu_opened)
-            {
-                ui.toggle_interaction_menu(null);
-                camera_controller.is_dynamic = !ui.interaction_menu_opened;
             }
             camera_controller.is_dynamic = !ui.backpack_opened;
         }
@@ -54,27 +50,15 @@ public class PlayerColtroller : MonoBehaviour
         direction.y = Input.GetAxisRaw("Vertical");
         character.direction = direction.normalized;
         if(Input.GetKeyDown(KeyCode.Mouse0)){
-            if(ui.interaction_menu_opened) return;
+            if(attack_locked) return;
             character.normal_attack();
         }
         else if(Input.GetKeyDown(KeyCode.Mouse1)){
-            if(ui.interaction_menu_opened) return;
+            if(attack_locked) return;
             character.special_attack();
         }
         if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
-            NPC npc = nearest_interactable_object.GetComponent<NPC>();
-            Computer cpu = nearest_interactable_object.GetComponent<Computer>();
-            Item item = nearest_interactable_object.GetComponent<Item>();
-            if(npc != null){
-                ui.toggle_interaction_menu(npc);
-                camera_controller.is_dynamic = !ui.interaction_menu_opened;
-            }
-            else if(cpu != null){
-                cpu.GetComponent<InteractableBox>().interacted(this);
-            }
-            else if(item != null){
-                item.GetComponent<InteractableBox>().interacted(this);
-            }
+            nearest_interactable_object.GetComponent<InteractableBox>().interacted(this);
         }
         if(Input.GetKeyDown(KeyCode.Alpha1)){
             ui.use_hotbar_item(20);
@@ -108,10 +92,12 @@ public class PlayerColtroller : MonoBehaviour
             }
         }
         if(dist.Count == 0){
-            nearest_interactable_object = null;
-            if(ui.interaction_menu_opened){
-                ui.toggle_interaction_menu(null);
-                camera_controller.is_dynamic = !ui.interaction_menu_opened;
+            if(nearest_interactable_object != null){
+                NPC npc = nearest_interactable_object.GetComponent<NPC>();
+                if(npc != null && npc.action_menu_opened){
+                    npc.interacted(this);
+                }
+                nearest_interactable_object = null;
             }
             return;
         }
