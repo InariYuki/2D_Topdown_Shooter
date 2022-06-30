@@ -5,7 +5,8 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public int item_id = 0;
-    public void interacted(PlayerColtroller player){
+    public void interacted(PlayerColtroller player , int interact_state){
+        if(interact_state == 1) return;
         player.ui.add_item_to_backpack(item_id);
         if(!player.ui.backpack_is_full()) Destroy(gameObject);
     }

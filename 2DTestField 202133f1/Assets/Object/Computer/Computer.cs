@@ -6,6 +6,11 @@ public class Computer : MonoBehaviour
 {
     string[] interact_methods = {"control locked doors" , "control traps"};
     public void interacted(int interact_state){
-        print("Hello I am computer");
+        if(interact_state == 0){
+            print("Hello I am computer");
+        }
+        else{
+            
+        }
     }
 }
