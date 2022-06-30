@@ -28,9 +28,14 @@ public class NPC : MonoBehaviour
             button_instanced.init(interact_methods[i] , this);
         }
     }
-    public void interacted(PlayerColtroller _player){
+    public void interacted(PlayerColtroller _player , int interact_state){
         player = _player;
-        toggle_action_menu();
+        if(interact_state == 0){
+            if(action_menu_opened == false) toggle_action_menu();
+        }
+        else{
+            if(action_menu_opened) toggle_action_menu();
+        }
         player.attack_locked = action_menu_opened;
     }
     public bool action_menu_opened;

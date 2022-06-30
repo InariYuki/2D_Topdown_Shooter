@@ -58,7 +58,7 @@ public class PlayerColtroller : MonoBehaviour
             character.special_attack();
         }
         if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
-            nearest_interactable_object.GetComponent<InteractableBox>().interacted(this);
+            nearest_interactable_object.GetComponent<InteractableBox>().interacted(this , 0);
         }
         if(Input.GetKeyDown(KeyCode.Alpha1)){
             ui.use_hotbar_item(20);
@@ -93,10 +93,7 @@ public class PlayerColtroller : MonoBehaviour
         }
         if(dist.Count == 0){
             if(nearest_interactable_object != null){
-                NPC npc = nearest_interactable_object.GetComponent<NPC>();
-                if(npc != null && npc.action_menu_opened){
-                    npc.interacted(this);
-                }
+                nearest_interactable_object.GetComponent<InteractableBox>().interacted(this , 1);
                 nearest_interactable_object = null;
             }
             return;

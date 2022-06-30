@@ -12,9 +12,9 @@ public class InteractableBox : MonoBehaviour
         item = GetComponent<Item>();
         npc = GetComponent<NPC>();
     }
-    public void interacted(PlayerColtroller player){
-        if(computer != null) computer.interacted();
+    public void interacted(PlayerColtroller player , int interact_state){
+        if(computer != null) computer.interacted(interact_state);
         else if(item != null) item.interacted(player);
-        else if(npc != null) npc.interacted(player);
+        else if(npc != null) npc.interacted(player , interact_state);
     }
 }
