@@ -36,8 +36,8 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     NavBox start_navbox , end_navbox;
     List<Vector3> find_path(Vector3 pos){
-        start_navbox = find_nearest_navbox(parent.feet.position);
-        end_navbox = find_nearest_navbox(pos);
+        start_navbox = find_nearest_navbox(pos);
+        end_navbox = find_nearest_navbox(parent.feet.position);
         if(start_navbox == null || end_navbox == null){
             Debug.Log("Destination or start position is not set");
             return null;
@@ -70,18 +70,13 @@ public class ArtificialIntelligence : MonoBehaviour
             picked_navboxes.Add(current_navbox);
         }
         List<NavBox> box_path = new List<NavBox>();
-        while(current_navbox != start_navbox){
+        for(int i = 0; i < 2; i++){
             box_path.Add(current_navbox);
             current_navbox = box_parent_dict[current_navbox];
         }
-        box_path.Add(current_navbox);
-        List<Vector3> reversed_path = new List<Vector3>();
-        for(int i = 0; i < box_path.Count; i++){
-            reversed_path.Add(box_path[i].transform.position);
-        }
         List<Vector3> path = new List<Vector3>();
-        for(int i = reversed_path.Count - 1; i >=0;i--){
-            path.Add(reversed_path[i]);
+        for(int i = 0; i < box_path.Count; i++){
+            path.Add(box_path[i].transform.position);
         }
         path.Add(pos);
         return path;
