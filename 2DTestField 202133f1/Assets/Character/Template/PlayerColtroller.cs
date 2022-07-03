@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerColtroller : MonoBehaviour
 {
@@ -100,5 +101,16 @@ public class PlayerColtroller : MonoBehaviour
         }
         dist.Sort();
         nearest_interactable_object = dist_obj_dict[dist[0]];
+    }
+    [SerializeField] TextMeshProUGUI dialogue;
+    public void player_talk(string talk){
+        StopCoroutine(talk_finished());
+        dialogue.gameObject.SetActive(true);
+        dialogue.text = talk;
+        StartCoroutine(talk_finished());
+    }
+    IEnumerator talk_finished(){
+        yield return new WaitForSeconds(2f);
+        dialogue.gameObject.SetActive(false);
     }
 }

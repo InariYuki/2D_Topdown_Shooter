@@ -129,11 +129,9 @@ public class ArtificialIntelligence : MonoBehaviour
         if(parent.ranged_weapon != null && parent.ranged_weapon.drawed) parent.special_attack();
         ai_state = 0;
         if(static_patrol){
-            parent.speed = parent.top_speed;
             free_roam_substate = 1;
         }
         else{
-            parent.speed = parent.top_speed / 3;
             free_roam_substate = 0;
         }
     }
@@ -143,6 +141,7 @@ public class ArtificialIntelligence : MonoBehaviour
             case 0:
                 if(idle) return;
                 if(current == null) current = find_nearest_navbox(parent.feet.position);
+                parent.speed = parent.top_speed / 3;
                 if((current.transform.position - transform.position).magnitude > 0.1f){
                     parent.direction = current.transform.position - transform.position;
                 }
@@ -174,6 +173,7 @@ public class ArtificialIntelligence : MonoBehaviour
             case 1:
                 Vector3 vec = before_search_position - transform.position;
                 if(vec.magnitude > 0.1f){
+                    parent.speed = parent.top_speed;
                     go_to(before_search_position);
                 }
                 else{
@@ -201,7 +201,6 @@ public class ArtificialIntelligence : MonoBehaviour
         attack_mode_substate_timer_start = false;
         current_enemy = attacker;
         current_enemy_character = current_enemy.GetComponent<Character>();
-        parent.speed = parent.top_speed;
         if(parent.ranged_weapon != null && parent.ranged_weapon.drawed == false){
             parent.special_attack();
         }
@@ -227,6 +226,7 @@ public class ArtificialIntelligence : MonoBehaviour
                 StartCoroutine(change_attack_substate());
             }
         }
+        parent.speed = parent.top_speed;
         parent.target_position = current_enemy.transform.position;
         if(parent.melee_weapon != null){
             if((current_enemy.transform.position - transform.position).magnitude > 0.3f){
@@ -292,7 +292,6 @@ public class ArtificialIntelligence : MonoBehaviour
         search_substate = 0;
         substate_2_search_times = 0;
         substate_2_search_position_picked = false;
-        parent.speed = parent.top_speed;
         if(parent.ranged_weapon != null && parent.ranged_weapon.drawed){
             parent.special_attack();
         }
@@ -304,6 +303,7 @@ public class ArtificialIntelligence : MonoBehaviour
             case 0:
                 Vector3 target_vector = search_position - parent.feet.position;
                 if(target_vector.magnitude > 0.1f){
+                    parent.speed = parent.top_speed;
                     go_to(search_position);
                 }
                 else{
