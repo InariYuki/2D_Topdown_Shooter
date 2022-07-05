@@ -14,7 +14,8 @@ public class NavBox : MonoBehaviour
     {
         connect();
     }
-    void connect(){
+    public void connect(){
+        next_hops.Clear();
         Collider2D[] neighbors = Physics2D.OverlapCircleAll(transform.position , radius , Navbox);
         for(int i = 0; i < neighbors.Length; i++){
             if(neighbors[i] == collision){

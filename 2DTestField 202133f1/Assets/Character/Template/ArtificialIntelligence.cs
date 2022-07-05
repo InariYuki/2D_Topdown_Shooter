@@ -352,16 +352,30 @@ public class ArtificialIntelligence : MonoBehaviour
             for(int i = 0; i < path.Count - 1; i++){
                 Debug.DrawLine(path[i] , path[i+1] , Color.green);
             }
-            if(! Physics2D.Raycast(upper_right , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle) &&
-               ! Physics2D.Raycast(upper_left , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle) &&
-               ! Physics2D.Raycast(lower_right , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle) &&
-               ! Physics2D.Raycast(lower_left , (path[1] - parent.feet.position).normalized , (path[1] - parent.feet.position).magnitude , Obstacle)){
+            Vector2 dir = path[1] - path[0];
+            List<RaycastHit2D> hits = new List<RaycastHit2D>();
+            RaycastHit2D[][] all_hits = {
+                Physics2D.RaycastAll(path[0] + new Vector3(0.07f , 0.07f) , dir.normalized , dir.magnitude , default_layer) ,
+                Physics2D.RaycastAll(path[0] + new Vector3(-0.07f , 0.07f) , dir.normalized , dir.magnitude , default_layer) ,
+                Physics2D.RaycastAll(path[0] + new Vector3(0.07f , -0.07f) , dir.normalized , dir.magnitude , default_layer) , 
+                Physics2D.RaycastAll(path[0] + new Vector3(-0.07f , -0.07f) , dir.normalized , dir.magnitude , default_layer) ,
+                Physics2D.RaycastAll(path[0] , dir.normalized , dir.magnitude , default_layer)
+            };
+            for(int i = 0; i < all_hits.Length; i++){
+                hits.AddRange(all_hits[i]);
+            }
+            bool on_track = false;
+            for(int i = 0 ; i < hits.Count; i++){
+                if(hits[i].transform.gameObject == gameObject){
+                    on_track = true;
+                    break;
+                }
+            }
+            if(on_track){
                 parent.direction = (path[1] - parent.feet.position).normalized;
-                Debug.DrawLine(parent.feet.position , path[1] , Color.red);
             }
             else{
-                parent.direction = (path[0] - transform.position).normalized;
-                Debug.DrawLine(parent.feet.position , path[0] , Color.red);
+                parent.direction = (path[0] - parent.feet.position).normalized;
             }
         }
         else{

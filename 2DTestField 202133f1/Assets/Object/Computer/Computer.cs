@@ -23,6 +23,9 @@ public class Computer : MonoBehaviour
     [SerializeField] Transform action_menu;
     [SerializeField] InteractiomMenuButton button;
     void generate_interaction_menu(){
+        if(doors.Count == 0){
+            interact_methods.Remove("Doors");
+        }
         RectTransform rect = action_menu.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(240 , 5 + 35 * interact_methods.Count);
         for(int i = 0; i < interact_methods.Count; i++){
@@ -45,8 +48,11 @@ public class Computer : MonoBehaviour
     void trap_control(){
         print("traps");
     }
+    [SerializeField] List<Door> doors = new List<Door>();
     void door_control(){
-        print("doors");
+        for(int i = 0; i < doors.Count; i++){
+            doors[i].door_control();
+        }
     }
     bool action_menu_opened;
     void toggle_action_menu(){
