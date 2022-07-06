@@ -9,7 +9,6 @@ public class NavBox : MonoBehaviour
     [SerializeField] LayerMask Obstacle;
     [SerializeField] Collider2D collision;
     public List<NavBox> next_hops = new List<NavBox>();
-    // Start is called before the first frame update
     void Start()
     {
         connect();
@@ -33,11 +32,5 @@ public class NavBox : MonoBehaviour
     }
     void OnDrawGizmos(){
         Gizmos.DrawWireSphere(transform.position , radius);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

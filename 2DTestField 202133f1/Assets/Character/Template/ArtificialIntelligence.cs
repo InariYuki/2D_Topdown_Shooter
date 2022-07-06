@@ -64,6 +64,10 @@ public class ArtificialIntelligence : MonoBehaviour
                 cost_box_dict[box_cost] = unpicked_navboxes[i];
                 cost.Add(box_cost);
             }
+            if(cost.Count == 0){
+                print("no path found now exit");
+                return new List<Vector3>();
+            }
             cost.Sort();
             current_navbox = cost_box_dict[cost[0]];
             unpicked_navboxes.Remove(cost_box_dict[cost[0]]);

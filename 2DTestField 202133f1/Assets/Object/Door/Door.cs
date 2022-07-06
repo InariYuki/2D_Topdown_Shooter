@@ -18,6 +18,10 @@ public class Door : MonoBehaviour
         collision = GetComponent<BoxCollider2D>();
     }
     private void Start() {
+        StartCoroutine(initial_connect());
+    }
+    IEnumerator initial_connect(){
+        yield return new WaitForSeconds(0.1f);
         reconnect_navboxes();
     }
     private void FixedUpdate() {
