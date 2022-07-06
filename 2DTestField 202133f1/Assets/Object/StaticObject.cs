@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StaticObject : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer sprite_renderer;
+    SpriteRenderer sprite_renderer;
     [SerializeField] Transform feet;
     private void Awake() {
         sprite_renderer = GetComponent<SpriteRenderer>();

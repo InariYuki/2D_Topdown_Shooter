@@ -30,6 +30,24 @@ public class ArtificialIntelligence : MonoBehaviour
         initial_parameters();
         free_roam_init();
     }
+    [HideInInspector] public int ai_state = 0; //0 = idle , 1 = attack , 2 = search
+    void FixedUpdate()
+    {
+        if (parent.dead) return;
+        switch(ai_state){
+            case 0:
+                free_roam();
+                break;
+            case 1:
+                attack_mode();
+                break;
+            case 2:
+                search_mode();
+                break;
+            default:
+                break;
+        }
+    }
     void initial_parameters(){
         health = max_health;
         before_search_position = find_nearest_navbox(parent.feet.position).transform.position;
@@ -65,8 +83,8 @@ public class ArtificialIntelligence : MonoBehaviour
                 cost.Add(box_cost);
             }
             if(cost.Count == 0){
-                print("no path found now exit");
-                return new List<Vector3>();
+                free_roam_init();
+                return null;
             }
             cost.Sort();
             current_navbox = cost_box_dict[cost[0]];
@@ -85,32 +103,19 @@ public class ArtificialIntelligence : MonoBehaviour
         path.Add(pos);
         return path;
     }
-    public int ai_state = 0; //0 = idle , 1 = attack , 2 = search
-    void FixedUpdate()
-    {
-        if (parent.dead) return;
-        switch(ai_state){
-            case 0:
-                free_roam();
-                break;
-            case 1:
-                attack_mode();
-                break;
-            case 2:
-                search_mode();
-                break;
-            default:
-                break;
-        }
-    }
     float sight_distance = 2f , view_angle = 80;
     LayerMask default_layer;
+    [SerializeField] bool is_rogue = false;
     void sight(){
         Collider2D[] chatacter_colliders = Physics2D.OverlapCircleAll(transform.position , sight_distance , default_layer);
         for(int i = 0; i < chatacter_colliders.Length; i++){
+            if(chatacter_colliders[i] == parent.collision) continue;
             Vector2 vec = chatacter_colliders[i].transform.position - transform.position;
             if(! Physics2D.Raycast(parent.feet.position , vec.normalized , vec.magnitude , Obstacle) && Vector3.Angle(vec.normalized , parent.facing_direction) <= view_angle){
                 Debug.DrawLine(parent.feet.position , chatacter_colliders[i].transform.position , Color.cyan);
+                if(is_rogue && !enemies.Contains(chatacter_colliders[i].gameObject)){
+                    enemies.Add(chatacter_colliders[i].gameObject);
+                }
                 if(enemies.Contains(chatacter_colliders[i].gameObject)){
                     attack_mode_init(chatacter_colliders[i].gameObject);
                 }
@@ -222,17 +227,17 @@ public class ArtificialIntelligence : MonoBehaviour
             search_mode_init(current_enemy_character.feet.transform.position);
             return;
         }
-        if(attack_mode_substate_decided == false){
-            attack_mode_substate_decided = true;
-            attack_mode_substate = Random.Range(0 , 2);
-            if(attack_mode_substate_timer_start == false){
-                attack_mode_substate_timer_start = true;
-                StartCoroutine(change_attack_substate());
-            }
-        }
-        parent.speed = parent.top_speed;
         parent.target_position = current_enemy.transform.position;
         if(parent.melee_weapon != null){
+            if(attack_mode_substate_decided == false){
+                attack_mode_substate_decided = true;
+                attack_mode_substate = Random.Range(0 , 2);
+                if(attack_mode_substate_timer_start == false){
+                    attack_mode_substate_timer_start = true;
+                    StartCoroutine(change_attack_substate());
+                }
+            }
+            parent.speed = parent.top_speed;
             if((current_enemy.transform.position - transform.position).magnitude > 0.3f){
                 if(is_elite){
                     deflect_bullet();
@@ -252,6 +257,7 @@ public class ArtificialIntelligence : MonoBehaviour
             }
         }
         else if(parent.ranged_weapon != null){
+            parent.speed = parent.top_speed / 2;
             if((current_enemy.transform.position - transform.position).magnitude > 2f){
                 parent.direction = current_enemy.transform.position - transform.position;
             }
