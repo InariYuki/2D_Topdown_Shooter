@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3406320814343523014}
   - component: {fileID: 3406320814343523015}
   - component: {fileID: 3406320814343523016}
+  - component: {fileID: -872691839167078405}
   m_Layer: 6
   m_Name: BioContainer
   m_TagString: Untagged
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e61cf9388ca454f8f6794368469b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  feet: {fileID: 0}
 --- !u!61 &3406320814343523016
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,6 +127,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 0.11}
   m_EdgeRadius: 0
+--- !u!114 &-872691839167078405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3406320814343523012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f675e06bf006a224990f54c33be55bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  full: {fileID: -28317236, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
+  empty: {fileID: -1892506443, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
+  broken: {fileID: -2085504034, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
+  off: {fileID: 400777358, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
+  glass_break_effect: {fileID: 4285786539611938067, guid: 07f8946637574ca4a91c1d974f9aa4a7, type: 3}
 --- !u!1 &3406320815406654782
 GameObject:
   m_ObjectHideFlags: 0

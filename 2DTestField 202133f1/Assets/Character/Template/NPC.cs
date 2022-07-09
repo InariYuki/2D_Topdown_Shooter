@@ -76,7 +76,7 @@ public class NPC : MonoBehaviour
         }
         player.ui.toggle_NPC_backpack(this);
         player.ui.toggle_backpack();
-        player.camera_controller.is_dynamic = false;
+        player.ui.camera_controller.is_dynamic = false;
     }
     void assassinate(PlayerColtroller player){
         if (Random.Range(0, 100) > action_success_rate[3]){

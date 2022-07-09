@@ -359,6 +359,7 @@ public class ArtificialIntelligence : MonoBehaviour
             Physics2D.Raycast(lower_right , vec.normalized , vec.magnitude , Obstacle) ||
             Physics2D.Raycast(lower_left , vec.normalized , vec.magnitude , Obstacle)){
             List<Vector3> path = find_path(target_position);
+            if(path == null) return;
             for(int i = 0; i < path.Count - 1; i++){
                 Debug.DrawLine(path[i] , path[i+1] , Color.green);
             }

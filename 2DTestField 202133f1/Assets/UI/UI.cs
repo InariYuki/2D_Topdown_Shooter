@@ -6,8 +6,10 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
-    public Character player;
-    public ItemRegister item_database;
+    [HideInInspector] public Character player;
+    [HideInInspector] public PlayerColtroller player_ctl;
+    [HideInInspector] public ItemRegister item_database;
+    public CameraController camera_controller;
     private void Awake() {
         item_database = GetComponent<ItemRegister>();
         for(int i = 0; i < 46; i++){
@@ -36,9 +38,9 @@ public class UI : MonoBehaviour
         npc_backpack.gameObject.SetActive(false);
     }
     [SerializeField] Transform backpack , hotbar , equipment , npc_backpack;
-    public int[] items_in_backpack = new int[46];
-    public GameObject[] slots = new GameObject[46];
-    public bool backpack_opened;
+    [HideInInspector] public int[] items_in_backpack = new int[46];
+    [HideInInspector] public GameObject[] slots = new GameObject[46];
+    [HideInInspector] public bool backpack_opened;
     public void toggle_backpack(){
         backpack.gameObject.SetActive(!backpack.gameObject.activeSelf);
         equipment.gameObject.SetActive(!equipment.gameObject.activeSelf);
@@ -69,8 +71,8 @@ public class UI : MonoBehaviour
         if(slot.childCount == 0) return;
         slot.GetChild(0).GetComponent<DragDrop>().use();
     }
-    public bool npc_backpack_opened;
-    public NPC current_interacting_npc;
+    [HideInInspector] public bool npc_backpack_opened;
+    [HideInInspector] public NPC current_interacting_npc;
     public void toggle_NPC_backpack(NPC npc){
         npc_backpack.gameObject.SetActive(!npc_backpack.gameObject.activeSelf);
         npc_backpack_opened = npc_backpack.gameObject.activeSelf;
@@ -107,10 +109,20 @@ public class UI : MonoBehaviour
             }
         }
     }
-    [SerializeField] GameObject intro_scene;
+    public void move_player_to_position(Vector2 pos){
+        player.transform.position = pos;
+        player_ctl.all_control_locked = false;
+        camera_controller.target = player.transform;
+        camera_controller.is_dynamic = true;
+    }
+    [SerializeField] IntroMission intro_scene;
     [SerializeField] GameObject main_menu;
     public void new_game_button_pressed(){
-        Instantiate(intro_scene , new Vector3(0 , 0 , 10f) , Quaternion.identity);
+        IntroMission intro_scene_instanced = Instantiate(intro_scene , new Vector3(0 , 0 , 10f) , Quaternion.identity);
+        intro_scene_instanced.mission_start(this);
+        player_ctl.all_control_locked = true;
+        camera_controller.target = intro_scene_instanced.player_container.transform;
+        camera_controller.is_dynamic = false;
         main_menu.SetActive(false);
     }
 }

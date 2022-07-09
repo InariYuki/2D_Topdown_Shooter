@@ -5,16 +5,16 @@ using UnityEngine;
 public class Punch : MonoBehaviour
 {
     public int damage = 10;
-    public GameObject parent , hit_effect;
+    public GameObject parent , hit_effect , clink_effect;
     [SerializeField] LayerMask attack;
     public void punch(){
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position , 0.1f , attack);
         for(int i = 0; i < hits.Length ; i++){
-            if(hits[i].GetComponent<Hitbox>() != null){
-                if(hits[i].GetComponent<Hitbox>().parent == parent){
-                    continue;
-                }
-                hits[i].GetComponent<Hitbox>().hit(damage , parent , hit_effect);
+            Hitbox hit = hits[i].GetComponent<Hitbox>();
+            if(hit != null){
+                if(hit.parent == parent) continue;
+                if(hit.parent.GetComponent<Character>() != null) hit.hit(damage , parent , hit_effect);
+                else if(hit.parent.GetComponent<BreakableObject>() != null) hit.hit(damage , parent , clink_effect);
             }
         }
     }

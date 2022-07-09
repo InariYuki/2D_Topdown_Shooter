@@ -28,7 +28,8 @@ public class NormalSwing : MonoBehaviour
                 if(things_hitbox.parent == parent){
                     continue;
                 }
-                things_hitbox.hit(damage , parent , hit_effect);
+                if(things_hitbox.parent.GetComponent<Character>() != null) things_hitbox.hit(damage , parent , hit_effect);
+                else if(things_hitbox.parent.GetComponent<BreakableObject>() != null) things_hitbox.hit(damage , parent , clink_effect);
             }
             else if(things_defelectable_projectile != null){
                 things_defelectable_projectile.direction = -things_defelectable_projectile.direction;

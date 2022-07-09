@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    /*
-        manually set:
-            cam
-            target
-            speed
-    */
     public Camera cam;
-    [SerializeField] Transform target;
+    [HideInInspector] public Transform target;
     [SerializeField] float speed;
     Vector3 deviation = Vector2.zero;
-    public bool is_dynamic = true;
+    [HideInInspector] public bool is_dynamic = true;
     void FixedUpdate()
     {
         if(target == null) return;

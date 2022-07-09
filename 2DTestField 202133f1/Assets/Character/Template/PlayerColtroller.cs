@@ -5,18 +5,13 @@ using TMPro;
 
 public class PlayerColtroller : MonoBehaviour
 {
-    /*
-        manually input:
-            ui
-            camera controller
-            target
-    */
     Hitbox hitbox;
     private void Awake() {
         hitbox = GetComponentInChildren<Hitbox>();
         obstacle = LayerMask.GetMask("Obstacle");
         character = GetComponent<Character>();
         ui.player = character;
+        ui.player_ctl = this;
     }
     void Start()
     {
@@ -30,21 +25,22 @@ public class PlayerColtroller : MonoBehaviour
         player_input();
     }
     private void FixedUpdate() {
-        character.target_position = camera_controller.cam.ScreenToWorldPoint(Input.mousePosition);
+        character.target_position = ui.camera_controller.cam.ScreenToWorldPoint(Input.mousePosition);
         search_interactable_object();
     }
     Vector2 direction;
     Character character;
-    public CameraController camera_controller;
     public UI ui;
-    public bool attack_locked;
+    [HideInInspector] public bool attack_locked;
+    [HideInInspector] public bool all_control_locked;
     void player_input(){
+        if(all_control_locked) return;
         if(Input.GetKeyDown(KeyCode.Tab)){
             ui.toggle_backpack();
             if(ui.npc_backpack_opened){
                 ui.toggle_NPC_backpack(null);
             }
-            camera_controller.is_dynamic = !ui.backpack_opened;
+            ui.camera_controller.is_dynamic = !ui.backpack_opened;
         }
         if(ui.backpack_opened || ui.npc_backpack_opened) return;
         direction.x = Input.GetAxisRaw("Horizontal");

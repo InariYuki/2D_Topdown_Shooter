@@ -121,6 +121,7 @@ MonoBehaviour:
   damage: 10
   parent: {fileID: 0}
   hit_effect: {fileID: 8499676266109591988, guid: ceb1935a96ce8a94e9c15010a5312e47, type: 3}
+  clink_effect: {fileID: 7944692190937919618, guid: 7d2b410f885675d44ba14aee0ac485f9, type: 3}
   attack:
     serializedVersion: 2
     m_Bits: 8

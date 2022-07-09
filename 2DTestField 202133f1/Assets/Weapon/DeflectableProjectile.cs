@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class DeflectableProjectile : MonoBehaviour
 {
-    public GameObject parent , hit_effect;
+    public GameObject parent , hit_effect , clink_effect;
     public Vector3 direction;
     public float speed = 10f , ttl = 5f;
     public int damage = 0;
     Rigidbody2D body;
     float radius = 0.05f;
-    [SerializeField] LayerMask layermask;
+    LayerMask attack_layer;
     [SerializeField] Collider2D collision;
     void Awake(){
         body = GetComponent<Rigidbody2D>();
+        attack_layer = LayerMask.GetMask("Attack");
     }
     void Start()
     {
@@ -26,17 +27,15 @@ public class DeflectableProjectile : MonoBehaviour
     void FixedUpdate()
     {
         body.MovePosition(body.transform.position + direction * speed * Time.deltaTime);
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position , radius , layermask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position , radius , attack_layer);
         for(int i = 0; i < hits.Length; i++){
             if(hits[i] == collision){
                 continue;
             }
             Hitbox thing_hitbox = hits[i].GetComponent<Hitbox>();
             if(thing_hitbox != null && thing_hitbox.parent != parent){
-                thing_hitbox.hit(damage , parent , hit_effect);
-                Destroy(gameObject);
-            }
-            else if(hits[i].GetComponent<StaticObject>() != null){
+                if(thing_hitbox.parent.GetComponent<Character>() != null) thing_hitbox.hit(damage , parent , hit_effect);
+                else if(thing_hitbox.parent.GetComponent<BreakableObject>() != null) thing_hitbox.hit(damage , parent , clink_effect);
                 Destroy(gameObject);
             }
         }

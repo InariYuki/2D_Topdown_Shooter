@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DashSlash : MonoBehaviour
 {
-    public GameObject parent , hit_effect;
+    public GameObject parent , hit_effect , clink_effect;
     public int damage;
     public float rotation;
     public void init(GameObject _parent , int _damage , float _rotation , GameObject _hit_effect)
@@ -24,7 +24,8 @@ public class DashSlash : MonoBehaviour
                 if(things_hitbox.parent == parent){
                     continue;
                 }
-                things_hitbox.hit(damage , parent , hit_effect);
+                if(things_hitbox.parent.GetComponent<Character>() != null) things_hitbox.hit(damage , parent , hit_effect);
+                else if(things_hitbox.parent.GetComponent<BreakableObject>() != null) things_hitbox.hit(damage , parent , clink_effect);
             }
         }
     }
