@@ -26,9 +26,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:2DTestField 202133f1/Assets/Object/Wall/RedBrick/RedBrickWallTUp.prefab
   m_GameObject: {fileID: 1620005646128972247}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.9600306, y: 4.80003, z: 0}
+=======
+  m_GameObject: {fileID: 7636125201079331069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7636125201151726701}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7636125201151726702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7636125201151726701}
+  - component: {fileID: 7636125201151726700}
+  - component: {fileID: 7636125201151726703}
+  - component: {fileID: 7636125201151726674}
+  - component: {fileID: 7636125201151726675}
+  - component: {fileID: 7636125201151726672}
+  m_Layer: 6
+  m_Name: DoorH
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7636125201151726701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636125201151726702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.280008, y: 0.80000496, z: 0}
+>>>>>>> Stashed changes:2DTestField 202133f1/Assets/Object/Door/DoorH.prefab
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -88,14 +130,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< Updated upstream:2DTestField 202133f1/Assets/Object/Wall/RedBrick/RedBrickWallTUp.prefab
 --- !u!61 &1620005646128972244
 BoxCollider2D:
+=======
+--- !u!95 &7636125201151726703
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636125201151726702}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0e4f592d46d91647b60ed631ab91856, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7636125201151726674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636125201151726702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e61cf9388ca454f8f6794368469b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feet: {fileID: 7636125201079331042}
+--- !u!114 &7636125201151726675
+MonoBehaviour:
+>>>>>>> Stashed changes:2DTestField 202133f1/Assets/Object/Door/DoorH.prefab
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620005646128972247}
   m_Enabled: 1
+<<<<<<< Updated upstream:2DTestField 202133f1/Assets/Object/Wall/RedBrick/RedBrickWallTUp.prefab
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -115,6 +196,17 @@ BoxCollider2D:
   m_Size: {x: 0.08, y: 0.24}
   m_EdgeRadius: 0
 --- !u!61 &1620005646128972245
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34d5d813394ff740b622c8391115dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locked_door_sprite: {fileID: 784739770, guid: f394ae56565bc3746a3e95cc408f2ee6, type: 3}
+  feet: {fileID: 7636125201079331042}
+  navboxes_needs_to_reconnect: []
+  detect_radius: 0.16
+--- !u!61 &7636125201151726672
+>>>>>>> Stashed changes:2DTestField 202133f1/Assets/Object/Door/DoorH.prefab
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

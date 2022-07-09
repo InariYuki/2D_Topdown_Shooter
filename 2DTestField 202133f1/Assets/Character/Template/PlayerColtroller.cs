@@ -4,8 +4,23 @@ using UnityEngine;
 
 public class PlayerColtroller : MonoBehaviour
 {
+<<<<<<< Updated upstream
     [SerializeField] Hitbox hitbox;
     // Start is called before the first frame update
+=======
+    /*
+        manually input:
+            ui
+            camera controller
+            target
+    */
+    Hitbox hitbox;
+    private void Awake() {
+        hitbox = GetComponentInChildren<Hitbox>();
+        obstacle = LayerMask.GetMask("Obstacle");
+        character = GetComponent<Character>();
+    }
+>>>>>>> Stashed changes
     void Start()
     {
         initial_parameters();
@@ -20,15 +35,38 @@ public class PlayerColtroller : MonoBehaviour
         player_input();
     }
     private void FixedUpdate() {
+<<<<<<< Updated upstream
         character.target_position = cam.ScreenToWorldPoint(Input.mousePosition);
+=======
+        character.target_position = ui.camera_controller.cam.ScreenToWorldPoint(Input.mousePosition);
+>>>>>>> Stashed changes
         search_interactable_object();
     }
+    public void init(UI _ui){
+        ui = _ui;
+        ui.player = character;
+    }
     Vector2 direction;
+<<<<<<< Updated upstream
     public Character character;
     public Camera cam;
     bool inventory_opened = false;
     public UI ui;
     void player_input(){
+=======
+    Character character;
+    [HideInInspector] public UI ui;
+    public bool attack_locked;
+    void player_input(){
+        if(Input.GetKeyDown(KeyCode.Tab)){
+            ui.toggle_backpack();
+            if(ui.npc_backpack_opened){
+                ui.toggle_NPC_backpack(null);
+            }
+            ui.camera_controller.is_dynamic = !ui.backpack_opened;
+        }
+        if(ui.backpack_opened || ui.npc_backpack_opened) return;
+>>>>>>> Stashed changes
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
         character.direction = direction.normalized;
