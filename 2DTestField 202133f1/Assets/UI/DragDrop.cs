@@ -72,13 +72,13 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
             }
         }
         else{
-            move_item_to_slot(slot);
             if(current_in_slot_id == 24){
                 ui.player.unequip_weapon();
             }
             else if(current_in_slot_id == 25){
                 //unequip armor
             }
+            move_item_to_slot(slot);
         }
     }
     IEnumerator wait_to_change_weapon(){

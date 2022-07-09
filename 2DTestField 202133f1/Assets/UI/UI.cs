@@ -107,4 +107,10 @@ public class UI : MonoBehaviour
             }
         }
     }
+    [SerializeField] GameObject intro_scene;
+    [SerializeField] GameObject main_menu;
+    public void new_game_button_pressed(){
+        Instantiate(intro_scene , new Vector3(0 , 0 , 10f) , Quaternion.identity);
+        main_menu.SetActive(false);
+    }
 }
