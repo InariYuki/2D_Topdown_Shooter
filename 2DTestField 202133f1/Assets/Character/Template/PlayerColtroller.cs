@@ -29,7 +29,7 @@ public class PlayerColtroller : MonoBehaviour
         search_interactable_object();
     }
     Vector2 direction;
-    Character character;
+    [HideInInspector] public Character character;
     public UI ui;
     [HideInInspector] public bool attack_locked;
     [HideInInspector] public bool all_control_locked;

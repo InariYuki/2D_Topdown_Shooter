@@ -96,6 +96,7 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     float sight_distance = 2f , view_angle = 80;
     LayerMask default_layer;
+    [SerializeField] List<int> patrol_navbox_tag = new List<int>();
     [SerializeField] bool is_rogue = false;
     void sight(){
         Collider2D[] chatacter_colliders = Physics2D.OverlapCircleAll(transform.position , sight_distance , default_layer);
@@ -104,10 +105,20 @@ public class ArtificialIntelligence : MonoBehaviour
             Vector2 vec = chatacter_colliders[i].transform.position - transform.position;
             if(! Physics2D.Raycast(parent.feet.position , vec.normalized , vec.magnitude , Obstacle) && Vector3.Angle(vec.normalized , parent.facing_direction) <= view_angle){
                 Debug.DrawLine(parent.feet.position , chatacter_colliders[i].transform.position , Color.cyan);
-                Character detected_character = chatacter_colliders[i].GetComponent<Character>();
+                ArtificialIntelligence detected_character = chatacter_colliders[i].GetComponent<ArtificialIntelligence>();
+                PlayerColtroller detected_player = chatacter_colliders[i].GetComponent<PlayerColtroller>();
                 if(detected_character != null){
-                    if(is_rogue && !enemies.Contains(chatacter_colliders[i].gameObject)){
-                        enemies.Add(chatacter_colliders[i].gameObject);
+                    if(!enemies.Contains(chatacter_colliders[i].gameObject)){
+                        if(is_rogue || (detected_character.faction != faction && patrol_navbox_tag.Contains(find_nearest_navbox(detected_character.parent.feet.position).navbox_tag))){
+                            enemies.Add(chatacter_colliders[i].gameObject);
+                        }
+                    }
+                }
+                else if(detected_player != null){
+                    if(!enemies.Contains(chatacter_colliders[i].gameObject)){
+                        if(is_rogue || patrol_navbox_tag.Contains(find_nearest_navbox(detected_player.character.feet.position).navbox_tag)){
+                            enemies.Add(chatacter_colliders[i].gameObject);
+                        }
                     }
                 }
                 if(enemies.Contains(chatacter_colliders[i].gameObject)){
