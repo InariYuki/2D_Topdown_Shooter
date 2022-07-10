@@ -38,7 +38,8 @@ public class PlayerColtroller : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Tab)){
             ui.toggle_backpack();
             if(ui.npc_backpack_opened){
-                ui.toggle_NPC_backpack(null);
+                if(ui.current_interacting_npc != null) ui.toggle_NPC_backpack(null);
+                else if(ui.current_interacting_stash != null) ui.toggle_stash(null);
             }
             ui.camera_controller.is_dynamic = !ui.backpack_opened;
         }
@@ -74,7 +75,17 @@ public class PlayerColtroller : MonoBehaviour
         character.velocity = (transform.position - attacker.transform.position).normalized * 5f;
     }
     LayerMask obstacle;
-    GameObject nearest_interactable_object = null;
+    GameObject _nearest_interactable_object = null;
+    GameObject nearest_interactable_object{
+        set{
+            if(_nearest_interactable_object == value) return;
+            if(_nearest_interactable_object != null) _nearest_interactable_object.GetComponent<InteractableBox>().interacted(this , 1);
+            _nearest_interactable_object = value;
+        }
+        get{
+            return _nearest_interactable_object;
+        }
+    }
     void search_interactable_object(){
         Collider2D[] nearby_objects = Physics2D.OverlapCircleAll(character.feet.position , 0.1f);
         Dictionary<float , GameObject> dist_obj_dict = new Dictionary<float, GameObject>();
@@ -90,13 +101,13 @@ public class PlayerColtroller : MonoBehaviour
         }
         if(dist.Count == 0){
             if(nearest_interactable_object != null){
-                nearest_interactable_object.GetComponent<InteractableBox>().interacted(this , 1);
                 nearest_interactable_object = null;
             }
             return;
         }
         dist.Sort();
         nearest_interactable_object = dist_obj_dict[dist[0]];
+        nearest_interactable_object.GetComponent<InteractableBox>().display_interaction_hint();
     }
     [SerializeField] TextMeshProUGUI dialogue;
     public void player_talk(string talk){

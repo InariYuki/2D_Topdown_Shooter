@@ -140,9 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb6a541d37e4824dbb9aa173ef8f8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  broken: {fileID: -424190244, guid: 09d7667c905a6f44b9d6332b54c1d647, type: 3}
   max_health: 20
   damage_threshold: 0
+  broken: 0
+  pieces: {fileID: 4285786539611938067, guid: 07f8946637574ca4a91c1d974f9aa4a7, type: 3}
 --- !u!1 &2003325387197226278
 GameObject:
   m_ObjectHideFlags: 0

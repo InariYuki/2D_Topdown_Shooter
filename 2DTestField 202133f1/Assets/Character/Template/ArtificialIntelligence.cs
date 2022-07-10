@@ -4,17 +4,8 @@ using UnityEngine;
 
 public class ArtificialIntelligence : MonoBehaviour
 {
-    /*summary
-        manually input:
-            max_health
-            stop_count
-            stop_diration
-            idle
-            static_patrol
-            is_elite
-    */
     Hitbox hitbox;
-    public int max_health = 100;
+    public int max_health = 100 , faction = 0; //0 = civilian , 1 = corp
     int health;
     Character parent;
     private void Awake() {
@@ -113,8 +104,11 @@ public class ArtificialIntelligence : MonoBehaviour
             Vector2 vec = chatacter_colliders[i].transform.position - transform.position;
             if(! Physics2D.Raycast(parent.feet.position , vec.normalized , vec.magnitude , Obstacle) && Vector3.Angle(vec.normalized , parent.facing_direction) <= view_angle){
                 Debug.DrawLine(parent.feet.position , chatacter_colliders[i].transform.position , Color.cyan);
-                if(is_rogue && !enemies.Contains(chatacter_colliders[i].gameObject)){
-                    enemies.Add(chatacter_colliders[i].gameObject);
+                Character detected_character = chatacter_colliders[i].GetComponent<Character>();
+                if(detected_character != null){
+                    if(is_rogue && !enemies.Contains(chatacter_colliders[i].gameObject)){
+                        enemies.Add(chatacter_colliders[i].gameObject);
+                    }
                 }
                 if(enemies.Contains(chatacter_colliders[i].gameObject)){
                     attack_mode_init(chatacter_colliders[i].gameObject);
@@ -127,6 +121,7 @@ public class ArtificialIntelligence : MonoBehaviour
     public int stop_count = 3;
     public float stop_duration = 1f;
     public bool idle = false , static_patrol = false;
+    public List<int> can_walk_navbox_tag = new List<int>{0};
     int step_count = 0 , free_roam_substate = 0; //static patrol NPC is 1 , non static is 0
     void free_roam_init(){
         StopAllCoroutines();
@@ -167,9 +162,13 @@ public class ArtificialIntelligence : MonoBehaviour
                     before_search_position = current.transform.position;
                     List<NavBox> nexts = new List<NavBox>();
                     for(int i = 0; i < current.next_hops.Count; i++){
-                        nexts.Add(current.next_hops[i]);
+                        if(can_walk_navbox_tag.Contains(current.next_hops[i].navbox_tag)) nexts.Add(current.next_hops[i]);
                     }
                     if(nexts.Count > 1) nexts.Remove(previous);
+                    else if(nexts.Count == 0){
+                        parent.direction = Vector2.zero;
+                        return;
+                    }
                     previous = current;
                     current = nexts[Random.Range(0 , nexts.Count)];
                     if(stop_count != 0) step_count++;

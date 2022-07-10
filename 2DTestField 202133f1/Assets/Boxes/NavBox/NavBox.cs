@@ -5,6 +5,7 @@ using UnityEngine;
 public class NavBox : MonoBehaviour
 {
     public float radius = 0.5f;
+    public int navbox_tag = 0;
     [SerializeField] LayerMask Navbox;
     [SerializeField] LayerMask Obstacle;
     [SerializeField] Collider2D collision;

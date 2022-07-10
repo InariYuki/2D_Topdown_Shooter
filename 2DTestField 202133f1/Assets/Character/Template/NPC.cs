@@ -86,14 +86,36 @@ public class NPC : MonoBehaviour
         }
         character.die();
     }
+    bool saying = false;
     void say(string something){
         StopCoroutine(dialogue_disappear());
         dialogue_box.text = something;
         dialogue_box.gameObject.SetActive(true);
+        saying = true;
         StartCoroutine(dialogue_disappear());
     }
     IEnumerator dialogue_disappear(){
         yield return new WaitForSeconds(2f);
         dialogue_box.gameObject.SetActive(false);
+        saying = false;
+    }
+    public void display_string(string text){
+        if(saying) return;
+        try{
+            dialogue_box.text = text;
+            dialogue_box.gameObject.SetActive(true);
+        }
+        catch{
+
+        }
+    }
+    public void undisplay(){
+        if(saying) return;
+        try{
+            dialogue_box.gameObject.SetActive(false);
+        }
+        catch{
+            
+        }
     }
 }

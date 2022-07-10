@@ -6,9 +6,11 @@ public class Character : MonoBehaviour
 {   
     public GameObject pivot , attack_point;
     Rigidbody2D char_ctrl;
-    public Collider2D collision;
-    public Vector2 direction = Vector3.zero , velocity = Vector3.zero , facing_direction = Vector3.right;
-    public float top_speed = 10f , speed = 0;
+    [HideInInspector] public Collider2D collision;
+    [HideInInspector] public Vector2 direction = Vector3.zero , velocity = Vector3.zero;
+    public Vector2 facing_direction = Vector3.right;
+    public float top_speed = 10f;
+    [HideInInspector] public float speed = 0;
     float acceleration = 10f;
     void Awake(){
         char_ctrl = GetComponent<Rigidbody2D>();
@@ -28,8 +30,8 @@ public class Character : MonoBehaviour
         body_sprite_ctrl();
         handle_render_order();
     }
-    public Melee melee_weapon = null;
-    public Ranged ranged_weapon = null;
+    [HideInInspector] public Melee melee_weapon = null;
+    [HideInInspector] public Ranged ranged_weapon = null;
     public void equip_weapon(){
         if(weapon_ctrl.transform.childCount == 0) return;
         Transform weapon = weapon_ctrl.transform.GetChild(0);
@@ -52,7 +54,7 @@ public class Character : MonoBehaviour
         ranged_weapon = null;
         weapon_ctrl.weapon_sprite_renderer = null;
     }
-    public Vector3 target_position = Vector3.zero;
+    [HideInInspector] public Vector3 target_position = Vector3.zero;
     void attack_loop(){
         Vector2 facing = target_position - pivot.transform.position;
         pivot.transform.localRotation = Quaternion.Euler(0 , 0 , Mathf.Rad2Deg * Mathf.Atan2(facing.y , facing.x));
@@ -127,12 +129,12 @@ public class Character : MonoBehaviour
     public Animator left_leg_animator , right_leg_animator;
     WeaponController weapon_ctrl;
     public Transform weapon , feet;
-    public int order;
+    [HideInInspector] public int order;
     int looking_at = 0;
     void body_sprite_ctrl(){
         if(direction != Vector2.zero){
             facing_direction = direction;
-            if(direction.x >= 0.5f || direction.x <= -0.5f){
+            if(facing_direction.x >= 0.5f || facing_direction.x <= -0.5f){
                 right_leg_animator.Play("WalkH1");
                 left_leg_animator.Play("WalkH2");
                 head.sprite = head_s;
@@ -143,7 +145,7 @@ public class Character : MonoBehaviour
                 left_leg.sprite = left_leg_s;
                 looking_at = 0;
                 weapon_ctrl.state = 0;
-                if(direction.x > 0){
+                if(facing_direction.x > 0){
                     head.flipX = false;
                     body.flipX = false;
                     right_hand.flipX = false;

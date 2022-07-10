@@ -98,6 +98,32 @@ public class UI : MonoBehaviour
         }
         current_interacting_npc = npc;
     }
+    [HideInInspector] public Stash current_interacting_stash;
+    public void toggle_stash(Stash stash){
+        npc_backpack.gameObject.SetActive(!npc_backpack.gameObject.activeSelf);
+        npc_backpack_opened = npc_backpack.gameObject.activeSelf;
+        if(!npc_backpack.gameObject.activeSelf){
+            int[] override_backpack = new int[20];
+            for(int i = 0; i < 20 ; i++){
+                override_backpack[i] = items_in_backpack[i+26];
+            }
+            current_interacting_stash.items_in_backpack = override_backpack;
+            return;
+        }
+        for(int i = 0 ; i < npc_backpack.childCount ; i++){
+            if(slots[i+26].transform.childCount != 0) Destroy(slots[i+26].transform.GetChild(0).gameObject);
+        }
+        for(int i = 0; i < stash.items_in_backpack.Length ; i++){
+            if(stash.items_in_backpack[i] == 0) continue;
+            DragDrop item = Instantiate(item_database.item_id_to_image(stash.items_in_backpack[i]) , slots[i+26].transform.position , Quaternion.identity , slots[i+26].transform).GetComponent<DragDrop>();
+            item.ui_canvas = GetComponent<Canvas>();
+            item.current_in_slot_id = i + 26;
+            item.item_id = stash.items_in_backpack[i];
+            item.ui = this;
+            item.ui.items_in_backpack[i + 26] = stash.items_in_backpack[i];
+        }
+        current_interacting_stash = stash;
+    }
     [SerializeField] GameObject[] sectors = new GameObject[0];
     void generate_map(int map_width , int map_height)
     {

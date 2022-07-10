@@ -22,7 +22,9 @@ public class IntroMission : MonoBehaviour
         hintzone_glass();
     }
     bool can_trigger = true;
+    [SerializeField] BreakableObject glass_1 , glass_2;
     void hintzone_glass(){
+        if(glass_1.broken || glass_2.broken) return;
         Collider2D[] hits = Physics2D.OverlapBoxAll(new Vector2(1.96f , 1.86f) , Vector2.one * 0.5f , 0);
         if(hits.Length == 0) return;
         List<Collider2D> hits_list = new List<Collider2D>();
