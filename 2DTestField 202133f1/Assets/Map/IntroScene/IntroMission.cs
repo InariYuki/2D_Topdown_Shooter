@@ -13,6 +13,7 @@ public class IntroMission : MonoBehaviour
             if(! container_broken){
                 container_broken = true;
                 player_container.break_container();
+                ui.set_player_sprite(1 , 2 , 0);
                 ui.move_player_to_position(new Vector2(1.76f , 0.48f));
                 stage_one();
             }

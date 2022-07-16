@@ -6,6 +6,7 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
+    [SerializeField] List<Sprite> head_s , head_f , head_b , body_s , body_f , body_b , right_hand_s , left_hand_s , right_leg_s , left_leg_s , right_hand_v , left_hand_v , right_leg_v , left_leg_v;
     [HideInInspector] public Character player;
     [HideInInspector] public PlayerColtroller player_ctl;
     [HideInInspector] public ItemRegister item_database;
@@ -140,6 +141,23 @@ public class UI : MonoBehaviour
         player_ctl.all_control_locked = false;
         camera_controller.target = player.transform;
         camera_controller.is_dynamic = true;
+    }
+    public void set_player_sprite(int head_index , int body_index , int limb_index){
+        player.head_s = head_s[head_index];
+        player.head_f = head_f[head_index];
+        player.head_b = head_b[head_index];
+        player.body_s = body_s[body_index];
+        player.body_f = body_f[body_index];
+        player.body_b = body_b[body_index];
+        player.right_hand_s = right_hand_s[limb_index];
+        player.left_hand_s = left_hand_s[limb_index];
+        player.right_leg_s = right_leg_s[limb_index];
+        player.left_leg_s = left_leg_s[limb_index];
+        player.right_hand_v = right_hand_v[limb_index];
+        player.left_hand_v = left_hand_v[limb_index];
+        player.right_leg_v = right_leg_v[limb_index];
+        player.left_leg_v = left_leg_v[limb_index];
+        player.sprite_init();
     }
     [SerializeField] IntroMission intro_scene;
     [SerializeField] GameObject main_menu;

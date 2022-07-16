@@ -814,7 +814,7 @@ MonoBehaviour:
   is_rogue: 0
   stop_count: 3
   stop_duration: 2
-  idle: 0
+  idle: 1
   static_patrol: 1
   can_walk_navbox_tag: 00000000
   is_elite: 0
@@ -2513,6 +2513,14 @@ PrefabInstance:
     - target: {fileID: 6686069037882567892, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686069037882567894, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
+      propertyPath: facing_direction.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686069037882567894, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
+      propertyPath: facing_direction.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6686069037882567895, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: m_RootOrder

@@ -34,8 +34,13 @@ public class DeflectableProjectile : MonoBehaviour
             }
             Hitbox thing_hitbox = hits[i].GetComponent<Hitbox>();
             if(thing_hitbox != null && thing_hitbox.parent != parent){
-                if(thing_hitbox.parent.GetComponent<Character>() != null) thing_hitbox.hit(damage , parent , hit_effect);
-                else if(thing_hitbox.parent.GetComponent<BreakableObject>() != null) thing_hitbox.hit(damage , parent , clink_effect);
+                try{
+                    if(thing_hitbox.parent.GetComponent<Character>() != null) thing_hitbox.hit(damage , parent , hit_effect);
+                    else if(thing_hitbox.parent.GetComponent<BreakableObject>() != null) thing_hitbox.hit(damage , parent , clink_effect);
+                }
+                catch{
+                    thing_hitbox.hit(damage , gameObject , hit_effect);
+                }
                 Destroy(gameObject);
             }
         }

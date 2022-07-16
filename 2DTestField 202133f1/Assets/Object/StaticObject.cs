@@ -11,6 +11,6 @@ public class StaticObject : MonoBehaviour
         feet = transform.GetChild(0);
     }
     void Start(){
-        sprite_renderer.sortingOrder = (int)(-feet.position.y * 100);
+        sprite_renderer.sortingOrder = Mathf.RoundToInt(-feet.position.y * 100);
     }
 }

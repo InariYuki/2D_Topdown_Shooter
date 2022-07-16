@@ -12,14 +12,17 @@ public class Character : MonoBehaviour
     public float top_speed = 10f;
     [HideInInspector] public float speed = 0;
     float acceleration = 10f;
+    LayerMask soft_layer;
     void Awake(){
         char_ctrl = GetComponent<Rigidbody2D>();
         weapon_ctrl = GetComponentInChildren<WeaponController>();
         collision = GetComponent<Collider2D>();
         hitbox = GetComponentInChildren<Hitbox>();
+        soft_layer = LayerMask.GetMask("Default");
     }
     void Start(){
         equip_weapon();
+        sprite_init();
     }
     void FixedUpdate()
     {
@@ -113,7 +116,6 @@ public class Character : MonoBehaviour
         char_ctrl.MovePosition(char_ctrl.position + velocity * Time.deltaTime);
     }
     float soft_collision_radius = 0.025f;
-    [SerializeField] LayerMask soft_layer;
     void soft_collision(){
         Collider2D[] clds = Physics2D.OverlapCircleAll(feet.position , soft_collision_radius , soft_layer);
         for(int i = 0; i < clds.Length; i++){
@@ -131,6 +133,60 @@ public class Character : MonoBehaviour
     public Transform weapon , feet;
     [HideInInspector] public int order;
     int looking_at = 0;
+    public void sprite_init(){
+        if(facing_direction == Vector2.up){
+            looking_at = 2;
+            head.sprite = head_b;
+            body.sprite = body_b;
+            right_hand.sprite = right_hand_v;
+            left_hand.sprite = left_hand_v;
+            right_leg.sprite = right_leg_v;
+            left_leg.sprite = left_leg_v;
+            weapon_ctrl.state = 1;
+        }
+        else if(facing_direction == Vector2.down){
+            looking_at = 1;
+            head.sprite = head_f;
+            body.sprite = body_f;
+            right_hand.sprite = right_hand_v;
+            left_hand.sprite = left_hand_v;
+            right_leg.sprite = right_leg_v;
+            left_leg.sprite = left_leg_v;
+            weapon_ctrl.state = 0;
+        }
+        else if(facing_direction == Vector2.left){
+            looking_at = 0;
+            head.sprite = head_s;
+            body.sprite = body_s;
+            right_hand.sprite = right_hand_s;
+            left_hand.sprite = left_hand_s;
+            right_leg.sprite = right_leg_s;
+            left_leg.sprite = left_leg_s;
+            head.flipX = true;
+            body.flipX = true;
+            right_hand.flipX = true;
+            left_hand.flipX = true;
+            right_leg.flipX = true;
+            left_leg.flipX = true;
+            weapon_ctrl.state = 0;
+        }
+        else{
+            looking_at = 0;
+            head.sprite = head_s;
+            body.sprite = body_s;
+            right_hand.sprite = right_hand_s;
+            left_hand.sprite = left_hand_s;
+            right_leg.sprite = right_leg_s;
+            left_leg.sprite = left_leg_s;
+            head.flipX = false;
+            body.flipX = false;
+            right_hand.flipX = false;
+            left_hand.flipX = false;
+            right_leg.flipX = false;
+            left_leg.flipX = false;
+            weapon_ctrl.state = 0;
+        }
+    }
     void body_sprite_ctrl(){
         if(direction != Vector2.zero){
             facing_direction = direction;
@@ -193,7 +249,7 @@ public class Character : MonoBehaviour
         }
     }
     void handle_render_order(){
-        order = (int)(-feet.position.y * 100);
+        order = Mathf.RoundToInt(-feet.position.y * 100);
         head.sortingOrder = order;
         switch(looking_at){ //0 horizontal 1 down 2 up
             case 0:
@@ -220,19 +276,10 @@ public class Character : MonoBehaviour
         }
     }
     [SerializeField] GameObject corpse;
-    bool _dead = false;
-    public bool dead{get{return _dead;}}
+    [HideInInspector] public bool dead = false;
     public void die(){
-        if (_dead) return;
-        StopAllCoroutines();
-        _dead = true;
+        dead = true;
         Instantiate(corpse , transform.position , Quaternion.identity);
-        for(int i = 0; i < transform.childCount ; i++) Destroy(transform.GetChild(i).gameObject);
-        StartCoroutine(wait_to_destroy(5f));
-    }
-    IEnumerator wait_to_destroy(float time)
-    {
-        yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
 }

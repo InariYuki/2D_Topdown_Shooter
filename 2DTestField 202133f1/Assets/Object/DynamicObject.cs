@@ -11,6 +11,6 @@ public class DynamicObject : MonoBehaviour
     }
     void Update()
     {
-        sprite.sortingOrder = (int)(-feet.position.y * 100);
+        sprite.sortingOrder = Mathf.RoundToInt(-feet.position.y * 100);
     }
 }
