@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6694306714793132592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6694306714793132593}
+  - component: {fileID: 6694306714793132606}
+  m_Layer: 0
+  m_Name: SoldierArmor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6694306714793132593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694306714793132592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4655683, y: 1.0598556, z: -0.035603706}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6694306714793132606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694306714793132592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7823e9eb34ee2f14d839185fe63b25fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head_s: {fileID: -700904123, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  head_f: {fileID: -2119263106, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  head_b: {fileID: 1200742960, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  body_s: {fileID: -2063150195, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  body_f: {fileID: -466282542, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  body_b: {fileID: -945597031, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  right_hand_s: {fileID: 319035369, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  left_hand_s: {fileID: 632920333, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  right_leg_s: {fileID: -1158768581, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  left_leg_s: {fileID: -152468738, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  right_hand_v: {fileID: 1813245286, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  left_hand_v: {fileID: -1296872749, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  right_leg_v: {fileID: 107626721, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}
+  left_leg_v: {fileID: -1996112384, guid: a7be2cbcb64b4784792c0ed8189d3dab, type: 3}

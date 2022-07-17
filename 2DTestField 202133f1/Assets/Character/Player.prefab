@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1789125722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789125723}
+  m_Layer: 0
+  m_Name: ArmorHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1789125723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789125722}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3152503592998675725}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &88670985060690243
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +315,7 @@ Transform:
   - {fileID: 7995472752325091662}
   - {fileID: 9054205469917546045}
   - {fileID: 8608139263256033595}
+  - {fileID: 1789125723}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -309,12 +341,24 @@ MonoBehaviour:
   speed: 0
   melee_weapon: {fileID: 0}
   ranged_weapon: {fileID: 0}
+  armor_holder: {fileID: 1789125723}
+  carcass_head_s: {fileID: 0}
+  carcass_head_f: {fileID: 0}
+  carcass_head_b: {fileID: 0}
+  carcass_body_s: {fileID: 0}
+  carcass_body_f: {fileID: 0}
+  carcass_body_b: {fileID: 0}
+  carcass_right_hand_s: {fileID: 0}
+  carcass_left_hand_s: {fileID: 0}
+  carcass_right_leg_s: {fileID: 0}
+  carcass_left_leg_s: {fileID: 0}
+  carcass_right_hand_v: {fileID: 0}
+  carcass_left_hand_v: {fileID: 0}
+  carcass_right_leg_v: {fileID: 0}
+  carcass_left_leg_v: {fileID: 0}
   target_position: {x: 0, y: 0, z: 0}
   hitbox: {fileID: 4301705849394388388}
   punch: {fileID: 5077202013484140094, guid: 48d6f0c0ccc0cd441aedf10f8c6dd8f4, type: 3}
-  soft_layer:
-    serializedVersion: 2
-    m_Bits: 1
   head_s: {fileID: 122178416, guid: f5930e6d50d14d840a68707132d50c1e, type: 3}
   head_f: {fileID: -146358215, guid: f5930e6d50d14d840a68707132d50c1e, type: 3}
   head_b: {fileID: 601413797, guid: f5930e6d50d14d840a68707132d50c1e, type: 3}
@@ -341,6 +385,7 @@ MonoBehaviour:
   feet: {fileID: 5117051432053971226}
   order: 0
   corpse: {fileID: 1129639512143834257, guid: 35396cd96cef29d48901b56bb46157aa, type: 3}
+  dead: 0
 --- !u!50 &7980642186431729573
 Rigidbody2D:
   serializedVersion: 4
@@ -390,9 +435,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea087546396a414e96a0c2af788a147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera_controller: {fileID: 0}
+  character: {fileID: 0}
   ui: {fileID: 0}
   attack_locked: 0
+  all_control_locked: 0
   dialogue: {fileID: 8608139262613199488}
 --- !u!1 &3263627186506947117
 GameObject:

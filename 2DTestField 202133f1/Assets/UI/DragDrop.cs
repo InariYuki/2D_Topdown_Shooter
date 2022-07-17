@@ -35,7 +35,7 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
                 ui.player.unequip_weapon();
             }
             if(current_in_slot_id == 25){
-                //unequip armor
+                ui.player.unequip_armor();
             }
             Instantiate(ui.item_database.item_id_to_item(item_id) , ui.player.feet.position , Quaternion.identity);
             ui.items_in_backpack[current_in_slot_id] = 0;
@@ -53,7 +53,7 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
             if(is_weapon){
                 ui.player.unequip_weapon();
                 move_item_to_slot(slot);
-                Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.weapon.transform.position , Quaternion.identity , ui.player.weapon.transform);
+                Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.weapon.position , Quaternion.identity , ui.player.weapon);
                 StartCoroutine(wait_to_change_weapon());
             }
             else{
@@ -62,10 +62,10 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
         }
         else if(slot.slot_id == 25){
             if(is_armor){
-                //unequip armor
+                ui.player.unequip_armor();
                 move_item_to_slot(slot);
-                //instantiate armor
-                //equip armor
+                Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.armor_holder.position , Quaternion.identity , ui.player.armor_holder);
+                StartCoroutine(wait_to_change_armor());
             }
             else{
                 return_to_original_slot();
@@ -76,7 +76,7 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
                 ui.player.unequip_weapon();
             }
             else if(current_in_slot_id == 25){
-                //unequip armor
+                ui.player.unequip_armor();
             }
             move_item_to_slot(slot);
         }
@@ -84,6 +84,10 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
     IEnumerator wait_to_change_weapon(){
         yield return new WaitForSeconds(0.001f);
         ui.player.equip_weapon();
+    }
+    IEnumerator wait_to_change_armor(){
+        yield return new WaitForSeconds(0.001f);
+        ui.player.equip_armor();
     }
     void move_item_to_slot(Slot target_slot){
         if(ui.items_in_backpack[target_slot.slot_id] == 0){
