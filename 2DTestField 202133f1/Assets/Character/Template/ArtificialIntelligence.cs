@@ -279,6 +279,16 @@ public class ArtificialIntelligence : MonoBehaviour
             }
             parent.normal_attack();
         }
+        else{
+            parent.speed = parent.top_speed;
+            if((current_enemy.transform.position - transform.position).magnitude > 0.3f){
+                parent.direction = current_enemy.transform.position - transform.position;
+            }
+            else{
+                parent.direction = Vector2.zero;
+                parent.normal_attack();
+            }
+        }
     }
     LayerMask attack_layer;
     void deflect_bullet(){

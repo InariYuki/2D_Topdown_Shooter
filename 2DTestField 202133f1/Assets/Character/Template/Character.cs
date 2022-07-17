@@ -22,6 +22,7 @@ public class Character : MonoBehaviour
     }
     void Start(){
         equip_weapon();
+        set_carcass();
         equip_armor();
         sprite_init();
     }
@@ -62,20 +63,7 @@ public class Character : MonoBehaviour
     public Sprite carcass_head_s , carcass_head_f , carcass_head_b , carcass_body_s , carcass_body_f , carcass_body_b , carcass_right_hand_s , carcass_left_hand_s , carcass_right_leg_s , carcass_left_leg_s , carcass_right_hand_v , carcass_left_hand_v , carcass_right_leg_v , carcass_left_leg_v;
     public void equip_armor(){
         if(armor_holder.childCount == 0){
-            head_s = carcass_head_s;
-            head_f = carcass_head_f;
-            head_b = carcass_head_b;
-            body_s = carcass_body_s;
-            body_f = carcass_body_f;
-            body_b = carcass_body_b;
-            right_hand_s = carcass_right_hand_s;
-            left_hand_s = carcass_left_hand_s;
-            right_leg_s = carcass_right_leg_s;
-            left_leg_s = carcass_left_leg_s;
-            right_hand_v = carcass_right_hand_v;
-            left_hand_v = carcass_left_hand_v;
-            right_leg_v = carcass_right_leg_v;
-            left_leg_v = carcass_left_leg_v;
+            return;
         }
         else{
             Armor armor = armor_holder.GetChild(0).GetComponent<Armor>();
@@ -103,6 +91,10 @@ public class Character : MonoBehaviour
     public void unequip_armor(){
         if(armor_holder.childCount == 0) return;
         Destroy(armor_holder.GetChild(0).gameObject);
+        set_carcass();
+        sprite_init();
+    }
+    public void set_carcass(){
         head_s = carcass_head_s;
         head_f = carcass_head_f;
         head_b = carcass_head_b;
@@ -117,7 +109,6 @@ public class Character : MonoBehaviour
         left_hand_v = carcass_left_hand_v;
         right_leg_v = carcass_right_leg_v;
         left_leg_v = carcass_left_leg_v;
-        sprite_init();
     }
     [HideInInspector] public Vector3 target_position = Vector3.zero;
     void attack_loop(){

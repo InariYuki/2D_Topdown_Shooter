@@ -157,7 +157,7 @@ public class UI : MonoBehaviour
         player.carcass_left_hand_v = left_hand_v[limb_index];
         player.carcass_right_leg_v = right_leg_v[limb_index];
         player.carcass_left_leg_v = left_leg_v[limb_index];
-        player.equip_armor();
+        player.set_carcass();
         player.sprite_init();
     }
     [SerializeField] IntroMission intro_scene;

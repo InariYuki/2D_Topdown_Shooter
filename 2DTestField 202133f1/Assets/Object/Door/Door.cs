@@ -21,7 +21,11 @@ public class Door : MonoBehaviour
         StartCoroutine(initial_connect());
     }
     IEnumerator initial_connect(){
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
+        if(door_locked){
+            animator.enabled = false;
+            sprite.sprite = locked_door_sprite;
+        }
         reconnect_navboxes();
     }
     private void FixedUpdate() {
@@ -39,7 +43,7 @@ public class Door : MonoBehaviour
         animator.SetBool("door_open" , false);
         collision.enabled = true;
     }
-    bool door_locked = false;
+    [SerializeField] bool door_locked = false;
     void door_lock(){
         door_close();
         door_locked = true;

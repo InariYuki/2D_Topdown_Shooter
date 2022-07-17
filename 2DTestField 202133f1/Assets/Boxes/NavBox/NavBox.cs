@@ -6,10 +6,15 @@ public class NavBox : MonoBehaviour
 {
     public float radius = 0.5f;
     public int navbox_tag = 0;
-    [SerializeField] LayerMask Navbox;
-    [SerializeField] LayerMask Obstacle;
-    [SerializeField] Collider2D collision;
-    public List<NavBox> next_hops = new List<NavBox>();
+    LayerMask Navbox;
+    LayerMask Obstacle;
+    Collider2D collision;
+    [HideInInspector] public List<NavBox> next_hops = new List<NavBox>();
+    private void Awake() {
+        collision = GetComponent<Collider2D>();
+        Navbox = LayerMask.GetMask("Navigation");
+        Obstacle = LayerMask.GetMask("Obstacle");
+    }
     void Start()
     {
         connect();
