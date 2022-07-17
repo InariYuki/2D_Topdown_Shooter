@@ -79,18 +79,22 @@ public class Character : MonoBehaviour
         }
         else{
             Armor armor = armor_holder.GetChild(0).GetComponent<Armor>();
-            head_s = armor.head_s;
-            head_f = armor.head_f;
-            head_b = armor.head_b;
+            if(armor.head_s != null){
+                head_s = armor.head_s;
+                head_f = armor.head_f;
+                head_b = armor.head_b;
+            }
+            if(armor.right_hand_s != null){
+                right_hand_s = armor.right_hand_s;
+                left_hand_s = armor.left_hand_s;
+                right_hand_v = armor.right_hand_v;
+                left_hand_v = armor.left_hand_v;
+            }
             body_s = armor.body_s;
             body_f = armor.body_f;
             body_b = armor.body_b;
-            right_hand_s = armor.right_hand_s;
-            left_hand_s = armor.left_hand_s;
             right_leg_s = armor.right_leg_s;
             left_leg_s = armor.left_leg_s;
-            right_hand_v = armor.right_hand_v;
-            left_hand_v = armor.left_hand_v;
             right_leg_v = armor.right_leg_v;
             left_leg_v = armor.left_leg_v;
         }

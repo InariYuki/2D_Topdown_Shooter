@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6694306714793132592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6694306714793132593}
+  - component: {fileID: 6694306714793132606}
+  m_Layer: 0
+  m_Name: ExperimentalArmor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6694306714793132593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694306714793132592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4655683, y: 1.0598556, z: -0.035603706}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6694306714793132606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694306714793132592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7823e9eb34ee2f14d839185fe63b25fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head_s: {fileID: 0}
+  head_f: {fileID: 0}
+  head_b: {fileID: 0}
+  body_s: {fileID: 1110110487, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  body_f: {fileID: 1037869748, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  body_b: {fileID: -1421303059, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  right_hand_s: {fileID: -1487565817, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  left_hand_s: {fileID: 627291098, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  right_leg_s: {fileID: -1867714419, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  left_leg_s: {fileID: 1365972929, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  right_hand_v: {fileID: 161874733, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  left_hand_v: {fileID: 1048459145, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  right_leg_v: {fileID: 18820009, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
+  left_leg_v: {fileID: 1398702330, guid: 37572233a4cb1c745bc4263f83190442, type: 3}
