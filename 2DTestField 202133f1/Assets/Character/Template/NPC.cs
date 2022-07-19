@@ -62,7 +62,7 @@ public class NPC : MonoBehaviour
     }
     [SerializeField] TextMeshProUGUI dialogue_box;
     void talk(){
-        say("Hi I am a kitsune");
+        say("What");
     }
     void intimidate(PlayerColtroller player){
         AI.hit(0 , player.gameObject);

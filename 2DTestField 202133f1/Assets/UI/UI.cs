@@ -125,6 +125,45 @@ public class UI : MonoBehaviour
         }
         current_interacting_stash = stash;
     }
+    [HideInInspector] public int hint_count = 0;
+    [SerializeField] GameObject hint_panel;
+    public void add_hint_msg(string message){
+        if(hint_count > 2){
+            //can't take any mission
+            return;
+        }
+        if(!hint_panel.activeSelf){
+            hint_panel.SetActive(true);
+        }
+        for(int i = 0; i < 3; i++){
+            TextMeshProUGUI mission = hint_panel.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+            if(mission.text == ""){
+                mission.text = message;
+                hint_count++;
+                break;
+            }
+        }
+    }
+    public void remove_hint_message(string message){
+        for(int i = 0; i < 3; i++){
+            TextMeshProUGUI mission = hint_panel.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+            if(mission.text == message){
+                mission.text = "";
+                hint_count--;
+                break;
+            }
+        }
+        if(hint_count == 0){
+            hint_panel.SetActive(false);
+        }
+    }
+    public void clear_hint_text(){
+        for(int i = 0; i < 3; i++){
+            TextMeshProUGUI mission = hint_panel.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+            mission.text = "";
+        }
+        hint_panel.SetActive(false);
+    }
     [SerializeField] GameObject[] sectors = new GameObject[0];
     void generate_map(int map_width , int map_height)
     {

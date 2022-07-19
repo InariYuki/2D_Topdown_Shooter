@@ -165,8 +165,8 @@ public class Character : MonoBehaviour
     }
     void movement_loop(){
         direction = direction.normalized;
-        velocity = Vector3.Lerp(velocity , direction * speed , acceleration * Time.deltaTime);
-        char_ctrl.MovePosition(char_ctrl.position + velocity * Time.deltaTime);
+        velocity = Vector3.Lerp(velocity , direction * speed , acceleration * 0.02f);
+        char_ctrl.MovePosition(char_ctrl.position + velocity * 0.02f);
     }
     float soft_collision_radius = 0.025f;
     void soft_collision(){

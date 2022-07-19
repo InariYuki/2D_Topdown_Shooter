@@ -43,7 +43,7 @@ public class Door : MonoBehaviour
         animator.SetBool("door_open" , false);
         collision.enabled = true;
     }
-    [SerializeField] bool door_locked = false;
+    [HideInInspector] public bool door_locked = false;
     void door_lock(){
         door_close();
         door_locked = true;

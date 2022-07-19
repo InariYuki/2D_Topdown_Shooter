@@ -127,6 +127,9 @@ public class ArtificialIntelligence : MonoBehaviour
             }
         }
     }
+    private void OnDrawGizmosSelected() {
+        Gizmos.DrawWireSphere(transform.position , sight_distance);
+    }
     NavBox previous = null , current = null;
     bool rest = false , trigger = false;
     public int stop_count = 3;
