@@ -31,12 +31,33 @@ public class UI : MonoBehaviour
             Slot slot = slots[i].GetComponent<Slot>();
             slot.slot_id = i;
         }
-        //generate_map(4 , 4);
     }
     private void Start() {
         backpack.gameObject.SetActive(false);
         equipment.gameObject.SetActive(false);
         npc_backpack.gameObject.SetActive(false);
+    }
+    [SerializeField] GameObject player_computer;
+    public void toggle_player_computer(){
+        player_computer.SetActive(true);
+        camera_controller.is_dynamic = false;
+        player_ctl.all_control_locked = true;
+    }
+    public void close_player_computer(){
+        player_computer.SetActive(false);
+        camera_controller.is_dynamic = true;
+        player_ctl.all_control_locked = false;
+    }
+    [SerializeField] GameObject pause_menu;
+    public void toggle_pause_menu(){
+        pause_menu.SetActive(true);
+        camera_controller.is_dynamic = false;
+        player_ctl.all_control_locked = true;
+    }
+    public void close_pause_menu(){
+        pause_menu.SetActive(false);
+        camera_controller.is_dynamic = true;
+        player_ctl.all_control_locked = false;
     }
     [SerializeField] Transform backpack , hotbar , equipment , npc_backpack;
     [HideInInspector] public int[] items_in_backpack = new int[46];
@@ -207,6 +228,12 @@ public class UI : MonoBehaviour
         player_ctl.all_control_locked = true;
         camera_controller.target = intro_scene_instanced.player_container.transform;
         camera_controller.is_dynamic = false;
+        main_menu.SetActive(false);
+    }
+    [SerializeField] GameObject player_home;
+    public void load_game_button_pressed(){
+        player_home.SetActive(true);
+        move_player_to_position(new Vector2(1.7f , 0.5f));
         main_menu.SetActive(false);
     }
 }

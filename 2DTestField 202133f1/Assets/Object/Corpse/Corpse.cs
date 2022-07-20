@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Corpse : MonoBehaviour
 {
-    [SerializeField] GameObject head , body , blood;
+    [SerializeField] GameObject head , body;
     void Start()
     {
         make_corpse();

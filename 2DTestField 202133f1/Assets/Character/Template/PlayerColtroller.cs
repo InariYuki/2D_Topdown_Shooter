@@ -70,6 +70,9 @@ public class PlayerColtroller : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Alpha4)){
             ui.use_hotbar_item(23);
         }
+        else if(Input.GetKeyDown(KeyCode.Escape)){
+            ui.toggle_pause_menu();
+        }
     }
     public void hit(int damage , GameObject attacker){
         character.velocity = (transform.position - attacker.transform.position).normalized * 5f;

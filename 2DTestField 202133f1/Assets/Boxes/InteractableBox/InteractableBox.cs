@@ -9,12 +9,14 @@ public class InteractableBox : MonoBehaviour
     NPC npc;
     Stash stash;
     SpriteRenderer sprite;
+    PlayerComputer player_computer;
     private void Awake() {
         computer = GetComponent<Computer>();
         item = GetComponent<Item>();
         npc = GetComponent<NPC>();
         stash = GetComponent<Stash>();
         sprite = GetComponent<SpriteRenderer>();
+        player_computer = GetComponent<PlayerComputer>();
     }
     public void interacted(PlayerColtroller player , int interact_state){
         if(sprite != null) sprite.color = Color.white;
@@ -23,6 +25,7 @@ public class InteractableBox : MonoBehaviour
         else if(item != null) item.interacted(player , interact_state);
         else if(npc != null) npc.interacted(player , interact_state);
         else if(stash != null) stash.interacted(player , interact_state);
+        else if(player_computer != null) player_computer.interacted(player , interact_state);
     }
     public void display_interaction_hint(){
         if(sprite != null) sprite.color = Color.green;

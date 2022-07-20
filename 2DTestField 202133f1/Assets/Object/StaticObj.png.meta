@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Computer
+      name: StaticObj_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,20 +112,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b30a40821cd06e74681532ed9d00b643
-      internalID: 810656377
+      spriteID: 7586081b3e03cd84eb4535122be257bd
+      internalID: -1677027476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Router
+      name: StaticObj_1
       rect:
         serializedVersion: 2
         x: 32
@@ -133,20 +133,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0ece8ca7925d91438a198616bfcacca
-      internalID: -953572649
+      spriteID: 911aa0ea88ad33e4aa1c51c0cd9dd6a5
+      internalID: 1723444923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Server
+      name: StaticObj_2
       rect:
         serializedVersion: 2
         x: 64
@@ -154,20 +154,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a01de6d6d96911c4abf9b75375b89bd0
-      internalID: -1638263742
+      spriteID: 649310735a1b74f4ea27739ea1d9112d
+      internalID: 33918103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Terminal
+      name: StaticObj_3
       rect:
         serializedVersion: 2
         x: 96
@@ -175,20 +175,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8c1ac066b25a0b408bfe7236c742872
-      internalID: -1540841167
+      spriteID: 8eab9d9ee75ff9042ae2def3097f16cb
+      internalID: 1874329212
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fridge
+      name: StaticObj_4
       rect:
         serializedVersion: 2
         x: 128
@@ -196,20 +196,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb2735298c4941845ba58a7173534fac
-      internalID: 1096243834
+      spriteID: 273b2f3e53f811847a9ae4b9bd08f2dc
+      internalID: -147580385
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mirror
+      name: StaticObj_5
       rect:
         serializedVersion: 2
         x: 160
@@ -217,20 +217,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 879c21897fb882440a46e9cf9c7f6d93
-      internalID: 629148014
+      spriteID: aca308d33923e4c4989e7c9648bb2386
+      internalID: -1099891200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Toilet
+      name: StaticObj_6
       rect:
         serializedVersion: 2
         x: 192
@@ -238,20 +238,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f9c838a95af6c04fb1d92278d5b2be2
-      internalID: 351428498
+      spriteID: a91b7e3025d0b464dbe9df3c5ccd5262
+      internalID: 1962613852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Closet
+      name: StaticObj_7
       rect:
         serializedVersion: 2
         x: 224
@@ -259,20 +259,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6797aa494e7a3b946a6111fe9597a7bb
-      internalID: -1818260163
+      spriteID: 95a174f7414d86d4e80c2c74555a5c3f
+      internalID: -758578078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Box
+      name: StaticObj_8
       rect:
         serializedVersion: 2
         x: 256
@@ -280,20 +280,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e429e6d5b0fdb34caf58500b569f4fc
-      internalID: 193736234
+      spriteID: b65cb3444ed763c47943c9953c659907
+      internalID: 930236795
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CorpContainer
+      name: StaticObj_9
       rect:
         serializedVersion: 2
         x: 0
@@ -301,20 +301,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d067309e915e7ad49850d48621263e91
-      internalID: -298717129
+      spriteID: 01fff47e87413eb44a3fc375027b0c4a
+      internalID: -1209536740
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CorpContainerLocked
+      name: StaticObj_10
       rect:
         serializedVersion: 2
         x: 32
@@ -322,62 +322,62 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6efe5a33433eb0f40850f286c05829fd
-      internalID: -163684570
+      spriteID: 532b2119d8f42e441b27a0e211edc012
+      internalID: 149223560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass
+      name: StaticObj_11
       rect:
         serializedVersion: 2
         x: 64
-        y: 257
+        y: 256
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdb9f565e9fb0a14fa844b0a6a4f10ec
-      internalID: 1778768412
+      spriteID: 386df45e5154f524e8b392df0e5760e4
+      internalID: -941775404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bed
+      name: StaticObj_12
       rect:
         serializedVersion: 2
         x: 96
-        y: 257
+        y: 256
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b56be5f697e59c479d3b5d772c53acb
-      internalID: 899057895
+      spriteID: 399aec1bc26be2a41bd43abc23a889e4
+      internalID: -1720061596
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Table
+      name: StaticObj_13
       rect:
         serializedVersion: 2
         x: 128
@@ -385,20 +385,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37492767ae2142f4eabc496d068a75a8
-      internalID: -1090450005
+      spriteID: 8bf11ad3d64adfa42aafbea4aefcc40a
+      internalID: 1974259741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TableMessy
+      name: StaticObj_14
       rect:
         serializedVersion: 2
         x: 160
@@ -406,20 +406,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5477742c31a4dc4184f29ae640b1611
-      internalID: 1537281627
+      spriteID: 40b99351be9b3c3448366dc9f564e304
+      internalID: 1881240244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TablePlay
+      name: StaticObj_15
       rect:
         serializedVersion: 2
         x: 192
@@ -427,20 +427,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e935e1f2f97b9d8499792e6f0d63d36b
-      internalID: -121289988
+      spriteID: dd031e28415a9cc42a5d3399f4aa26e1
+      internalID: -1981591520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TableGamble
+      name: StaticObj_16
       rect:
         serializedVersion: 2
         x: 224
@@ -448,20 +448,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3239127484d46b4e90ff6ff9c232c53
-      internalID: 477571485
+      spriteID: a356d6242d6c68c4c99fdbe49a7e0862
+      internalID: 343258789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Counter
+      name: StaticObj_17
       rect:
         serializedVersion: 2
         x: 256
@@ -469,20 +469,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e5292b782b106642ac1b1fb3f8f2dda
-      internalID: -693595227
+      spriteID: adbb98226af33804698ede85b51458c6
+      internalID: 2107790417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WineShelf
+      name: StaticObj_18
       rect:
         serializedVersion: 2
         x: 0
@@ -490,20 +490,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d632e29e6bfba1e41b9757cfadabd779
-      internalID: 1556072768
+      spriteID: 55e823d975a141e49835c49dd526ec0d
+      internalID: -1693545146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BioContainerFull
+      name: StaticObj_19
       rect:
         serializedVersion: 2
         x: 32
@@ -511,20 +511,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2af66aaa96ebfd241b3ece252891822e
-      internalID: -28317236
+      spriteID: 546d49a97df165b40a5b4eaefbd69697
+      internalID: 58016473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BioContainerEmpty
+      name: StaticObj_20
       rect:
         serializedVersion: 2
         x: 64
@@ -532,20 +532,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc0a5e7cd115220469a3dbbb568c3ab7
-      internalID: -1892506443
+      spriteID: 41f0a424509da4243af705734e068cc8
+      internalID: 556948146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BioContainerBroke
+      name: StaticObj_21
       rect:
         serializedVersion: 2
         x: 96
@@ -553,20 +553,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf97fffbbbceb784caf87a495a3dd28b
-      internalID: -2085504034
+      spriteID: 03e9dd63ef9fe674abd40857e17f2867
+      internalID: -332361214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BioContainerOff
+      name: StaticObj_22
       rect:
         serializedVersion: 2
         x: 128
@@ -574,14 +574,14 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f47e58a3980123342bed5825ef0cbb06
-      internalID: 400777358
+      spriteID: e18cabf1dfb3d0a49b7ad3260f643194
+      internalID: 424456126
       vertices: []
       indices: 
       edges: []
@@ -597,29 +597,29 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BioContainerFull: -28317236
-      CorpContainer: -298717129
-      Mirror: 629148014
-      CorpContainerLocked: -163684570
-      TableGamble: 477571485
-      Closet: -1818260163
-      Server: -1638263742
-      BioContainerEmpty: -1892506443
-      Terminal: -1540841167
-      BioContainerOff: 400777358
-      Grass: 1778768412
-      Counter: -693595227
-      TableMessy: 1537281627
-      TablePlay: -121289988
-      Table: -1090450005
-      WineShelf: 1556072768
-      Box: 193736234
-      BioContainerBroke: -2085504034
-      Toilet: 351428498
-      Fridge: 1096243834
-      Computer: 810656377
-      Bed: 899057895
-      Router: -953572649
+      StaticObj_17: 2107790417
+      StaticObj_14: 1881240244
+      StaticObj_16: 343258789
+      StaticObj_4: -147580385
+      StaticObj_15: -1981591520
+      StaticObj_22: 424456126
+      StaticObj_12: -1720061596
+      StaticObj_9: -1209536740
+      StaticObj_2: 33918103
+      StaticObj_10: 149223560
+      StaticObj_8: 930236795
+      StaticObj_19: 58016473
+      StaticObj_7: -758578078
+      StaticObj_13: 1974259741
+      StaticObj_11: -941775404
+      StaticObj_5: -1099891200
+      StaticObj_18: -1693545146
+      StaticObj_0: -1677027476
+      StaticObj_1: 1723444923
+      StaticObj_3: 1874329212
+      StaticObj_20: 556948146
+      StaticObj_6: 1962613852
+      StaticObj_21: -332361214
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
