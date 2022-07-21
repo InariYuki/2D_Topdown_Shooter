@@ -185,17 +185,6 @@ public class UI : MonoBehaviour
         }
         hint_panel.SetActive(false);
     }
-    [SerializeField] GameObject[] sectors = new GameObject[0];
-    void generate_map(int map_width , int map_height)
-    {
-        for (int i = 0; i < map_height; i++)
-        {
-            for (int j = 0; j < map_width; j++)
-            {
-                Instantiate(sectors[Random.Range(0 , sectors.Length)] , new Vector2(i , j) * 6.4f , Quaternion.identity);
-            }
-        }
-    }
     public void move_player_to_position(Vector2 pos){
         player.transform.position = pos;
         player_ctl.all_control_locked = false;
