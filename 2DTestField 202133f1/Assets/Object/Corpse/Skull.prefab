@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1350824791771412933}
   - component: {fileID: 1350824791771412930}
   - component: {fileID: 1350824791771412934}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Skull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ecc65bf5b97b454bb8a1e2643b15fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1350824791771412932}
   feet: {fileID: 1350824792860617077}
 --- !u!1 &1350824792860617074
 GameObject:
@@ -148,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1350824792860617077}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

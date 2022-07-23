@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4553448477155160517}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4655269675686730889}
   - component: {fileID: 2468588715063154080}
   - component: {fileID: 7481814343229142566}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,5 +168,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ecc65bf5b97b454bb8a1e2643b15fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6688064881921513587}
   feet: {fileID: 4553448477155160517}

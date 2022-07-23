@@ -41,9 +41,12 @@ public class PlayerColtroller : MonoBehaviour
                 if(ui.current_interacting_npc != null) ui.toggle_NPC_backpack(null);
                 else if(ui.current_interacting_stash != null) ui.toggle_stash(null);
             }
+            if(ui.shop_opened){
+                ui.close_shop();
+            }
             ui.camera_controller.is_dynamic = !ui.backpack_opened;
         }
-        if(ui.backpack_opened || ui.npc_backpack_opened) return;
+        if(ui.backpack_opened || ui.npc_backpack_opened || ui.shop_opened) return;
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
         character.direction = direction.normalized;
@@ -60,13 +63,13 @@ public class PlayerColtroller : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Alpha1)){
             ui.use_hotbar_item(20);
-        } 
+        }
         else if(Input.GetKeyDown(KeyCode.Alpha2)){
             ui.use_hotbar_item(21);
-        } 
+        }
         else if(Input.GetKeyDown(KeyCode.Alpha3)){
             ui.use_hotbar_item(22);
-        } 
+        }
         else if(Input.GetKeyDown(KeyCode.Alpha4)){
             ui.use_hotbar_item(23);
         }

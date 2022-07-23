@@ -6,7 +6,7 @@ public class MissionMap : MonoBehaviour
 {
     [SerializeField] GameObject bar_sector , store_sector;
     [SerializeField] List<GameObject> city_sector = new List<GameObject>();
-    void generate_bar_sector(int column , int row){
+    public void generate_city_sector(int column , int row){
         List<Vector2> map_coordinate = generate_map_coordinate(column , row);
         instance_desinated_sector(bar_sector , map_coordinate);
         instance_desinated_sector(store_sector , map_coordinate);

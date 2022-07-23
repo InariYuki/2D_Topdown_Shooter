@@ -41,7 +41,7 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     void initial_parameters(){
         health = max_health;
-        before_search_position = find_nearest_navbox(parent.feet.position).transform.position;
+        before_search_position = parent.feet.position;
     }
     NavBox start_navbox , end_navbox;
     List<Vector3> find_path(Vector3 pos){
@@ -116,8 +116,13 @@ public class ArtificialIntelligence : MonoBehaviour
                 }
                 else if(detected_player != null){
                     if(!enemies.Contains(chatacter_colliders[i].gameObject)){
-                        if(is_rogue || patrol_navbox_tag.Contains(find_nearest_navbox(detected_player.character.feet.position).navbox_tag)){
-                            enemies.Add(chatacter_colliders[i].gameObject);
+                        try{
+                            if(is_rogue || patrol_navbox_tag.Contains(find_nearest_navbox(detected_player.character.feet.position).navbox_tag)){
+                                enemies.Add(chatacter_colliders[i].gameObject);
+                            }
+                        }
+                        catch{
+                            
                         }
                     }
                 }
@@ -157,7 +162,10 @@ public class ArtificialIntelligence : MonoBehaviour
         sight();
         switch(free_roam_substate){
             case 0:
-                if(idle) return;
+                if(idle){
+                    parent.direction = Vector2.zero;
+                    return;
+                } 
                 if(current == null) current = find_nearest_navbox(parent.feet.position);
                 parent.speed = parent.top_speed / 3;
                 if((current.transform.position - transform.position).magnitude > 0.1f){

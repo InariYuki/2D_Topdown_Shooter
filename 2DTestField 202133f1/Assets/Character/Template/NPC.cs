@@ -15,7 +15,7 @@ public class NPC : MonoBehaviour
         toggle_action_menu();
     }
     public List<string> interact_methods = new List<string>{"Chat" , "Intimidate" , "Steal" , "Assassinate"};
-    public int[] action_success_rate = {0 , 0 , 50 , 50};
+    public int[] action_success_rate = {0 , 0 , 50 , 50 , 0};
     public int[] items_in_backpack = {1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1};
     [SerializeField] Transform action_menu;
     [SerializeField] InteractiomMenuButton button;
@@ -59,6 +59,9 @@ public class NPC : MonoBehaviour
         else if(_action_string == "Assassinate"){
             assassinate(player);
         }
+        else if(_action_string == "Shop"){
+            shop(player);
+        }
     }
     [SerializeField] TextMeshProUGUI dialogue_box;
     void talk(){
@@ -80,11 +83,15 @@ public class NPC : MonoBehaviour
     }
     void assassinate(PlayerColtroller player){
         if (Random.Range(0, 100) > action_success_rate[3]){
-            AI.hit(0, player.gameObject);
+            AI.hit(0 , player.gameObject);
             say("You merderer!");
             return;
         }
         character.die();
+    }
+    [SerializeField] Stash NPC_stash;
+    void shop(PlayerColtroller player){
+        player.ui.toggle_shop(NPC_stash);
     }
     bool saying = false;
     void say(string something){

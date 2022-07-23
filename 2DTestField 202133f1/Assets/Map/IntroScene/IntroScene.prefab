@@ -10198,7 +10198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: static_patrol
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: patrol_navbox_tag.Array.size
@@ -23911,7 +23911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: static_patrol
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: patrol_navbox_tag.Array.size
@@ -24080,7 +24080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: static_patrol
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: patrol_navbox_tag.Array.size
@@ -26088,7 +26088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: static_patrol
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: patrol_navbox_tag.Array.size
@@ -27068,7 +27068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: static_patrol
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 230421861, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: patrol_navbox_tag.Array.size

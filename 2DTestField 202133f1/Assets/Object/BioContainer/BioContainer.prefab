@@ -139,10 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f675e06bf006a224990f54c33be55bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  full: {fileID: -28317236, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
-  empty: {fileID: -1892506443, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
-  broken: {fileID: -2085504034, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
-  off: {fileID: 400777358, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
+  full: {fileID: 58016473, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
+  empty: {fileID: 556948146, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
+  broken: {fileID: -332361214, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
+  off: {fileID: 424456126, guid: 86dd2d0c337083b469425eb1b761eb87, type: 3}
   glass_break_effect: {fileID: 4285786539611938067, guid: 07f8946637574ca4a91c1d974f9aa4a7, type: 3}
 --- !u!1 &3406320815406654782
 GameObject:

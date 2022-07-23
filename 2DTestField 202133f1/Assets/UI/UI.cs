@@ -31,6 +31,11 @@ public class UI : MonoBehaviour
             Slot slot = slots[i].GetComponent<Slot>();
             slot.slot_id = i;
         }
+        for(int i = 0; i < 20; i++){
+            ShopButton shop_button = shop.transform.GetChild(i).GetComponent<ShopButton>();
+            shop_button.ui = this;
+            shop_button.button_number = i;
+        }
     }
     private void Start() {
         backpack.gameObject.SetActive(false);
@@ -61,6 +66,7 @@ public class UI : MonoBehaviour
     }
     [SerializeField] Transform backpack , hotbar , equipment , npc_backpack;
     [HideInInspector] public int[] items_in_backpack = new int[46];
+    [HideInInspector] public List<int> keys_in_backpack = new List<int>();
     [HideInInspector] public GameObject[] slots = new GameObject[46];
     [HideInInspector] public bool backpack_opened;
     public void toggle_backpack(){
@@ -69,6 +75,9 @@ public class UI : MonoBehaviour
         backpack_opened = backpack.gameObject.activeSelf;
     }
     public void add_item_to_backpack(int item_id){
+        if(item_id == 6){
+            return;
+        }
         for(int i = 0; i < 20; i++){
             if(items_in_backpack[i] == 0){
                 items_in_backpack[i] = item_id;
@@ -84,7 +93,7 @@ public class UI : MonoBehaviour
     }
     public bool backpack_is_full(){
         for(int i = 0; i < 20;i++){
-            if(items_in_backpack[i] != 0) return false;
+            if(items_in_backpack[i] == 0) return false;
         }
         return true;
     }
@@ -145,6 +154,32 @@ public class UI : MonoBehaviour
             item.ui.items_in_backpack[i + 26] = stash.items_in_backpack[i];
         }
         current_interacting_stash = stash;
+    }
+    [SerializeField] GameObject shop;
+    [HideInInspector] public bool shop_opened = false;
+    Stash current_shop;
+    public void toggle_shop(Stash stash){
+        current_shop = stash;
+        for(int i = 0; i < 20; i++){
+            Transform shop_slot = shop.transform.GetChild(i);
+            if(shop_slot.childCount == 2) Destroy(shop_slot.GetChild(1).gameObject);
+            if(stash.items_in_backpack[i] != 0){
+                Instantiate(item_database.item_id_to_image(stash.items_in_backpack[i]) , shop_slot.position , Quaternion.identity , shop.transform.GetChild(i)).GetComponent<CanvasGroup>().blocksRaycasts = false;
+            }
+        }
+        shop.SetActive(true);
+        toggle_backpack();
+        shop_opened = true;
+    }
+    public void close_shop(){
+        shop.SetActive(false);
+        shop_opened = false;
+    }
+    public void item_baught(int button_number){
+        if(backpack_is_full()) return;
+        add_item_to_backpack(current_shop.items_in_backpack[button_number]);
+        current_shop.remove_item(button_number);
+        Destroy(shop.transform.GetChild(button_number).GetChild(1).gameObject);
     }
     [HideInInspector] public int hint_count = 0;
     [SerializeField] GameObject hint_panel;
@@ -224,5 +259,11 @@ public class UI : MonoBehaviour
         player_home.SetActive(true);
         move_player_to_position(new Vector2(1.7f , 0.5f));
         main_menu.SetActive(false);
+    }
+    [SerializeField] MissionMap mission_map;
+    public void city_sector_button_pressed(){
+        mission_map.generate_city_sector(4 , 4);
+        player_home.SetActive(false);
+        close_player_computer();
     }
 }
