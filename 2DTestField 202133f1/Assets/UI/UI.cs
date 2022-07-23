@@ -75,9 +75,6 @@ public class UI : MonoBehaviour
         backpack_opened = backpack.gameObject.activeSelf;
     }
     public void add_item_to_backpack(int item_id){
-        if(item_id == 6){
-            return;
-        }
         for(int i = 0; i < 20; i++){
             if(items_in_backpack[i] == 0){
                 items_in_backpack[i] = item_id;

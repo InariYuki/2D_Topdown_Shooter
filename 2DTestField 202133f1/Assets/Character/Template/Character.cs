@@ -332,6 +332,10 @@ public class Character : MonoBehaviour
     [HideInInspector] public bool dead = false;
     public void die(){
         dead = true;
+        NPC npc = GetComponent<NPC>();
+        if(npc != null){
+            npc.drop_key();
+        }
         Instantiate(corpse , transform.position , Quaternion.identity);
         Destroy(gameObject);
     }

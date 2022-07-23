@@ -93,6 +93,13 @@ public class NPC : MonoBehaviour
     void shop(PlayerColtroller player){
         player.ui.toggle_shop(NPC_stash);
     }
+    [SerializeField] Key key;
+    public void drop_key(){
+        if(NPC_stash != null){
+            Key key_instanced = Instantiate(key , character.feet.position , Quaternion.identity);
+            key_instanced.key_id = NPC_stash.key;
+        }
+    }
     bool saying = false;
     void say(string something){
         StopCoroutine(dialogue_disappear());
