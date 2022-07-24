@@ -39,7 +39,7 @@ public class DeflectableProjectile : MonoBehaviour
                     else if(thing_hitbox.parent.GetComponent<BreakableObject>() != null) thing_hitbox.hit(damage , parent , clink_effect);
                 }
                 catch{
-                    thing_hitbox.hit(damage , gameObject , hit_effect);
+                    Destroy(gameObject);
                 }
                 Destroy(gameObject);
             }

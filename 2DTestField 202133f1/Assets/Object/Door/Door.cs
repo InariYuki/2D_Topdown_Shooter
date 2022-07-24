@@ -6,15 +6,15 @@ public class Door : MonoBehaviour
 {
     Animator animator;
     SpriteRenderer sprite;
-    LayerMask default_layer;
+    LayerMask default_layer , navbox_layer;
     BoxCollider2D collision;
     [SerializeField] Sprite locked_door_sprite;
     [SerializeField] Transform feet;
-    [SerializeField] List<NavBox> navboxes_needs_to_reconnect = new List<NavBox>();
     private void Awake() {
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         default_layer = LayerMask.GetMask("Default");
+        navbox_layer = LayerMask.GetMask("Navigation");
         collision = GetComponent<BoxCollider2D>();
     }
     private void Start() {
@@ -43,7 +43,7 @@ public class Door : MonoBehaviour
         animator.SetBool("door_open" , false);
         collision.enabled = true;
     }
-    [HideInInspector] public bool door_locked = false;
+    public bool door_locked = false;
     void door_lock(){
         door_close();
         door_locked = true;
@@ -65,15 +65,16 @@ public class Door : MonoBehaviour
         }
     }
     void reconnect_navboxes(){
+        Collider2D[] navboxes_nearby = Physics2D.OverlapCircleAll(feet.position , detect_radius , navbox_layer);
         if(door_locked){
-            for(int i = 0; i < navboxes_needs_to_reconnect.Count; i++){
-                navboxes_needs_to_reconnect[i].connect();
+            for(int i = 0; i < navboxes_nearby.Length; i++){
+                navboxes_nearby[i].GetComponent<NavBox>().connect();
             }
         }
         else{
             collision.enabled = false;
-            for(int i = 0; i < navboxes_needs_to_reconnect.Count; i++){
-                navboxes_needs_to_reconnect[i].connect();
+            for(int i = 0; i < navboxes_nearby.Length; i++){
+                navboxes_nearby[i].GetComponent<NavBox>().connect();
             }
             collision.enabled = true;
         }

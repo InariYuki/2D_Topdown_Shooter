@@ -170,10 +170,12 @@ public class UI : MonoBehaviour
         shop.SetActive(true);
         toggle_backpack();
         shop_opened = true;
+        camera_controller.is_dynamic = false;
     }
     public void close_shop(){
         shop.SetActive(false);
         shop_opened = false;
+        camera_controller.is_dynamic = true;
     }
     int player_money = 500;
     public void item_baught(int button_number){

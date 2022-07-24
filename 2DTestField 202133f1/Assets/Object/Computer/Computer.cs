@@ -8,7 +8,7 @@ public class Computer : MonoBehaviour
         generate_interaction_menu();
         toggle_action_menu();
     }
-    public List<string> interact_methods = new List<string>{"Read E-mail" , "Doors" , "Traps"};
+    public List<string> interact_methods = new List<string>{"Read E-mail"};
     PlayerColtroller player;
     public void interacted(PlayerColtroller _player , int interact_state){
         player = _player;
@@ -23,9 +23,6 @@ public class Computer : MonoBehaviour
     [SerializeField] Transform action_menu;
     [SerializeField] InteractiomMenuButton button;
     void generate_interaction_menu(){
-        if(doors.Count == 0){
-            interact_methods.Remove("Doors");
-        }
         RectTransform rect = action_menu.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(240 , 5 + 35 * interact_methods.Count);
         for(int i = 0; i < interact_methods.Count; i++){

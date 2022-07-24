@@ -287,8 +287,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interact_methods:
   - Read E-mail
-  - Doors
-  - Traps
   action_menu: {fileID: 5194555650164285927}
   button: {fileID: -6458364793580647055, guid: 4c369f499f7e9234f88bf73918b5de41, type: 3}
   doors: []

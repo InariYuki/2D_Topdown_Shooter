@@ -121,9 +121,7 @@ public class ArtificialIntelligence : MonoBehaviour
                                 enemies.Add(chatacter_colliders[i].gameObject);
                             }
                         }
-                        catch{
-                            
-                        }
+                        catch{}
                     }
                 }
                 if(enemies.Contains(chatacter_colliders[i].gameObject)){
@@ -243,27 +241,28 @@ public class ArtificialIntelligence : MonoBehaviour
             free_roam_init();
             return;
         }
+        call_reinforcement(current_enemy);
         Vector2 vec = current_enemy.transform.position - transform.position;
         if(Physics2D.Raycast(parent.feet.position , vec.normalized , vec.magnitude , Obstacle)){
             search_mode_init(current_enemy_character.feet.transform.position);
             return;
         }
         parent.target_position = current_enemy.transform.position;
-        if(parent.melee_weapon != null){
-            if(attack_mode_substate_decided == false){
-                attack_mode_substate_decided = true;
-                attack_mode_substate = Random.Range(0 , 2);
-                if(attack_mode_substate_timer_start == false){
-                    attack_mode_substate_timer_start = true;
-                    StartCoroutine(change_attack_substate());
-                }
+        if(attack_mode_substate_decided == false){
+            attack_mode_substate_decided = true;
+            attack_mode_substate = Random.Range(0 , 2);
+            if(attack_mode_substate_timer_start == false){
+                attack_mode_substate_timer_start = true;
+                StartCoroutine(change_attack_substate());
             }
+        }
+        if(parent.melee_weapon != null){
             parent.speed = parent.top_speed;
-            if((current_enemy.transform.position - transform.position).magnitude > 0.3f){
+            if(vec.magnitude > 0.3f){
                 if(is_elite){
                     deflect_bullet();
                 }
-                parent.direction = current_enemy.transform.position - transform.position;
+                parent.direction = vec;
             }
             else{
                 switch(attack_mode_substate){
@@ -272,23 +271,31 @@ public class ArtificialIntelligence : MonoBehaviour
                         parent.normal_attack();
                         break;
                     case 1:
-                        parent.velocity = (Quaternion.AngleAxis(Random.Range(-90 , 90) , Vector3.forward) * (transform.position - current_enemy.transform.position)).normalized * 8f;
+                        parent.velocity = (Quaternion.AngleAxis(Random.Range(-90 , 90) , Vector3.forward) * (-vec)).normalized * 8f;
                         break;
                 }
             }
         }
         else if(parent.ranged_weapon != null){
             parent.speed = parent.top_speed / 2;
-            if((current_enemy.transform.position - transform.position).magnitude > 2f){
-                parent.direction = current_enemy.transform.position - transform.position;
+            if(vec.magnitude > 2f){
+                parent.direction = vec;
             }
-            else if((current_enemy.transform.position - transform.position).magnitude < 1.8f){
-                parent.direction = transform.position - current_enemy.transform.position;
+            else if(vec.magnitude < 1.8f){
+                parent.direction = -vec;
             }
             else{
-                parent.direction = Vector2.zero;
+                switch(attack_mode_substate){
+                    case 0:
+                        parent.direction = (Quaternion.AngleAxis(90f , Vector3.forward) * (-vec)).normalized;
+                        break;
+                    case 1:
+                        parent.direction = (Quaternion.AngleAxis(-90f , Vector3.forward) * (-vec)).normalized;
+                        break;
+                }
             }
             parent.normal_attack();
+            
         }
         else{
             parent.speed = parent.top_speed;
@@ -310,6 +317,17 @@ public class ArtificialIntelligence : MonoBehaviour
                 parent.target_position = attacks[i].transform.position;
                 parent.normal_attack();
                 break;
+            }
+        }
+    }
+    [SerializeField] List<ArtificialIntelligence> nakamas = new List<ArtificialIntelligence>();
+    void call_reinforcement(GameObject attacker){
+        for(int i = 0; i < nakamas.Count; i++){
+            if(nakamas[i].ai_state != 1){
+                try{
+                    nakamas[i].intimidated(attacker);
+                }
+                catch{}
             }
         }
     }
@@ -452,8 +470,15 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     List<GameObject> enemies = new List<GameObject>();
     public void hit(int damage , GameObject attacker){
-        if(!enemies.Contains(attacker)){
-            enemies.Add(attacker);
+        if(faction == 0){
+            intimidated(attacker);
+        }
+        else{
+            ArtificialIntelligence ai = attacker.GetComponent<ArtificialIntelligence>();
+            PlayerColtroller player = attacker.GetComponent<PlayerColtroller>();
+            if(ai != null && ai.faction != faction || player != null){
+                intimidated(attacker);
+            }
         }
         parent.velocity = (transform.position - attacker.transform.position).normalized * 5f;
         health -= damage;
@@ -461,6 +486,11 @@ public class ArtificialIntelligence : MonoBehaviour
             health = 0;
             parent.die();
         }
-        search_mode_init(attacker.GetComponent<Character>().feet.position);
+    }
+    public void intimidated(GameObject someone){
+        if(!enemies.Contains(someone)){
+            enemies.Add(someone);
+        }
+        search_mode_init(someone.GetComponent<Character>().feet.position);
     }
 }
