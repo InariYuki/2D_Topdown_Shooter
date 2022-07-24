@@ -6,6 +6,7 @@ public class ItemRegister : MonoBehaviour{
     [SerializeField] GameObject[] item_database = new GameObject[0];
     [SerializeField] GameObject[] image_database = new GameObject[0];
     [SerializeField] GameObject[] instance_database = new GameObject[0];
+    public int[] item_price = new int[0];
     Dictionary<int , GameObject> item_id_to_image_dict = new Dictionary<int, GameObject>();
     Dictionary<int , GameObject> item_id_to_item_dict = new Dictionary<int, GameObject>();
     Dictionary<int , GameObject> item_id_to_instance = new Dictionary<int, GameObject>();

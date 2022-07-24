@@ -159,9 +159,12 @@ public class UI : MonoBehaviour
         current_shop = stash;
         for(int i = 0; i < 20; i++){
             Transform shop_slot = shop.transform.GetChild(i);
+            ShopButton sell_slot = shop_slot.GetComponent<ShopButton>();
+            sell_slot.set_price(0);
             if(shop_slot.childCount == 2) Destroy(shop_slot.GetChild(1).gameObject);
             if(stash.items_in_backpack[i] != 0){
                 Instantiate(item_database.item_id_to_image(stash.items_in_backpack[i]) , shop_slot.position , Quaternion.identity , shop.transform.GetChild(i)).GetComponent<CanvasGroup>().blocksRaycasts = false;
+                sell_slot.set_price(item_database.item_price[i + 1]);
             }
         }
         shop.SetActive(true);
@@ -172,9 +175,16 @@ public class UI : MonoBehaviour
         shop.SetActive(false);
         shop_opened = false;
     }
+    int player_money = 500;
     public void item_baught(int button_number){
         if(backpack_is_full()) return;
+        if(player_money < item_database.item_price[current_shop.items_in_backpack[button_number]]){
+            print("not enough money");
+            return;
+        }
         add_item_to_backpack(current_shop.items_in_backpack[button_number]);
+        player_money -= item_database.item_price[current_shop.items_in_backpack[button_number]];
+        print(player_money);
         current_shop.remove_item(button_number);
         Destroy(shop.transform.GetChild(button_number).GetChild(1).gameObject);
     }
