@@ -470,17 +470,19 @@ public class ArtificialIntelligence : MonoBehaviour
     }
     List<GameObject> enemies = new List<GameObject>();
     public void hit(int damage , GameObject attacker){
-        if(faction == 0){
-            intimidated(attacker);
-        }
-        else{
-            ArtificialIntelligence ai = attacker.GetComponent<ArtificialIntelligence>();
-            PlayerColtroller player = attacker.GetComponent<PlayerColtroller>();
-            if(ai != null && ai.faction != faction || player != null){
+        if(attacker != null){
+            if(faction == 0){
                 intimidated(attacker);
             }
+            else{
+                ArtificialIntelligence ai = attacker.GetComponent<ArtificialIntelligence>();
+                PlayerColtroller player = attacker.GetComponent<PlayerColtroller>();
+                if(ai != null && ai.faction != faction || player != null){
+                    intimidated(attacker);
+                }
+            }
+            parent.velocity = (transform.position - attacker.transform.position).normalized * 5f;
         }
-        parent.velocity = (transform.position - attacker.transform.position).normalized * 5f;
         health -= damage;
         if(health <= 0){
             health = 0;

@@ -607,6 +607,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: StaticObj_24
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1599f9efb42a780468411d7a5dcb816b
+      internalID: -1986361427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StaticObj_25
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e79dc64c8ffb54e4e8e433f46531ce6e
+      internalID: 1819597758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -626,6 +668,7 @@ TextureImporter:
       StaticObj_22: 424456126
       StaticObj_12: -1720061596
       StaticObj_9: -1209536740
+      StaticObj_24: -1986361427
       StaticObj_2: 33918103
       StaticObj_10: 149223560
       StaticObj_8: 930236795
@@ -635,6 +678,7 @@ TextureImporter:
       StaticObj_11: -941775404
       StaticObj_5: -1099891200
       StaticObj_18: -1693545146
+      StaticObj_25: 1819597758
       StaticObj_0: -1677027476
       StaticObj_1: 1723444923
       StaticObj_3: 1874329212

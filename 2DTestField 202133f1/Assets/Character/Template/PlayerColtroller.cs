@@ -78,7 +78,7 @@ public class PlayerColtroller : MonoBehaviour
         }
     }
     public void hit(int damage , GameObject attacker){
-        character.velocity = (transform.position - attacker.transform.position).normalized * 5f;
+        if(attacker != null) character.velocity = (transform.position - attacker.transform.position).normalized * 5f;
     }
     LayerMask obstacle;
     GameObject _nearest_interactable_object = null;

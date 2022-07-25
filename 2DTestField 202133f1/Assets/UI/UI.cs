@@ -164,7 +164,7 @@ public class UI : MonoBehaviour
             if(shop_slot.childCount == 2) Destroy(shop_slot.GetChild(1).gameObject);
             if(stash.items_in_backpack[i] != 0){
                 Instantiate(item_database.item_id_to_image(stash.items_in_backpack[i]) , shop_slot.position , Quaternion.identity , shop.transform.GetChild(i)).GetComponent<CanvasGroup>().blocksRaycasts = false;
-                sell_slot.set_price(item_database.item_price[i + 1]);
+                sell_slot.set_price(item_database.item_price[stash.items_in_backpack[i]]);
             }
         }
         shop.SetActive(true);

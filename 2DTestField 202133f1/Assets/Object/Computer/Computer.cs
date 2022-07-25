@@ -42,8 +42,14 @@ public class Computer : MonoBehaviour
     void read_email(){
         player.player_talk("Thats rude!");
     }
+    [SerializeField] List<GameObject> traps = new List<GameObject>();
     void trap_control(){
-        print("traps");
+        for(int i = 0; i < traps.Count; i++){
+            LaserTrap laser_trap = traps[i].GetComponent<LaserTrap>();
+            if(laser_trap != null){
+                laser_trap.toggle_laser_trap();
+            }
+        }
     }
     [SerializeField] List<Door> doors = new List<Door>();
     void door_control(){

@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3152503592998675725}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &88670985060690243
 GameObject:
@@ -93,7 +93,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3152503592998675725}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4415110699882308007
 SpriteRenderer:
@@ -198,7 +198,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3152503592998675725}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &81908525772966484
 SpriteRenderer:
@@ -307,7 +307,6 @@ Transform:
   - {fileID: 8834451393176629070}
   - {fileID: 2377867803368363873}
   - {fileID: 5117051432053971226}
-  - {fileID: 8608139263711180986}
   - {fileID: 4673589899782423363}
   - {fileID: 3514680157364056436}
   - {fileID: 1886290269499248813}
@@ -316,6 +315,7 @@ Transform:
   - {fileID: 9054205469917546045}
   - {fileID: 8608139263256033595}
   - {fileID: 1789125723}
+  - {fileID: 3156540575042095878}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -342,22 +342,22 @@ MonoBehaviour:
   melee_weapon: {fileID: 0}
   ranged_weapon: {fileID: 0}
   armor_holder: {fileID: 1789125723}
-  carcass_head_s: {fileID: 0}
-  carcass_head_f: {fileID: 0}
-  carcass_head_b: {fileID: 0}
-  carcass_body_s: {fileID: 0}
-  carcass_body_f: {fileID: 0}
-  carcass_body_b: {fileID: 0}
-  carcass_right_hand_s: {fileID: 0}
-  carcass_left_hand_s: {fileID: 0}
-  carcass_right_leg_s: {fileID: 0}
-  carcass_left_leg_s: {fileID: 0}
-  carcass_right_hand_v: {fileID: 0}
-  carcass_left_hand_v: {fileID: 0}
-  carcass_right_leg_v: {fileID: 0}
-  carcass_left_leg_v: {fileID: 0}
+  carcass_head_s: {fileID: -1980960338, guid: 10a647470e142e54a91225dade620304, type: 3}
+  carcass_head_f: {fileID: 33307931, guid: 10a647470e142e54a91225dade620304, type: 3}
+  carcass_head_b: {fileID: 258111248, guid: 10a647470e142e54a91225dade620304, type: 3}
+  carcass_body_s: {fileID: 1578712274, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  carcass_body_f: {fileID: 43762892, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  carcass_body_b: {fileID: 730893069, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  carcass_right_hand_s: {fileID: 1464096136, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  carcass_left_hand_s: {fileID: -1030843105, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  carcass_right_leg_s: {fileID: -1667931653, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  carcass_left_leg_s: {fileID: -286941923, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  carcass_right_hand_v: {fileID: 1947919839, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  carcass_left_hand_v: {fileID: 1308804483, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  carcass_right_leg_v: {fileID: 767510909, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  carcass_left_leg_v: {fileID: -314021980, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
   target_position: {x: 0, y: 0, z: 0}
-  hitbox: {fileID: 4301705849394388388}
+  hitbox: {fileID: 0}
   punch: {fileID: 5077202013484140094, guid: 48d6f0c0ccc0cd441aedf10f8c6dd8f4, type: 3}
   head: {fileID: 1298321778271890327}
   body: {fileID: 2318279669483692925}
@@ -457,7 +457,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3152503592998675725}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1298321778271890327
 SpriteRenderer:
@@ -562,7 +562,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3152503592998675725}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5432440773146233952
 SpriteRenderer:
@@ -698,7 +698,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3152503592998675725}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2318279669483692925
 SpriteRenderer:
@@ -835,7 +835,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3152503592998675725}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2069530731408170313
 SpriteRenderer:
@@ -1124,7 +1124,7 @@ RectTransform:
   m_Children:
   - {fileID: 8608139262613199743}
   m_Father: {fileID: 3152503592998675725}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1192,76 +1192,77 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &8608139263711180933
-GameObject:
+--- !u!1001 &8965557900294656341
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8608139263711180986}
-  - component: {fileID: 8608139263711180987}
-  - component: {fileID: 4301705849394388388}
-  m_Layer: 3
-  m_Name: Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8608139263711180986
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8608139263711180933}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3152503592998675725}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &8608139263711180987
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8608139263711180933}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.17}
-  m_EdgeRadius: 0
---- !u!114 &4301705849394388388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_Modification:
+    m_TransformParent: {fileID: 3152503592998675725}
+    m_Modifications:
+    - target: {fileID: 4036806736741555385, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_Name
+      value: Hitbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192199819280454500, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_Size.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192199819280454500, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: m_Size.y
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 9105309142185902730, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 3152503592998675726}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+--- !u!4 &3156540575042095878 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6314688265865615955, guid: 1b43010e03f1f394c813ff4d08bfaf42, type: 3}
+  m_PrefabInstance: {fileID: 8965557900294656341}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8608139263711180933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6c69afb910cb24392079cfcdff9089, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 3152503592998675726}
-  can_take_hit: 1
