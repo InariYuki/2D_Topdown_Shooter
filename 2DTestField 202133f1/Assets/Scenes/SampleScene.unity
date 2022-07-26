@@ -12036,7 +12036,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3445914291657013926, guid: aae00cf966f33f64babc78db33adedf7, type: 3}
       propertyPath: m_Name
-      value: RuinSector
+      value: OutlawSector
       objectReference: {fileID: 0}
     - target: {fileID: 3445914291657013927, guid: aae00cf966f33f64babc78db33adedf7, type: 3}
       propertyPath: m_RootOrder
@@ -13362,11 +13362,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3152503592998675725, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.120082
+      value: 27.36017
       objectReference: {fileID: 0}
     - target: {fileID: 3152503592998675725, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.520022
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3152503592998675725, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
       propertyPath: m_LocalPosition.z

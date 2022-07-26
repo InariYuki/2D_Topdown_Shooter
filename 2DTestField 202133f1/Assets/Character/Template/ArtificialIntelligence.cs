@@ -281,7 +281,7 @@ public class ArtificialIntelligence : MonoBehaviour
             if(vec.magnitude > 2f){
                 parent.direction = vec;
             }
-            else if(vec.magnitude < 1.8f){
+            else if(vec.magnitude < 1.8f && !Physics2D.Raycast(transform.position , -vec.normalized , 0.2f , Obstacle)){
                 parent.direction = -vec;
             }
             else{

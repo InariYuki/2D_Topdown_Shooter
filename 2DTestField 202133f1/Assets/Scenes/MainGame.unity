@@ -1036,6 +1036,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 408509601, guid: 610735dbeb9944342a419f910308af6c, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 559610010, guid: 610735dbeb9944342a419f910308af6c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1279,6 +1283,34 @@ PrefabInstance:
     - target: {fileID: 7345924466630369412, guid: 610735dbeb9944342a419f910308af6c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345924466630369422, guid: 610735dbeb9944342a419f910308af6c, type: 3}
+      propertyPath: item_price.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345924466630369422, guid: 610735dbeb9944342a419f910308af6c, type: 3}
+      propertyPath: item_price.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345924466630369422, guid: 610735dbeb9944342a419f910308af6c, type: 3}
+      propertyPath: item_price.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345924466630369422, guid: 610735dbeb9944342a419f910308af6c, type: 3}
+      propertyPath: item_price.Array.data[2]
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345924466630369422, guid: 610735dbeb9944342a419f910308af6c, type: 3}
+      propertyPath: item_price.Array.data[3]
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345924466630369422, guid: 610735dbeb9944342a419f910308af6c, type: 3}
+      propertyPath: item_price.Array.data[4]
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345924466630369422, guid: 610735dbeb9944342a419f910308af6c, type: 3}
+      propertyPath: item_price.Array.data[5]
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7345924466630369423, guid: 610735dbeb9944342a419f910308af6c, type: 3}
       propertyPath: pause_menu
