@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 7980642186431729573}
   - component: {fileID: 7811865079609365875}
   - component: {fileID: 8608139263971650316}
+  - component: {fileID: 8608139262641111426}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -426,6 +427,66 @@ MonoBehaviour:
   attack_locked: 0
   all_control_locked: 0
   dialogue: {fileID: 8608139262613199488}
+--- !u!114 &8608139262641111426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3152503592998675726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7e87669ce9cda4aabebd601a0bdf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head_s:
+  - {fileID: -1980960338, guid: 10a647470e142e54a91225dade620304, type: 3}
+  - {fileID: 2112383491, guid: 10a647470e142e54a91225dade620304, type: 3}
+  - {fileID: -2138196357, guid: 10a647470e142e54a91225dade620304, type: 3}
+  head_f:
+  - {fileID: 33307931, guid: 10a647470e142e54a91225dade620304, type: 3}
+  - {fileID: 1903229033, guid: 10a647470e142e54a91225dade620304, type: 3}
+  - {fileID: -1406081871, guid: 10a647470e142e54a91225dade620304, type: 3}
+  head_b:
+  - {fileID: 258111248, guid: 10a647470e142e54a91225dade620304, type: 3}
+  - {fileID: 1175054497, guid: 10a647470e142e54a91225dade620304, type: 3}
+  - {fileID: -1872783991, guid: 10a647470e142e54a91225dade620304, type: 3}
+  body_s:
+  - {fileID: 1578712274, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  - {fileID: -1090022802, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  - {fileID: -119586882, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  body_f:
+  - {fileID: 43762892, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  - {fileID: 279856785, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  - {fileID: -1680320847, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  body_b:
+  - {fileID: 730893069, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  - {fileID: -1301231345, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  - {fileID: -1409521202, guid: 028dd50bb1c9c8d40a50fad2ca1b814f, type: 3}
+  right_hand_s:
+  - {fileID: 1464096136, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  - {fileID: 891360450, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  left_hand_s:
+  - {fileID: -1030843105, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  - {fileID: -126086246, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  right_leg_s:
+  - {fileID: -1667931653, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  - {fileID: 483730524, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  left_leg_s:
+  - {fileID: -286941923, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  - {fileID: -352930284, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  right_hand_v:
+  - {fileID: 1947919839, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  - {fileID: 182640861, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  left_hand_v:
+  - {fileID: 1308804483, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  - {fileID: -1970457229, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  right_leg_v:
+  - {fileID: 767510909, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  - {fileID: 410276735, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  left_leg_v:
+  - {fileID: -314021980, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
+  - {fileID: -1300721595, guid: 9d67689bdc395514f8e15ec0354e6d6c, type: 3}
 --- !u!1 &3263627186506947117
 GameObject:
   m_ObjectHideFlags: 0

@@ -128,8 +128,8 @@ public class Character : MonoBehaviour
             StartCoroutine(hitbox_time(melee_weapon.cool_down_time));
         }
         else if(ranged_weapon != null){
-            Vector2 vec = attack_point.transform.position - pivot.transform.position;
-            if(!Physics2D.Raycast(pivot.transform.position , vec.normalized , vec.magnitude * 4f , obstacle_layer)){
+            Vector3 vec = attack_point.transform.position - pivot.transform.position;
+            if(!Physics2D.Raycast(pivot.transform.position + vec.normalized * 0.05f , vec.normalized , vec.magnitude * 4f , obstacle_layer)){
                 ranged_weapon.normal_attack();
             }
         }

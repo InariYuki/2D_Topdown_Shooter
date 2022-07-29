@@ -37,7 +37,7 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
             if(current_in_slot_id == 25){
                 ui.player.unequip_armor();
             }
-            Instantiate(ui.item_database.item_id_to_item(item_id) , ui.player.feet.position , Quaternion.identity);
+            Instantiate(ui.item_database.item_id_to_item(item_id) , ui.player.feet.position , Quaternion.identity , ui.object_holder);
             ui.items_in_backpack[current_in_slot_id] = 0;
             Destroy(gameObject);
         }

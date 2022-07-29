@@ -6,10 +6,10 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] List<Sprite> head_s , head_f , head_b , body_s , body_f , body_b , right_hand_s , left_hand_s , right_leg_s , left_leg_s , right_hand_v , left_hand_v , right_leg_v , left_leg_v;
     [HideInInspector] public Character player;
     [HideInInspector] public PlayerColtroller player_ctl;
     [HideInInspector] public ItemRegister item_database;
+    public Transform object_holder;
     public CameraController camera_controller;
     private void Awake() {
         item_database = GetComponent<ItemRegister>();
@@ -236,51 +236,9 @@ public class UI : MonoBehaviour
         camera_controller.is_dynamic = true;
     }
     public void set_player_sprite(int head_index , int body_index , int limb_index){
-        player.carcass_head_s = head_s[head_index];
-        player.carcass_head_f = head_f[head_index];
-        player.carcass_head_b = head_b[head_index];
-        player.carcass_body_s = body_s[body_index];
-        player.carcass_body_f = body_f[body_index];
-        player.carcass_body_b = body_b[body_index];
-        player.carcass_right_hand_s = right_hand_s[limb_index];
-        player.carcass_left_hand_s = left_hand_s[limb_index];
-        player.carcass_right_leg_s = right_leg_s[limb_index];
-        player.carcass_left_leg_s = left_leg_s[limb_index];
-        player.carcass_right_hand_v = right_hand_v[limb_index];
-        player.carcass_left_hand_v = left_hand_v[limb_index];
-        player.carcass_right_leg_v = right_leg_v[limb_index];
-        player.carcass_left_leg_v = left_leg_v[limb_index];
+        player.GetComponent<SpriteDatabase>().set_sprite(head_index , body_index , limb_index);
         player.set_carcass();
         player.sprite_init();
-    }
-    [SerializeField] Transform object_holder;
-    [SerializeField] Character template_NPC;
-    void spawn_random_NPC(Vector2 spawn_position){
-        Character random_NPC = Instantiate(template_NPC , spawn_position , Quaternion.identity , object_holder);
-        ArtificialIntelligence npc_ai = random_NPC.GetComponent<ArtificialIntelligence>();
-        int random_num_head = Random.Range(0 , head_b.Count);
-        int random_num_body = Random.Range(0 , body_b.Count);
-        int random_num_limb = Random.Range(0 , left_hand_s.Count);
-        random_NPC.carcass_head_s = head_s[random_num_head];
-        random_NPC.carcass_head_f = head_f[random_num_head];
-        random_NPC.carcass_head_b = head_b[random_num_head];
-        random_NPC.carcass_body_s = body_s[random_num_body];
-        random_NPC.carcass_body_f = body_f[random_num_body];
-        random_NPC.carcass_body_b = body_b[random_num_body];
-        random_NPC.carcass_right_hand_s = right_hand_s[random_num_limb];
-        random_NPC.carcass_left_hand_s = left_hand_s[random_num_limb];
-        random_NPC.carcass_right_leg_s = right_leg_s[random_num_limb];
-        random_NPC.carcass_left_leg_s = left_leg_s[random_num_limb];
-        random_NPC.carcass_right_hand_v = right_hand_v[random_num_limb];
-        random_NPC.carcass_left_hand_v = left_hand_v[random_num_limb];
-        random_NPC.carcass_right_leg_v = right_leg_v[random_num_limb];
-        random_NPC.carcass_left_leg_v = left_leg_v[random_num_limb];
-        random_NPC.set_carcass();
-        random_NPC.sprite_init();
-        npc_ai.stop_count = 10;
-        npc_ai.stop_duration = 0;
-        npc_ai.static_patrol = false;
-        npc_ai.idle = false;
     }
     [SerializeField] IntroMission intro_scene;
     [SerializeField] GameObject main_menu;

@@ -7,10 +7,11 @@ public class NPC : MonoBehaviour
 {
     Character character;
     ArtificialIntelligence AI;
-    PlayerColtroller player;
+    [HideInInspector] public UI ui;
     private void Awake() {
         character = GetComponent<Character>();
         AI = GetComponent<ArtificialIntelligence>();
+        ui = GameObject.Find("UI").GetComponent<UI>();
         generate_interaction_menu();
         toggle_action_menu();
     }
@@ -28,14 +29,13 @@ public class NPC : MonoBehaviour
         }
     }
     public void interacted(PlayerColtroller _player , int interact_state){
-        player = _player;
         if(interact_state == 0){
             if(action_menu_opened == false) toggle_action_menu();
         }
         else{
             if(action_menu_opened) toggle_action_menu();
         }
-        player.attack_locked = action_menu_opened;
+        ui.player_ctl.attack_locked = action_menu_opened;
     }
     bool action_menu_opened;
     void toggle_action_menu(){
@@ -45,22 +45,22 @@ public class NPC : MonoBehaviour
     public void action(string _action_string){
         if(action_menu_opened){
             toggle_action_menu();
-            player.attack_locked = action_menu_opened;
+            ui.player_ctl.attack_locked = action_menu_opened;
         }
         if(_action_string == "Chat"){
             talk();
         }
         else if(_action_string == "Intimidate"){
-            intimidate(player);
+            intimidate(ui.player_ctl);
         }
         else if(_action_string == "Steal"){
-            steal(player);
+            steal(ui.player_ctl);
         }
         else if(_action_string == "Assassinate"){
-            assassinate(player);
+            assassinate(ui.player_ctl);
         }
         else if(_action_string == "Shop"){
-            shop(player);
+            shop(ui.player_ctl);
         }
     }
     [SerializeField] TextMeshProUGUI dialogue_box;
@@ -96,7 +96,7 @@ public class NPC : MonoBehaviour
     [SerializeField] Key key;
     public void drop_key(){
         if(NPC_stash != null){
-            Key key_instanced = Instantiate(key , character.feet.position , Quaternion.identity);
+            Key key_instanced = Instantiate(key , character.feet.position , Quaternion.identity , ui.object_holder);
             key_instanced.key_id = NPC_stash.key;
         }
     }
