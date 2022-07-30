@@ -9924,6 +9924,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8211412746946789230, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
+      propertyPath: random_armor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211412746946789230, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: random_appearence
       value: 1
       objectReference: {fileID: 0}
@@ -13016,6 +13020,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8211412746946789230, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
+      propertyPath: random_armor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211412746946789230, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: random_appearence
       value: 1
       objectReference: {fileID: 0}
@@ -13728,6 +13736,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8211412746946789230, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
+      propertyPath: random_armor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211412746946789230, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: random_appearence
       value: 1
       objectReference: {fileID: 0}
@@ -14113,6 +14125,10 @@ PrefabInstance:
     - target: {fileID: 6686069037882567895, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211412746946789230, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
+      propertyPath: random_armor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8211412746946789230, guid: 7655443ce3b6b7f4d9d6cc0095813318, type: 3}
       propertyPath: random_appearence

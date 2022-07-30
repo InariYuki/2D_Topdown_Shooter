@@ -5,6 +5,9 @@ using UnityEngine;
 public class SpriteDatabase : MonoBehaviour
 {
     [SerializeField] bool random_appearence = false;
+    [SerializeField] bool random_armor = false;
+    [SerializeField] bool always_has_weapon = false;
+    int has_weapon_threshold = 30;
     [SerializeField] List<Sprite> head_s = new List<Sprite>();
     [SerializeField] List<Sprite> head_f = new List<Sprite>();
     [SerializeField] List<Sprite> head_b = new List<Sprite>();
@@ -28,9 +31,14 @@ public class SpriteDatabase : MonoBehaviour
     private void Start() {
         if(random_appearence){
             set_random_sprite();
-            Instantiate(npc.ui.item_database.item_id_to_instanced_item(Random.Range(3 , 6)) , character.armor_holder.position , Quaternion.identity , character.armor_holder);
-            character.equip_armor();
-            if(Random.Range(0 , 100) < 30){
+            if(random_armor){
+                Instantiate(npc.ui.item_database.item_id_to_instanced_item(Random.Range(3 , 6)) , character.armor_holder.position , Quaternion.identity , character.armor_holder);
+                character.equip_armor();
+            }
+            if(always_has_weapon){
+                has_weapon_threshold = 100;
+            }
+            if(Random.Range(0 , 100) < has_weapon_threshold){
                 Instantiate(npc.ui.item_database.item_id_to_instanced_item(Random.Range(1 , 3)) , character.weapon.position , Quaternion.identity , character.weapon);
                 character.equip_weapon();
             }
