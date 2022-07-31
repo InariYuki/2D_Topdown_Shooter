@@ -261,5 +261,29 @@ public class UI : MonoBehaviour
         mission_map.generate_city_sector(4 , 4);
         player_home.SetActive(false);
         close_player_computer();
+        move_player_to_position(new Vector2(Random.Range(1 , 3) , Random.Range(1 , 3)) * 6.4f);
+    }
+    [SerializeField] GameObject travel_terminal;
+    public void ToggleTravelTerminal(){
+        travel_terminal.SetActive(true);
+        camera_controller.is_dynamic = false;
+        player_ctl.all_control_locked = true;
+    }
+    public void CloseTravelTerminal(){
+        travel_terminal.SetActive(false);
+        camera_controller.is_dynamic = true;
+        player_ctl.all_control_locked = false;
+    }
+    public void ReturnHome(){
+        CloseTravelTerminal();
+        mission_map.RemoveCitySector();
+        ClearItemsOnGround();
+        player_home.SetActive(true);
+        move_player_to_position(new Vector2(1.7f , 0.5f));
+    }
+    void ClearItemsOnGround(){
+        for(int i = 0 ; i < object_holder.childCount; i++){
+            Destroy(object_holder.GetChild(i).gameObject);
+        }
     }
 }

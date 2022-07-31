@@ -28,4 +28,9 @@ public class MissionMap : MonoBehaviour
         }
         return map_coordinate;
     }
+    public void RemoveCitySector(){
+        for(int i = 4 ; i < transform.childCount; i++){
+            Destroy(transform.GetChild(i).gameObject);
+        }
+    }
 }
