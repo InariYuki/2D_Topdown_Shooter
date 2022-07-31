@@ -101,12 +101,15 @@ public class NPC : MonoBehaviour
         }
     }
     bool saying = false;
+    Coroutine say_coroutine;
     void say(string something){
-        StopCoroutine(dialogue_disappear());
+        if(say_coroutine != null){
+            StopCoroutine(say_coroutine);
+        }
         dialogue_box.text = something;
         dialogue_box.gameObject.SetActive(true);
         saying = true;
-        StartCoroutine(dialogue_disappear());
+        say_coroutine = StartCoroutine(dialogue_disappear());
     }
     IEnumerator dialogue_disappear(){
         yield return new WaitForSeconds(2f);

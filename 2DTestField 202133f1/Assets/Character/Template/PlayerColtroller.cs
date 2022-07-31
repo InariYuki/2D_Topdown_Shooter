@@ -116,11 +116,14 @@ public class PlayerColtroller : MonoBehaviour
         nearest_interactable_object.GetComponent<InteractableBox>().display_interaction_hint();
     }
     [SerializeField] TextMeshProUGUI dialogue;
+    Coroutine talk_coroutine;
     public void player_talk(string talk){
-        StopCoroutine(talk_finished());
+        if(talk_coroutine != null){
+            StopCoroutine(talk_coroutine);
+        }
         dialogue.gameObject.SetActive(true);
         dialogue.text = talk;
-        StartCoroutine(talk_finished());
+        talk_coroutine = StartCoroutine(talk_finished());
     }
     IEnumerator talk_finished(){
         yield return new WaitForSeconds(2f);

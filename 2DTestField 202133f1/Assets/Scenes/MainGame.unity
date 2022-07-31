@@ -1080,11 +1080,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472475418}
   m_CullTransparentMesh: 1
---- !u!1 &1476952950 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1378622031, guid: 610735dbeb9944342a419f910308af6c, type: 3}
-  m_PrefabInstance: {fileID: 7345924465899704295}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1511914249 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3189133547722662637, guid: 9944b27da71772d47926e1a64ffc1ae0, type: 3}
@@ -1305,7 +1300,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 408509601, guid: 610735dbeb9944342a419f910308af6c, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 559610010, guid: 610735dbeb9944342a419f910308af6c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1459,6 +1454,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2113883718, guid: 610735dbeb9944342a419f910308af6c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7345924466630369408, guid: 610735dbeb9944342a419f910308af6c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1600,10 +1599,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 306659096}
     - target: {fileID: 7345924466630369423, guid: 610735dbeb9944342a419f910308af6c, type: 3}
-      propertyPath: player_computer
-      value: 
-      objectReference: {fileID: 1476952950}
-    - target: {fileID: 7345924466630369423, guid: 610735dbeb9944342a419f910308af6c, type: 3}
       propertyPath: camera_controller
       value: 
       objectReference: {fileID: 168023424}
@@ -1728,6 +1723,30 @@ PrefabInstance:
     - target: {fileID: 3152503592998675726, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608139262613199488, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608139262613199488, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608139262613199488, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608139262613199742, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608139262613199743, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 240.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608139262613199743, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 171.39
       objectReference: {fileID: 0}
     - target: {fileID: 8608139263971650316, guid: 5ee5eccbe6e0bc84796e6a3a7d275714, type: 3}
       propertyPath: ui

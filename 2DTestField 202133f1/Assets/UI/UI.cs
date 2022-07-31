@@ -41,6 +41,7 @@ public class UI : MonoBehaviour
         backpack.gameObject.SetActive(false);
         equipment.gameObject.SetActive(false);
         npc_backpack.gameObject.SetActive(false);
+        money_display.text = player_money.ToString();
     }
     [SerializeField] GameObject player_computer;
     public void toggle_player_computer(){
@@ -177,16 +178,17 @@ public class UI : MonoBehaviour
         shop_opened = false;
         camera_controller.is_dynamic = true;
     }
+    [SerializeField] TextMeshProUGUI money_display;
     int player_money = 500;
     public void item_baught(int button_number){
         if(backpack_is_full()) return;
         if(player_money < item_database.item_price[current_shop.items_in_backpack[button_number]]){
-            print("not enough money");
+            player_ctl.player_talk("I don't have enough money :(");
             return;
         }
         add_item_to_backpack(current_shop.items_in_backpack[button_number]);
         player_money -= item_database.item_price[current_shop.items_in_backpack[button_number]];
-        print(player_money);
+        money_display.text = player_money.ToString();
         current_shop.remove_item(button_number);
         Destroy(shop.transform.GetChild(button_number).GetChild(1).gameObject);
     }

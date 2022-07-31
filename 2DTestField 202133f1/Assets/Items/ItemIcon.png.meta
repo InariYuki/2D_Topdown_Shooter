@@ -229,6 +229,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ItemIcon_6
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 315
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14a2914c6cb0f134d9ebea39c1ad85d8
+      internalID: 1700580470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -245,6 +266,7 @@ TextureImporter:
       ItemIcon_1: 1426934795
       ItemIcon_3: 207091648
       ItemIcon_2: 1388004459
+      ItemIcon_6: 1700580470
       ItemIcon_4: -432751465
   spritePackingTag: 
   pSDRemoveMatte: 0
