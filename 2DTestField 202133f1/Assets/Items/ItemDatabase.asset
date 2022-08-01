@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0869637dbfefe41a0a9ae86a24d8b4, type: 3}
+  m_Name: ItemDatabase
+  m_EditorClassIdentifier: 
+  ui_image_template: {fileID: 1725906748081030075, guid: 413e33be0e9a1874bb38046041c291b6, type: 3}
+  item_template: {fileID: 8123128921334461338, guid: b143b6abdf0ef3249b2689c2095ebc54, type: 3}
+  items:
+  - item_id: 0
+    price: 0
+    item_sprite: {fileID: 0}
+    ui_image: {fileID: 0}
+    item_instanced: {fileID: 0}
+    is_weapon: 0
+    is_armor: 0
+    usable: 0
+  - item_id: 1
+    price: 100
+    item_sprite: {fileID: -570741856, guid: dd4529be7464f2344b2dbbb70b5ed3ec, type: 3}
+    ui_image: {fileID: -2110279347, guid: 82b6bce08796b034e8f481668090db9a, type: 3}
+    item_instanced: {fileID: 4739169989810011955, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
+    is_weapon: 1
+    is_armor: 0
+    usable: 0
+  - item_id: 2
+    price: 90
+    item_sprite: {fileID: -1068673203, guid: dd4529be7464f2344b2dbbb70b5ed3ec, type: 3}
+    ui_image: {fileID: 1426934795, guid: 82b6bce08796b034e8f481668090db9a, type: 3}
+    item_instanced: {fileID: 3375055276302788190, guid: 6519510f962e9424c84d851d8c0ee33f, type: 3}
+    is_weapon: 1
+    is_armor: 0
+    usable: 0
+  - item_id: 3
+    price: 110
+    item_sprite: {fileID: 1804032060, guid: dd4529be7464f2344b2dbbb70b5ed3ec, type: 3}
+    ui_image: {fileID: 207091648, guid: 82b6bce08796b034e8f481668090db9a, type: 3}
+    item_instanced: {fileID: 6694306714793132592, guid: f7b3dee611467184798a8353e82aee67, type: 3}
+    is_weapon: 0
+    is_armor: 1
+    usable: 0
+  - item_id: 4
+    price: 200
+    item_sprite: {fileID: -1516948627, guid: dd4529be7464f2344b2dbbb70b5ed3ec, type: 3}
+    ui_image: {fileID: 1388004459, guid: 82b6bce08796b034e8f481668090db9a, type: 3}
+    item_instanced: {fileID: 6694306714793132592, guid: cd468d83263edd842ae35c700eb4ebdd, type: 3}
+    is_weapon: 0
+    is_armor: 1
+    usable: 0
+  - item_id: 5
+    price: 80
+    item_sprite: {fileID: 100827155, guid: dd4529be7464f2344b2dbbb70b5ed3ec, type: 3}
+    ui_image: {fileID: -432751465, guid: 82b6bce08796b034e8f481668090db9a, type: 3}
+    item_instanced: {fileID: 6694306714793132592, guid: b5d4fdf1c8b05eb448d5b44363a219ba, type: 3}
+    is_weapon: 0
+    is_armor: 1
+    usable: 0

@@ -15,11 +15,23 @@ public class NPC : MonoBehaviour
         generate_interaction_menu();
         toggle_action_menu();
     }
+    private void Start() {
+        GenerateRandomItem();
+    }
     public List<string> interact_methods = new List<string>{"Chat" , "Intimidate" , "Steal" , "Assassinate"};
-    public int[] action_success_rate = {0 , 0 , 50 , 50 , 0};
-    public int[] items_in_backpack = {1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1};
+    public int[] action_success_rate = {0 , 0 , 50 , 50};
+    public int[] items_in_backpack = {0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0};
     [SerializeField] Transform action_menu;
     [SerializeField] InteractiomMenuButton button;
+    [SerializeField] int item_spawn_rate = 20;
+    void GenerateRandomItem(){
+        for(int i = 0; i < 20; i++){
+            items_in_backpack[i] = 0;
+            if(Random.Range(0 , 100) < item_spawn_rate){
+                items_in_backpack[i] = Random.Range(1 , ui.Item_database.items.Length - 1);
+            }
+        }
+    }
     void generate_interaction_menu(){
         RectTransform rect = action_menu.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(240 , 5 + 35 * interact_methods.Count);
@@ -122,17 +134,23 @@ public class NPC : MonoBehaviour
             dialogue_box.text = text;
             dialogue_box.gameObject.SetActive(true);
         }
-        catch{
-
-        }
+        catch{}
     }
     public void undisplay(){
         if(saying) return;
         try{
             dialogue_box.gameObject.SetActive(false);
         }
-        catch{
-            
+        catch{}
+    }
+    public void DropItems(){
+        for(int i = 0; i < 20; i++){
+            if(items_in_backpack[i] != 0){
+                Item dropped_item = Instantiate(ui.Item_database.item_template , transform.position , Quaternion.identity , ui.object_holder);
+                dropped_item.SetParameters(items_in_backpack[i] , ui.Item_database.items[items_in_backpack[i]].item_sprite);
+                dropped_item.BurstMoveAway();
+                items_in_backpack[i] = 0;
+            }
         }
     }
 }

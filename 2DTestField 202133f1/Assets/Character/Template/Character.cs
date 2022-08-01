@@ -341,6 +341,7 @@ public class Character : MonoBehaviour
         NPC npc = GetComponent<NPC>();
         if(npc != null){
             npc.drop_key();
+            npc.DropItems();
         }
         Instantiate(corpse , transform.position , Quaternion.identity);
         Destroy(gameObject);

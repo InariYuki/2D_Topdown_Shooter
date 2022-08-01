@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 82b6bce08796b034e8f481668090db9a
+guid: dd4529be7464f2344b2dbbb70b5ed3ec
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,17 +100,29 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ItemIcon_0
+      name: Item_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 315
-        width: 35
-        height: 35
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b59ec86aea9bb94b8cf632c56b63ace
-      internalID: -2110279347
+      spriteID: 0154380d2f46ac840b0668bf2233eceb
+      internalID: -570741856
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIcon_1
+      name: Item_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 315
-        width: 35
-        height: 35
+        x: 32
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3331c46ada20ddd44b6f71e5501e44fe
-      internalID: 1426934795
+      spriteID: 13fb53c25fb47d941a588a898f8d3fc3
+      internalID: -1068673203
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIcon_2
+      name: Item_2
       rect:
         serializedVersion: 2
-        x: 70
-        y: 315
-        width: 35
-        height: 35
+        x: 64
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d45629a6a59fb149b510d3ec88d1683
-      internalID: 1388004459
+      spriteID: 382415004c1e8e84ab824656472436cb
+      internalID: -1516948627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIcon_3
+      name: Item_3
       rect:
         serializedVersion: 2
-        x: 105
-        y: 315
-        width: 35
-        height: 35
+        x: 96
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ed9052a13fefc34ebbe8f7b395c1375
-      internalID: 207091648
+      spriteID: 5c273352abea23244b0a65e13fe0d3e4
+      internalID: 1804032060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIcon_4
+      name: Item_4
       rect:
         serializedVersion: 2
-        x: 140
-        y: 315
-        width: 35
-        height: 35
+        x: 128
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dc211f41c6adf842ae58e5b7989fc7b
-      internalID: -432751465
+      spriteID: 6424cb67bef8da5418a3a0bc3b020eab
+      internalID: 100827155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIcon_5
+      name: Item_5
       rect:
         serializedVersion: 2
-        x: 175
-        y: 315
-        width: 35
-        height: 35
+        x: 160
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,8 +235,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 804d8630a1827454391d60644602ed94
-      internalID: 1846669153
+      spriteID: 3fc430350d58d1949b83f4b773bf7b0b
+      internalID: 389239245
       vertices: []
       indices: 
       edges: []
@@ -240,12 +252,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ItemIcon_5: 1846669153
-      ItemIcon_0: -2110279347
-      ItemIcon_1: 1426934795
-      ItemIcon_3: 207091648
-      ItemIcon_2: 1388004459
-      ItemIcon_4: -432751465
+      Item_2: -1516948627
+      Item_0: -570741856
+      Item_4: 100827155
+      Item_3: 1804032060
+      Item_5: 389239245
+      Item_1: -1068673203
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

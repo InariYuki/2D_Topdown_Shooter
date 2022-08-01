@@ -32,14 +32,14 @@ public class SpriteDatabase : MonoBehaviour
         if(random_appearence){
             set_random_sprite();
             if(random_armor){
-                Instantiate(npc.ui.item_database.item_id_to_instanced_item(Random.Range(3 , 6)) , character.armor_holder.position , Quaternion.identity , character.armor_holder);
+                Instantiate(npc.ui.Item_database.items[(Random.Range(3 , 6))].item_instanced , character.armor_holder.position , Quaternion.identity , character.armor_holder);
                 character.equip_armor();
             }
             if(always_has_weapon){
                 has_weapon_threshold = 100;
             }
             if(Random.Range(0 , 100) < has_weapon_threshold){
-                Instantiate(npc.ui.item_database.item_id_to_instanced_item(Random.Range(1 , 3)) , character.weapon.position , Quaternion.identity , character.weapon);
+                Instantiate(npc.ui.Item_database.items[(Random.Range(1 , 3))].item_instanced , character.weapon.position , Quaternion.identity , character.weapon);
                 character.equip_weapon();
             }
         }

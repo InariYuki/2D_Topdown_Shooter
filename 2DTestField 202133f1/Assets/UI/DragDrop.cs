@@ -2,21 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler , IEndDragHandler , IDragHandler
+public class DragDrop : MonoBehaviour , IBeginDragHandler , IEndDragHandler , IDragHandler
 {
     RectTransform rect_transform;
     CanvasGroup canvas_group;
-    public Canvas ui_canvas;
-    public UI ui;
-    public int current_in_slot_id = 0 , item_id = 0;
+    Image image;
+    [HideInInspector] public Canvas ui_canvas;
+    [HideInInspector] public UI ui;
+    [HideInInspector] public int current_in_slot_id = 0 , item_id = 0;
     public bool is_weapon = false , is_armor = false , usable = false;
     private void Awake() {
         rect_transform = GetComponent<RectTransform>();
         canvas_group = GetComponent<CanvasGroup>();
+        image = GetComponent<Image>();
     }
-    public void OnPointerDown(PointerEventData eventData){
-
+    public void SetParameters(Canvas c , UI _ui , int _slot_id , int id , Sprite sprite , bool weapon , bool armor , bool use){
+        ui_canvas = c;
+        ui = _ui;
+        current_in_slot_id = _slot_id;
+        item_id = id;
+        GetComponent<Image>().sprite = sprite;
+        is_weapon = weapon;
+        is_armor = armor;
+        usable = use;
     }
     public void OnBeginDrag(PointerEventData eventData){
         transform.SetParent(ui_canvas.transform);
@@ -37,7 +47,8 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
             if(current_in_slot_id == 25){
                 ui.player.unequip_armor();
             }
-            Instantiate(ui.item_database.item_id_to_item(item_id) , ui.player.feet.position , Quaternion.identity , ui.object_holder);
+            Item item_dropped = Instantiate(ui.Item_database.item_template , ui.player.feet.position , Quaternion.identity , ui.object_holder);
+            item_dropped.SetParameters(item_id , ui.Item_database.items[item_id].item_sprite);
             ui.items_in_backpack[current_in_slot_id] = 0;
             Destroy(gameObject);
         }
@@ -53,7 +64,7 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
             if(is_weapon){
                 ui.player.unequip_weapon();
                 move_item_to_slot(slot);
-                Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.weapon.position , Quaternion.identity , ui.player.weapon);
+                Instantiate(ui.Item_database.items[item_id].item_instanced , ui.player.weapon.position , Quaternion.identity , ui.player.weapon);
                 StartCoroutine(wait_to_change_weapon());
             }
             else{
@@ -64,7 +75,7 @@ public class DragDrop : MonoBehaviour , IPointerDownHandler , IBeginDragHandler 
             if(is_armor){
                 ui.player.unequip_armor();
                 move_item_to_slot(slot);
-                Instantiate(ui.item_database.item_id_to_instanced_item(item_id) , ui.player.armor_holder.position , Quaternion.identity , ui.player.armor_holder);
+                Instantiate(ui.Item_database.items[item_id].item_instanced , ui.player.armor_holder.position , Quaternion.identity , ui.player.armor_holder);
                 StartCoroutine(wait_to_change_armor());
             }
             else{

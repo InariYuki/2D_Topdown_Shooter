@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1725906748081030075}
   - component: {fileID: 9139053465878554648}
   m_Layer: 5
-  m_Name: SoldierArmorImage
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5525, y: -2.4863}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4913772372196364079
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 207091648, guid: 82b6bce08796b034e8f481668090db9a, type: 3}
+  m_Sprite: {fileID: -2110279347, guid: 82b6bce08796b034e8f481668090db9a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -94,8 +94,8 @@ MonoBehaviour:
   ui: {fileID: 0}
   current_in_slot_id: 0
   item_id: 0
-  is_weapon: 0
-  is_armor: 1
+  is_weapon: 1
+  is_armor: 0
   usable: 0
 --- !u!225 &9139053465878554648
 CanvasGroup:

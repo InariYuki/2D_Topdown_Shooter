@@ -10620,7 +10620,6 @@ GameObject:
   - component: {fileID: 7345924466630369410}
   - component: {fileID: 7345924466630369411}
   - component: {fileID: 7345924466630369423}
-  - component: {fileID: 7345924466630369422}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -10732,7 +10731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   player_ctl: {fileID: 0}
-  item_database: {fileID: 0}
+  Item_database: {fileID: 0}
   object_holder: {fileID: 0}
   camera_controller: {fileID: 0}
   player_computer: {fileID: 1378622031}
@@ -10804,37 +10803,6 @@ MonoBehaviour:
   player_home: {fileID: 0}
   mission_map: {fileID: 0}
   travel_terminal: {fileID: 3986478391568759391}
---- !u!114 &7345924466630369422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7345924466630369412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a24b70378733244c97b8a46db21c32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item_database:
-  - {fileID: 8123128921334461341, guid: b143b6abdf0ef3249b2689c2095ebc54, type: 3}
-  - {fileID: 8123128921334461341, guid: a569f5428e836d2429fbcec89a2ce385, type: 3}
-  - {fileID: 4478858189655313605, guid: b6e17e26557b62e4e90ca91c0b22bcf4, type: 3}
-  - {fileID: 4478858189655313605, guid: 73305e88eabbae3488137b9f48c2aa70, type: 3}
-  - {fileID: 4478858189655313605, guid: 826027ad08288014bb2ed74c8e589cf8, type: 3}
-  image_database:
-  - {fileID: 4913772372196364076, guid: 413e33be0e9a1874bb38046041c291b6, type: 3}
-  - {fileID: 4913772372196364076, guid: e97f1ab2572067c449a10b51073922b1, type: 3}
-  - {fileID: 4913772372196364076, guid: f155c15bd2ef82540b5085633cc4e1df, type: 3}
-  - {fileID: 4913772372196364076, guid: 81a4d0a8f86cc7540ab19ee70c9957a7, type: 3}
-  - {fileID: 4913772372196364076, guid: fe70a322a1a44404c89fb75f9a61b1fb, type: 3}
-  instance_database:
-  - {fileID: 4739169989810011955, guid: 3d9d84d6847b3114f9c3148d15a6386a, type: 3}
-  - {fileID: 3375055276302788190, guid: 6519510f962e9424c84d851d8c0ee33f, type: 3}
-  - {fileID: 6694306714793132592, guid: f7b3dee611467184798a8353e82aee67, type: 3}
-  - {fileID: 6694306714793132592, guid: cd468d83263edd842ae35c700eb4ebdd, type: 3}
-  - {fileID: 6694306714793132592, guid: b5d4fdf1c8b05eb448d5b44363a219ba, type: 3}
-  item_price: 
 --- !u!1 &7345924466654746982
 GameObject:
   m_ObjectHideFlags: 0

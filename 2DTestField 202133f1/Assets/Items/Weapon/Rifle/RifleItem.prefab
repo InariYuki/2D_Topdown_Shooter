@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 8123128921334461336}
   - component: {fileID: 8123128921334461337}
   - component: {fileID: 8123128921334461338}
+  - component: {fileID: 4621705190345382637}
   m_Layer: 0
-  m_Name: ThermoKatanaItem
+  m_Name: RifleItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -32767
-  m_Sprite: {fileID: -2110279347, guid: 82b6bce08796b034e8f481668090db9a, type: 3}
+  m_Sprite: {fileID: -1068673203, guid: dd4529be7464f2344b2dbbb70b5ed3ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,4 +128,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace148b5e08aefa4eb8c3e5ab9195124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item_id: 1
+  item_id: 2
+--- !u!50 &4621705190345382637
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8123128921334461341}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

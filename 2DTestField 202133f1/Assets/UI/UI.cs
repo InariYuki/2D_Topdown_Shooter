@@ -8,11 +8,12 @@ public class UI : MonoBehaviour
 {
     [HideInInspector] public Character player;
     [HideInInspector] public PlayerColtroller player_ctl;
-    [HideInInspector] public ItemRegister item_database;
+    public ItemScriptable Item_database;
     public Transform object_holder;
     public CameraController camera_controller;
+    Canvas canvas;
     private void Awake() {
-        item_database = GetComponent<ItemRegister>();
+        canvas = GetComponent<Canvas>();
         for(int i = 0; i < 46; i++){
             if(i < 20){ // 0-19
                 slots[i] = backpack.GetChild(i).gameObject;
@@ -79,12 +80,8 @@ public class UI : MonoBehaviour
         for(int i = 0; i < 20; i++){
             if(items_in_backpack[i] == 0){
                 items_in_backpack[i] = item_id;
-                GameObject item_image = Instantiate(item_database.item_id_to_image(item_id) , slots[i].transform.position , Quaternion.identity ,  slots[i].transform);
-                DragDrop item = item_image.GetComponent<DragDrop>();
-                item.ui_canvas = GetComponent<Canvas>();
-                item.current_in_slot_id = i;
-                item.item_id = item_id;
-                item.ui = this;
+                DragDrop item_image = Instantiate(Item_database.ui_image_template , slots[i].transform.position , Quaternion.identity ,  slots[i].transform);
+                item_image.SetParameters(canvas , this , i , item_id , Item_database.items[item_id].ui_image , Item_database.items[item_id].is_weapon , Item_database.items[item_id].is_armor , Item_database.items[item_id].usable);
                 return;
             }
         }
@@ -118,12 +115,9 @@ public class UI : MonoBehaviour
         }
         for(int i = 0; i < npc.items_in_backpack.Length ; i++){
             if(npc.items_in_backpack[i] == 0) continue;
-            DragDrop item = Instantiate(item_database.item_id_to_image(npc.items_in_backpack[i]) , slots[i+26].transform.position , Quaternion.identity , slots[i+26].transform).GetComponent<DragDrop>();
-            item.ui_canvas = GetComponent<Canvas>();
-            item.current_in_slot_id = i + 26;
-            item.item_id = npc.items_in_backpack[i];
-            item.ui = this;
-            item.ui.items_in_backpack[i + 26] = npc.items_in_backpack[i];
+            DragDrop item = Instantiate(Item_database.ui_image_template , slots[i+26].transform.position , Quaternion.identity , slots[i+26].transform).GetComponent<DragDrop>();
+            item.SetParameters(canvas , this , i + 26 , npc.items_in_backpack[i] , Item_database.items[npc.items_in_backpack[i]].ui_image , Item_database.items[npc.items_in_backpack[i]].is_weapon , Item_database.items[npc.items_in_backpack[i]].is_armor , Item_database.items[npc.items_in_backpack[i]].usable);
+            items_in_backpack[i + 26] = npc.items_in_backpack[i];
         }
         current_interacting_npc = npc;
     }
@@ -144,12 +138,9 @@ public class UI : MonoBehaviour
         }
         for(int i = 0; i < stash.items_in_backpack.Length ; i++){
             if(stash.items_in_backpack[i] == 0) continue;
-            DragDrop item = Instantiate(item_database.item_id_to_image(stash.items_in_backpack[i]) , slots[i+26].transform.position , Quaternion.identity , slots[i+26].transform).GetComponent<DragDrop>();
-            item.ui_canvas = GetComponent<Canvas>();
-            item.current_in_slot_id = i + 26;
-            item.item_id = stash.items_in_backpack[i];
-            item.ui = this;
-            item.ui.items_in_backpack[i + 26] = stash.items_in_backpack[i];
+            DragDrop item = Instantiate(Item_database.ui_image_template , slots[i+26].transform.position , Quaternion.identity , slots[i+26].transform).GetComponent<DragDrop>();
+            item.SetParameters(canvas , this , i + 26 , stash.items_in_backpack[i] , Item_database.items[stash.items_in_backpack[i]].ui_image , Item_database.items[stash.items_in_backpack[i]].is_weapon , Item_database.items[stash.items_in_backpack[i]].is_armor , Item_database.items[stash.items_in_backpack[i]].usable);
+            items_in_backpack[i + 26] = stash.items_in_backpack[i];
         }
         current_interacting_stash = stash;
     }
@@ -164,8 +155,11 @@ public class UI : MonoBehaviour
             sell_slot.set_price(0);
             if(shop_slot.childCount == 2) Destroy(shop_slot.GetChild(1).gameObject);
             if(stash.items_in_backpack[i] != 0){
-                Instantiate(item_database.item_id_to_image(stash.items_in_backpack[i]) , shop_slot.position , Quaternion.identity , shop.transform.GetChild(i)).GetComponent<CanvasGroup>().blocksRaycasts = false;
-                sell_slot.set_price(item_database.item_price[stash.items_in_backpack[i]]);
+                //Instantiate(item_database.item_id_to_image(stash.items_in_backpack[i]) , shop_slot.position , Quaternion.identity , shop.transform.GetChild(i)).GetComponent<CanvasGroup>().blocksRaycasts = false;
+                DragDrop item_on_shelf = Instantiate(Item_database.ui_image_template, shop_slot.position , Quaternion.identity , shop.transform.GetChild(i));
+                item_on_shelf.GetComponent<Image>().sprite = Item_database.items[stash.items_in_backpack[i]].ui_image;
+                item_on_shelf.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                sell_slot.set_price(Item_database.items[stash.items_in_backpack[i]].price);
             }
         }
         shop.SetActive(true);
@@ -182,12 +176,12 @@ public class UI : MonoBehaviour
     int player_money = 500;
     public void item_baught(int button_number){
         if(backpack_is_full()) return;
-        if(player_money < item_database.item_price[current_shop.items_in_backpack[button_number]]){
+        if(player_money < Item_database.items[current_shop.items_in_backpack[button_number]].price){
             player_ctl.player_talk("I don't have enough money :(");
             return;
         }
         add_item_to_backpack(current_shop.items_in_backpack[button_number]);
-        player_money -= item_database.item_price[current_shop.items_in_backpack[button_number]];
+        player_money -= Item_database.items[current_shop.items_in_backpack[button_number]].price;
         money_display.text = player_money.ToString();
         current_shop.remove_item(button_number);
         Destroy(shop.transform.GetChild(button_number).GetChild(1).gameObject);
