@@ -6,7 +6,10 @@ public class Stash : MonoBehaviour
 {
     public int[] items_in_backpack = {0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0};
     [SerializeField] bool locked = false;
-    public int key = 0;
+    [HideInInspector] public int key = 0;
+    private void Start() {
+        key = Random.Range(0 , 65536);
+    }
     public void interacted(PlayerColtroller player , int interact_state){
         if(interact_state == 1) return;
         if(locked && !player.ui.keys_in_backpack.Contains(key)){
