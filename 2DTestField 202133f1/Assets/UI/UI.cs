@@ -34,8 +34,11 @@ public class UI : MonoBehaviour
         }
         for(int i = 0; i < 20; i++){
             ShopButton shop_button = shop.transform.GetChild(i).GetComponent<ShopButton>();
+            CoinExchangerButton coin_exchanger_button = coin_exchanger.transform.GetChild(i).GetComponent<CoinExchangerButton>();
             shop_button.ui = this;
             shop_button.button_number = i;
+            coin_exchanger_button.ui = this;
+            coin_exchanger_button.button_number = i;
         }
     }
     private void Start() {
@@ -72,6 +75,16 @@ public class UI : MonoBehaviour
     [HideInInspector] public GameObject[] slots = new GameObject[46];
     [HideInInspector] public bool backpack_opened;
     public void toggle_backpack(){
+        for(int i = 0; i < 20 ; i++){
+            if(slots[i].transform.childCount == 1){
+                Destroy(slots[i].transform.GetChild(0).gameObject);
+            }
+            if(items_in_backpack[i] != 0){
+                DragDrop item = Instantiate(Item_database.ui_image_template , slots[i].transform.position , Quaternion.identity , slots[i].transform);
+                ItemData target_item = Item_database.FindObject(items_in_backpack[i]);
+                item.SetParameters(canvas , this , i , items_in_backpack[i] , target_item.ui_image , target_item.is_weapon , target_item.is_armor , target_item.usable);
+            }
+        }
         backpack.gameObject.SetActive(!backpack.gameObject.activeSelf);
         equipment.gameObject.SetActive(!equipment.gameObject.activeSelf);
         backpack_opened = backpack.gameObject.activeSelf;
@@ -80,8 +93,9 @@ public class UI : MonoBehaviour
         for(int i = 0; i < 20; i++){
             if(items_in_backpack[i] == 0){
                 items_in_backpack[i] = item_id;
+                ItemData target_item = Item_database.FindObject(item_id);
                 DragDrop item_image = Instantiate(Item_database.ui_image_template , slots[i].transform.position , Quaternion.identity ,  slots[i].transform);
-                item_image.SetParameters(canvas , this , i , item_id , Item_database.items[item_id].ui_image , Item_database.items[item_id].is_weapon , Item_database.items[item_id].is_armor , Item_database.items[item_id].usable);
+                item_image.SetParameters(canvas , this , i , item_id , target_item.ui_image , target_item.is_weapon , target_item.is_armor , target_item.usable);
                 return;
             }
         }
@@ -115,8 +129,9 @@ public class UI : MonoBehaviour
         }
         for(int i = 0; i < npc.items_in_backpack.Length ; i++){
             if(npc.items_in_backpack[i] == 0) continue;
+            ItemData target_item = Item_database.FindObject(npc.items_in_backpack[i]);
             DragDrop item = Instantiate(Item_database.ui_image_template , slots[i+26].transform.position , Quaternion.identity , slots[i+26].transform).GetComponent<DragDrop>();
-            item.SetParameters(canvas , this , i + 26 , npc.items_in_backpack[i] , Item_database.items[npc.items_in_backpack[i]].ui_image , Item_database.items[npc.items_in_backpack[i]].is_weapon , Item_database.items[npc.items_in_backpack[i]].is_armor , Item_database.items[npc.items_in_backpack[i]].usable);
+            item.SetParameters(canvas , this , i + 26 , npc.items_in_backpack[i] , target_item.ui_image , target_item.is_weapon , target_item.is_armor , target_item.usable);
             items_in_backpack[i + 26] = npc.items_in_backpack[i];
         }
         current_interacting_npc = npc;
@@ -138,8 +153,9 @@ public class UI : MonoBehaviour
         }
         for(int i = 0; i < stash.items_in_backpack.Length ; i++){
             if(stash.items_in_backpack[i] == 0) continue;
+            ItemData target_item = Item_database.FindObject(stash.items_in_backpack[i]);
             DragDrop item = Instantiate(Item_database.ui_image_template , slots[i+26].transform.position , Quaternion.identity , slots[i+26].transform).GetComponent<DragDrop>();
-            item.SetParameters(canvas , this , i + 26 , stash.items_in_backpack[i] , Item_database.items[stash.items_in_backpack[i]].ui_image , Item_database.items[stash.items_in_backpack[i]].is_weapon , Item_database.items[stash.items_in_backpack[i]].is_armor , Item_database.items[stash.items_in_backpack[i]].usable);
+            item.SetParameters(canvas , this , i + 26 , stash.items_in_backpack[i] , target_item.ui_image , target_item.is_weapon , target_item.is_armor , target_item.usable);
             items_in_backpack[i + 26] = stash.items_in_backpack[i];
         }
         current_interacting_stash = stash;
@@ -155,9 +171,8 @@ public class UI : MonoBehaviour
             sell_slot.set_price(0);
             if(shop_slot.childCount == 2) Destroy(shop_slot.GetChild(1).gameObject);
             if(stash.items_in_backpack[i] != 0){
-                //Instantiate(item_database.item_id_to_image(stash.items_in_backpack[i]) , shop_slot.position , Quaternion.identity , shop.transform.GetChild(i)).GetComponent<CanvasGroup>().blocksRaycasts = false;
                 DragDrop item_on_shelf = Instantiate(Item_database.ui_image_template, shop_slot.position , Quaternion.identity , shop.transform.GetChild(i));
-                item_on_shelf.GetComponent<Image>().sprite = Item_database.items[stash.items_in_backpack[i]].ui_image;
+                item_on_shelf.GetComponent<Image>().sprite = Item_database.FindObject(stash.items_in_backpack[i]).ui_image;
                 item_on_shelf.GetComponent<CanvasGroup>().blocksRaycasts = false;
                 sell_slot.set_price(Item_database.items[stash.items_in_backpack[i]].price);
             }
@@ -176,15 +191,47 @@ public class UI : MonoBehaviour
     int player_money = 500;
     public void item_baught(int button_number){
         if(backpack_is_full()) return;
-        if(player_money < Item_database.items[current_shop.items_in_backpack[button_number]].price){
+        if(player_money < Item_database.FindObject(current_shop.items_in_backpack[button_number]).price){
             player_ctl.player_talk("I don't have enough money :(");
             return;
         }
         add_item_to_backpack(current_shop.items_in_backpack[button_number]);
-        player_money -= Item_database.items[current_shop.items_in_backpack[button_number]].price;
+        player_money -= Item_database.FindObject(current_shop.items_in_backpack[button_number]).price;
         money_display.text = player_money.ToString();
         current_shop.remove_item(button_number);
         Destroy(shop.transform.GetChild(button_number).GetChild(1).gameObject);
+    }
+    [SerializeField] GameObject coin_exchanger;
+    public void ToggleCoinExchanger(){
+        for(int i = 0; i < 20 ; i++){
+            Transform coin_exchanger_slot = coin_exchanger.transform.GetChild(i);
+            CoinExchangerButton coin_exchanger_button = coin_exchanger_slot.GetComponent<CoinExchangerButton>();
+            coin_exchanger_button.SetPrice(0);
+            if(coin_exchanger_slot.childCount == 2){
+                Destroy(coin_exchanger_slot.GetChild(1).gameObject);
+            }
+            if(items_in_backpack[i] != 0){
+                DragDrop item_image = Instantiate(Item_database.ui_image_template , coin_exchanger_slot.position , Quaternion.identity , coin_exchanger_slot);
+                ItemData target_item = Item_database.FindObject(items_in_backpack[i]);
+                item_image.GetComponent<Image>().sprite = target_item.ui_image;
+                item_image.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                coin_exchanger_button.SetPrice(target_item.price / 2);
+            }
+        }
+        coin_exchanger.SetActive(true);
+        camera_controller.is_dynamic = false;
+        shop_opened = true;
+    }
+    public void CloseCoinExchanger(){
+        coin_exchanger.SetActive(false);
+        camera_controller.is_dynamic = true;
+        shop_opened = false;
+    }
+    public void ItemSold(int button_number){
+        Destroy(coin_exchanger.transform.GetChild(button_number).GetChild(1).gameObject);
+        player_money += Item_database.FindObject(items_in_backpack[button_number]).price / 2;
+        money_display.text = player_money.ToString();
+        items_in_backpack[button_number] = 0;
     }
     [HideInInspector] public int hint_count = 0;
     [SerializeField] GameObject hint_panel;

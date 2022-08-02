@@ -43,6 +43,7 @@ public class PlayerColtroller : MonoBehaviour
             }
             if(ui.shop_opened){
                 ui.close_shop();
+                ui.CloseCoinExchanger();
             }
             ui.camera_controller.is_dynamic = !ui.backpack_opened;
         }

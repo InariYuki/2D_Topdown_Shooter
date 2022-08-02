@@ -47,8 +47,9 @@ public class DragDrop : MonoBehaviour , IBeginDragHandler , IEndDragHandler , ID
             if(current_in_slot_id == 25){
                 ui.player.unequip_armor();
             }
+            ItemData target_item = ui.Item_database.FindObject(item_id);
             Item item_dropped = Instantiate(ui.Item_database.item_template , ui.player.feet.position , Quaternion.identity , ui.object_holder);
-            item_dropped.SetParameters(item_id , ui.Item_database.items[item_id].item_sprite);
+            item_dropped.SetParameters(item_id , ui.Item_database.FindObject(item_id).item_sprite);
             ui.items_in_backpack[current_in_slot_id] = 0;
             Destroy(gameObject);
         }
@@ -64,7 +65,7 @@ public class DragDrop : MonoBehaviour , IBeginDragHandler , IEndDragHandler , ID
             if(is_weapon){
                 ui.player.unequip_weapon();
                 move_item_to_slot(slot);
-                Instantiate(ui.Item_database.items[item_id].item_instanced , ui.player.weapon.position , Quaternion.identity , ui.player.weapon);
+                Instantiate(ui.Item_database.FindObject(item_id).item_instanced , ui.player.weapon.position , Quaternion.identity , ui.player.weapon);
                 StartCoroutine(wait_to_change_weapon());
             }
             else{
@@ -75,7 +76,7 @@ public class DragDrop : MonoBehaviour , IBeginDragHandler , IEndDragHandler , ID
             if(is_armor){
                 ui.player.unequip_armor();
                 move_item_to_slot(slot);
-                Instantiate(ui.Item_database.items[item_id].item_instanced , ui.player.armor_holder.position , Quaternion.identity , ui.player.armor_holder);
+                Instantiate(ui.Item_database.FindObject(item_id).item_instanced , ui.player.armor_holder.position , Quaternion.identity , ui.player.armor_holder);
                 StartCoroutine(wait_to_change_armor());
             }
             else{

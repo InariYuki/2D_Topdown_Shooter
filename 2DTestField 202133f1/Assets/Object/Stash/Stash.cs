@@ -13,7 +13,7 @@ public class Stash : MonoBehaviour
     public void interacted(PlayerColtroller player , int interact_state){
         if(interact_state == 1) return;
         if(locked && !player.ui.keys_in_backpack.Contains(key)){
-            print("locked!");
+            player.player_talk("It's locked!");
             return;
         }
         if(locked){
