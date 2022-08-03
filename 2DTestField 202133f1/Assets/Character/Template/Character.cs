@@ -25,7 +25,6 @@ public class Character : MonoBehaviour
         equip_weapon();
         set_carcass();
         equip_armor();
-        sprite_init();
     }
     void FixedUpdate()
     {
@@ -87,13 +86,11 @@ public class Character : MonoBehaviour
             right_leg_v = armor.right_leg_v;
             left_leg_v = armor.left_leg_v;
         }
-        sprite_init();
     }
     public void unequip_armor(){
         if(armor_holder.childCount == 0) return;
         Destroy(armor_holder.GetChild(0).gameObject);
         set_carcass();
-        sprite_init();
     }
     public void set_carcass(){
         head_s = carcass_head_s;
@@ -192,119 +189,69 @@ public class Character : MonoBehaviour
     public Transform weapon , feet;
     [HideInInspector] public int order;
     int looking_at = 0;
-    public void sprite_init(){
-        if(facing_direction == Vector2.up){
-            looking_at = 2;
-            head.sprite = head_b;
-            body.sprite = body_b;
-            right_hand.sprite = right_hand_v;
-            left_hand.sprite = left_hand_v;
-            right_leg.sprite = right_leg_v;
-            left_leg.sprite = left_leg_v;
-            weapon_ctrl.state = 1;
-        }
-        else if(facing_direction == Vector2.down){
-            looking_at = 1;
-            head.sprite = head_f;
-            body.sprite = body_f;
-            right_hand.sprite = right_hand_v;
-            left_hand.sprite = left_hand_v;
-            right_leg.sprite = right_leg_v;
-            left_leg.sprite = left_leg_v;
-            weapon_ctrl.state = 0;
-        }
-        else if(facing_direction == Vector2.left){
-            looking_at = 0;
-            head.sprite = head_s;
-            body.sprite = body_s;
-            right_hand.sprite = right_hand_s;
-            left_hand.sprite = left_hand_s;
-            right_leg.sprite = right_leg_s;
-            left_leg.sprite = left_leg_s;
-            head.flipX = true;
-            body.flipX = true;
-            right_hand.flipX = true;
-            left_hand.flipX = true;
-            right_leg.flipX = true;
-            left_leg.flipX = true;
-            weapon_ctrl.state = 0;
-        }
-        else{
-            looking_at = 0;
-            head.sprite = head_s;
-            body.sprite = body_s;
-            right_hand.sprite = right_hand_s;
-            left_hand.sprite = left_hand_s;
-            right_leg.sprite = right_leg_s;
-            left_leg.sprite = left_leg_s;
-            head.flipX = false;
-            body.flipX = false;
-            right_hand.flipX = false;
-            left_hand.flipX = false;
-            right_leg.flipX = false;
-            left_leg.flipX = false;
-            weapon_ctrl.state = 0;
-        }
-    }
     void body_sprite_ctrl(){
         if(direction != Vector2.zero){
             facing_direction = direction;
             if(facing_direction.x >= 0.5f || facing_direction.x <= -0.5f){
                 right_leg_animator.Play("WalkH1");
                 left_leg_animator.Play("WalkH2");
-                head.sprite = head_s;
-                body.sprite = body_s;
-                right_hand.sprite = right_hand_s;
-                left_hand.sprite = left_hand_s;
-                right_leg.sprite = right_leg_s;
-                left_leg.sprite = left_leg_s;
-                looking_at = 0;
-                weapon_ctrl.state = 0;
-                if(facing_direction.x > 0){
-                    head.flipX = false;
-                    body.flipX = false;
-                    right_hand.flipX = false;
-                    left_hand.flipX = false;
-                    right_leg.flipX = false;
-                    left_leg.flipX = false;
-                    weapon.localPosition = new Vector2(-0.01f , -0.02f);
-                }
-                else{
-                    head.flipX = true;
-                    body.flipX = true;
-                    right_hand.flipX = true;
-                    left_hand.flipX = true;
-                    right_leg.flipX = true;
-                    left_leg.flipX = true;
-                    weapon.localPosition = new Vector2(0.01f , -0.02f);
-                }
             }
             else{
                 right_leg_animator.Play("WalkV1");
                 left_leg_animator.Play("WalkV2");
-                right_hand.sprite = right_hand_v;
-                left_hand.sprite = left_hand_v;
-                right_leg.sprite = right_leg_v;
-                left_leg.sprite = left_leg_v;
-                if(direction.y > 0){
-                    head.sprite = head_b;
-                    body.sprite = body_b;
-                    looking_at = 2;
-                    weapon_ctrl.state = 1;
-                    weapon.localPosition = new Vector2(0f , -0.03f);
-                }
-                else{
-                    head.sprite = head_f;
-                    body.sprite = body_f;
-                    looking_at = 1;
-                    weapon_ctrl.state = 0;
-                    weapon.localPosition = new Vector2(0f , -0.01f);
-                }
             }
         }
         else{
             right_leg_animator.Play("Idle");
             left_leg_animator.Play("Idle");
+        }
+        if(facing_direction.x >= 0.5f || facing_direction.x <= -0.5f){
+            head.sprite = head_s;
+            body.sprite = body_s;
+            right_hand.sprite = right_hand_s;
+            left_hand.sprite = left_hand_s;
+            right_leg.sprite = right_leg_s;
+            left_leg.sprite = left_leg_s;
+            looking_at = 0;
+            weapon_ctrl.state = 0;
+            if(facing_direction.x > 0){
+                head.flipX = false;
+                body.flipX = false;
+                right_hand.flipX = false;
+                left_hand.flipX = false;
+                right_leg.flipX = false;
+                left_leg.flipX = false;
+                weapon.localPosition = new Vector2(-0.01f , -0.02f);
+            }
+            else{
+                head.flipX = true;
+                body.flipX = true;
+                right_hand.flipX = true;
+                left_hand.flipX = true;
+                right_leg.flipX = true;
+                left_leg.flipX = true;
+                weapon.localPosition = new Vector2(0.01f , -0.02f);
+            }
+        }
+        else{
+            right_hand.sprite = right_hand_v;
+            left_hand.sprite = left_hand_v;
+            right_leg.sprite = right_leg_v;
+            left_leg.sprite = left_leg_v;
+            if(direction.y > 0){
+                head.sprite = head_b;
+                body.sprite = body_b;
+                looking_at = 2;
+                weapon_ctrl.state = 1;
+                weapon.localPosition = new Vector2(0f , -0.03f);
+            }
+            else{
+                head.sprite = head_f;
+                body.sprite = body_f;
+                looking_at = 1;
+                weapon_ctrl.state = 0;
+                weapon.localPosition = new Vector2(0f , -0.01f);
+            }
         }
     }
     void handle_render_order(){

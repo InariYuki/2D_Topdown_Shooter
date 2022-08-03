@@ -60,7 +60,6 @@ public class SpriteDatabase : MonoBehaviour
         character.carcass_right_leg_v = right_leg_v[limb_index];
         character.carcass_left_leg_v = left_leg_v[limb_index];
         character.set_carcass();
-        character.sprite_init();
     }
     public void set_random_sprite(){
         set_sprite(Random.Range(0 , head_b.Count) , Random.Range(0 , body_b.Count) , Random.Range(0 , right_hand_s.Count));

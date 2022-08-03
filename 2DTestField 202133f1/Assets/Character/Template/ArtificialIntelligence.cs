@@ -42,6 +42,7 @@ public class ArtificialIntelligence : MonoBehaviour
     void initial_parameters(){
         health = max_health;
         before_search_position = parent.feet.position;
+        before_search_facing_direction = parent.facing_direction;
     }
     NavBox start_navbox , end_navbox;
     List<Vector3> find_path(Vector3 pos){
@@ -180,6 +181,7 @@ public class ArtificialIntelligence : MonoBehaviour
                         return;
                     }
                     before_search_position = current.transform.position;
+                    before_search_facing_direction = parent.facing_direction;
                     List<NavBox> nexts = new List<NavBox>();
                     for(int i = 0; i < current.next_hops.Count; i++){
                         if(can_walk_navbox_tag.Contains(current.next_hops[i].navbox_tag)) nexts.Add(current.next_hops[i]);
@@ -206,6 +208,7 @@ public class ArtificialIntelligence : MonoBehaviour
                 }
                 else{
                     parent.direction = Vector3.zero;
+                    parent.facing_direction = before_search_facing_direction;
                     parent.speed = parent.top_speed / 3;
                     free_roam_substate = 0;
                 }
@@ -337,7 +340,7 @@ public class ArtificialIntelligence : MonoBehaviour
         attack_mode_substate_decided = false;
         attack_mode_substate_timer_start = false;
     }
-    Vector3 search_position , substate_2_search_position , before_search_position , substate_2_start_position;
+    Vector3 search_position , substate_2_search_position , before_search_position , before_search_facing_direction, substate_2_start_position;
     int search_substate = 0 , substate_2_search_times = 0;
     bool substate_2_search_position_picked = false;
     void search_mode_init(Vector3 position){

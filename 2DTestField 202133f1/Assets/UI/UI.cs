@@ -281,7 +281,6 @@ public class UI : MonoBehaviour
     public void set_player_sprite(int head_index , int body_index , int limb_index){
         player.GetComponent<SpriteDatabase>().set_sprite(head_index , body_index , limb_index);
         player.set_carcass();
-        player.sprite_init();
     }
     [SerializeField] IntroMission intro_scene;
     [SerializeField] GameObject main_menu;
