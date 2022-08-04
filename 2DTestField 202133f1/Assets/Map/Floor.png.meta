@@ -985,6 +985,258 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Floor_42
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f2436f6a62218c46b40a73651c411ae
+      internalID: -114617663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_43
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43437be5019f44144aa01f1edc87de12
+      internalID: -850005939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_44
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eb48ae3bc575f24e82e767186e978e2
+      internalID: 1959100869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 646a44e03f933c249a38c225ed89553b
+      internalID: -1674877842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_46
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd74217772b191e448de5da990773dd3
+      internalID: 743734377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_47
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 915837eb2e4a325458072e474d33d44b
+      internalID: -1543245006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_48
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15e0cbad3a09a0649b8645a30ef48da2
+      internalID: 1480603251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_49
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ee4a7f93f64ece448be7a7e5b526f45
+      internalID: -1516599414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_50
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49becc86add046c41b67affd9539781a
+      internalID: 1735822290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_51
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46ec510a9d8cd5e44a1dffc61140e9dd
+      internalID: -1038488968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_52
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 773e0096aaea7f04586de48fb8987ad4
+      internalID: -1931797757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floor_53
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16ce735af1d479849a4f1d15def04849
+      internalID: 1839344490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -996,48 +1248,60 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Floor_20: -830915864
-      Floor_16: -326178264
+      Floor_32: -1915909476
       Floor_8: 907051197
       Floor_4: 893762947
       Floor_27: -136066671
+      Floor_44: 1959100869
+      Floor_2: -1325274949
+      Floor_52: -1931797757
+      Floor_14: 1916294575
+      Floor_34: 913399380
+      Floor_9: 1918627253
+      Floor_50: 1735822290
+      Floor_45: -1674877842
+      Floor_31: 1734026481
+      Floor_26: -1007755412
+      Floor_49: -1516599414
+      Floor_3: 167183326
+      Floor_17: 2040991711
+      Floor_41: -2092924468
+      Floor_38: -538257423
+      Floor_1: 392744719
+      Floor_53: 1839344490
+      Floor_29: 1560747596
+      Floor_35: 1202728048
+      Floor_13: -617518059
+      Floor_20: -830915864
+      Floor_16: -326178264
+      Floor_37: 1652745271
       Floor_7: 968418606
       Floor_15: -1073455262
-      Floor_32: -1915909476
-      Floor_37: 1652745271
-      Floor_2: -1325274949
+      Floor_51: -1038488968
+      Floor_48: 1480603251
       Floor_21: -196264723
       Floor_24: 1745874752
       Floor_6: 885808751
-      Floor_14: 1916294575
       Floor_19: -1930920281
       Floor_22: -294278172
-      Floor_9: 1918627253
       Floor_28: -1864721305
-      Floor_34: 913399380
       Floor_36: 1773914073
-      Floor_31: 1734026481
-      Floor_26: -1007755412
-      Floor_3: 167183326
+      Floor_47: -1543245006
+      Floor_46: 743734377
+      Floor_43: -850005939
       Floor_11: -1944409439
-      Floor_17: 2040991711
-      Floor_41: -2092924468
+      Floor_42: -114617663
       Floor_18: -1973180501
-      Floor_38: -538257423
-      Floor_1: 392744719
       Floor_39: 1106532846
       Floor_30: -1181556561
       Floor_0: -2097615125
       Floor_10: -180180326
       Floor_5: -1871963447
       Floor_23: -991597557
-      Floor_29: 1560747596
       Floor_40: 927178732
       Floor_12: 2071522533
       Floor_33: -2033148598
       Floor_25: 1880512588
-      Floor_35: 1202728048
-      Floor_13: -617518059
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

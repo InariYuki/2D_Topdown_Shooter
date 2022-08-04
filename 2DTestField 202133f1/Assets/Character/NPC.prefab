@@ -1170,9 +1170,10 @@ MonoBehaviour:
   items_in_backpack: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   action_menu: {fileID: 393986982}
   button: {fileID: -6458364793580647055, guid: 4c369f499f7e9234f88bf73918b5de41, type: 3}
+  item_spawn_rate: 20
   dialogue_box: {fileID: 1932269138}
   NPC_stash: {fileID: 0}
-  key: {fileID: 0}
+  key: {fileID: 5376343621769131158, guid: 813ca6633d39df942a2a1eca2ac0972f, type: 3}
 --- !u!114 &8211412746946789230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1188,6 +1189,7 @@ MonoBehaviour:
   random_appearence: 0
   random_armor: 0
   always_has_weapon: 0
+  sprite_database: {fileID: 11400000, guid: dcd6ff76017d45d48a57fc35766d1cbb, type: 2}
   head_s:
   - {fileID: -1980960338, guid: 10a647470e142e54a91225dade620304, type: 3}
   - {fileID: 2112383491, guid: 10a647470e142e54a91225dade620304, type: 3}

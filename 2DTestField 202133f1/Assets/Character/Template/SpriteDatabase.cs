@@ -8,20 +8,7 @@ public class SpriteDatabase : MonoBehaviour
     [SerializeField] bool random_armor = false;
     [SerializeField] bool always_has_weapon = false;
     int has_weapon_threshold = 30;
-    [SerializeField] List<Sprite> head_s = new List<Sprite>();
-    [SerializeField] List<Sprite> head_f = new List<Sprite>();
-    [SerializeField] List<Sprite> head_b = new List<Sprite>();
-    [SerializeField] List<Sprite> body_s = new List<Sprite>();
-    [SerializeField] List<Sprite> body_f = new List<Sprite>();
-    [SerializeField] List<Sprite> body_b = new List<Sprite>();
-    [SerializeField] List<Sprite> right_hand_s = new List<Sprite>();
-    [SerializeField] List<Sprite> left_hand_s = new List<Sprite>();
-    [SerializeField] List<Sprite> right_leg_s = new List<Sprite>();
-    [SerializeField] List<Sprite> left_leg_s = new List<Sprite>();
-    [SerializeField] List<Sprite> right_hand_v = new List<Sprite>();
-    [SerializeField] List<Sprite> left_hand_v = new List<Sprite>();
-    [SerializeField] List<Sprite> right_leg_v = new List<Sprite>();
-    [SerializeField] List<Sprite> left_leg_v = new List<Sprite>();
+    [SerializeField] SpriteData sprite_database;
     Character character;
     NPC npc;
     private void Awake() {
@@ -45,23 +32,26 @@ public class SpriteDatabase : MonoBehaviour
         }
     }
     public void set_sprite(int head_index , int body_index , int limb_index){
-        character.carcass_head_s = head_s[head_index];
-        character.carcass_head_f = head_f[head_index];
-        character.carcass_head_b = head_b[head_index];
-        character.carcass_body_s = body_s[body_index];
-        character.carcass_body_f = body_f[body_index];
-        character.carcass_body_b = body_b[body_index];
-        character.carcass_right_hand_s = right_hand_s[limb_index];
-        character.carcass_left_hand_s = left_hand_s[limb_index];
-        character.carcass_right_leg_s = right_leg_s[limb_index];
-        character.carcass_left_leg_s = left_leg_s[limb_index];
-        character.carcass_right_hand_v = right_hand_v[limb_index];
-        character.carcass_left_hand_v = left_hand_v[limb_index];
-        character.carcass_right_leg_v = right_leg_v[limb_index];
-        character.carcass_left_leg_v = left_leg_v[limb_index];
+        Head head = sprite_database.head_database[head_index];
+        Body body = sprite_database.body_database[body_index];
+        Limb limb = sprite_database.limb_database[limb_index];
+        character.carcass_head_s = head.head_s;
+        character.carcass_head_f = head.head_f;
+        character.carcass_head_b = head.head_b;
+        character.carcass_body_s = body.body_s;
+        character.carcass_body_f = body.body_f;
+        character.carcass_body_b = body.body_b;
+        character.carcass_right_hand_s = limb.right_hand_s;
+        character.carcass_left_hand_s = limb.left_hand_s;
+        character.carcass_right_leg_s = limb.right_leg_s;
+        character.carcass_left_leg_s = limb.left_leg_s;
+        character.carcass_right_hand_s = limb.right_hand_v;
+        character.carcass_left_hand_s = limb.left_hand_v;
+        character.carcass_right_leg_s = limb.right_leg_v;
+        character.carcass_left_leg_s = limb.left_leg_v;
         character.set_carcass();
     }
     public void set_random_sprite(){
-        set_sprite(Random.Range(0 , head_b.Count) , Random.Range(0 , body_b.Count) , Random.Range(0 , right_hand_s.Count));
+        set_sprite(Random.Range(0 , sprite_database.head_database.Count) , Random.Range(0 , sprite_database.body_database.Count) , Random.Range(0 , sprite_database.limb_database.Count));
     }
 }
