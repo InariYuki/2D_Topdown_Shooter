@@ -13,17 +13,20 @@ public class Character : MonoBehaviour
     [HideInInspector] public float speed = 0;
     float acceleration = 10f;
     LayerMask soft_layer , obstacle_layer;
+    SpriteDatabase sprite_database;
     void Awake(){
         char_ctrl = GetComponent<Rigidbody2D>();
         weapon_ctrl = GetComponentInChildren<WeaponController>();
         collision = GetComponent<Collider2D>();
         hitbox = GetComponentInChildren<Hitbox>();
+        sprite_database = GetComponent<SpriteDatabase>();
         soft_layer = LayerMask.GetMask("Default");
         obstacle_layer = LayerMask.GetMask("Obstacle");
     }
     void Start(){
-        equip_weapon();
         set_carcass();
+        sprite_database.GetAppearence();
+        equip_weapon();
         equip_armor();
     }
     void FixedUpdate()
@@ -238,7 +241,7 @@ public class Character : MonoBehaviour
             left_hand.sprite = left_hand_v;
             right_leg.sprite = right_leg_v;
             left_leg.sprite = left_leg_v;
-            if(direction.y > 0){
+            if(facing_direction.y > 0){
                 head.sprite = head_b;
                 body.sprite = body_b;
                 looking_at = 2;

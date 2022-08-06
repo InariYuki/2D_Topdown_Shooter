@@ -10,12 +10,14 @@ public class Door : MonoBehaviour
     BoxCollider2D collision;
     [SerializeField] Sprite locked_door_sprite;
     [SerializeField] Transform feet;
+    Hitbox hitbox;
     private void Awake() {
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         default_layer = LayerMask.GetMask("Default");
         navbox_layer = LayerMask.GetMask("Navigation");
         collision = GetComponent<BoxCollider2D>();
+        hitbox = GetComponentInChildren<Hitbox>();
     }
     private void Start() {
         StartCoroutine(initial_connect());
@@ -38,10 +40,12 @@ public class Door : MonoBehaviour
     void door_open(){
         animator.SetBool("door_open" , true);
         collision.enabled = false;
+        hitbox.DisableHitbox();
     }
     void door_close(){
         animator.SetBool("door_open" , false);
         collision.enabled = true;
+        hitbox.EnableHitbox();
     }
     public bool door_locked = false;
     void door_lock(){

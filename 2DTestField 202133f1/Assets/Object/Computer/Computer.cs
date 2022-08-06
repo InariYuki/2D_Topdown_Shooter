@@ -5,6 +5,7 @@ using UnityEngine;
 public class Computer : MonoBehaviour
 {
     private void Awake() {
+        BootComputer();
         generate_interaction_menu();
         toggle_action_menu();
     }
@@ -30,14 +31,22 @@ public class Computer : MonoBehaviour
             button_instanced.init(interact_methods[i] , this);
         }
     }
+    void BootComputer(){
+        if(traps.Count != 0){
+            interact_methods.Add("Control traps");
+        }
+        if(doors.Count + gates.Count != 0){
+            interact_methods.Add("Control doors");
+        }
+    }
     public void action(string _action_string){
         if(action_menu_opened){
             toggle_action_menu();
             player.attack_locked = action_menu_opened;
         }
         if(_action_string == "Read E-mail") read_email();
-        else if(_action_string == "Doors") door_control();
-        else if(_action_string == "Traps") trap_control();
+        else if(_action_string == "Control doors") door_control();
+        else if(_action_string == "Control traps") trap_control();
     }
     void read_email(){
         player.player_talk("Thats rude!");
@@ -46,15 +55,21 @@ public class Computer : MonoBehaviour
     void trap_control(){
         for(int i = 0; i < traps.Count; i++){
             LaserTrap laser_trap = traps[i].GetComponent<LaserTrap>();
+            //Add trap type here
             if(laser_trap != null){
                 laser_trap.toggle_laser_trap();
             }
+            //if trap is not null add trap control here
         }
     }
     [SerializeField] List<Door> doors = new List<Door>();
+    [SerializeField] List<Gate> gates = new List<Gate>();
     void door_control(){
         for(int i = 0; i < doors.Count; i++){
             doors[i].door_control();
+        }
+        for(int i = 0; i < gates.Count; i++){
+            gates[i].GateControl();
         }
     }
     bool action_menu_opened;

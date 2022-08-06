@@ -15,7 +15,7 @@ public class SpriteDatabase : MonoBehaviour
         character = GetComponent<Character>();
         npc = GetComponent<NPC>();
     }
-    private void Start() {
+    public void GetAppearence(){
         if(random_appearence){
             set_random_sprite();
             if(random_armor){
@@ -51,7 +51,7 @@ public class SpriteDatabase : MonoBehaviour
         character.carcass_left_leg_s = limb.left_leg_v;
         character.set_carcass();
     }
-    public void set_random_sprite(){
+    void set_random_sprite(){
         set_sprite(Random.Range(0 , sprite_database.head_database.Count) , Random.Range(0 , sprite_database.body_database.Count) , Random.Range(0 , sprite_database.limb_database.Count));
     }
 }
