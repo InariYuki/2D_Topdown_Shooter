@@ -111,7 +111,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1640302722, guid: 09d7667c905a6f44b9d6332b54c1d647, type: 3}
+  m_Sprite: {fileID: 198136135, guid: 09d7667c905a6f44b9d6332b54c1d647, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -199,8 +199,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb6a541d37e4824dbb9aa173ef8f8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  broken: {fileID: 0}
   max_health: 200
+  damage_threshold: 100
+  broken: 0
+  pieces: {fileID: 0}
 --- !u!1001 &102811481224392204
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 231341445020825839}
   - component: {fileID: 876066754113084332}
   m_Layer: 6
-  m_Name: BlueBrickWallTUp
+  m_Name: LaserFenceTUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 839496411, guid: 09d7667c905a6f44b9d6332b54c1d647, type: 3}
+  m_Sprite: {fileID: -134032648, guid: 09d7667c905a6f44b9d6332b54c1d647, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
