@@ -18,6 +18,18 @@ public class NPC : MonoBehaviour
     private void Start() {
         GenerateRandomItem();
     }
+    private void FixedUpdate() {
+        HandleAIProcess();
+    }
+    void HandleAIProcess(){
+        if((transform.position - ui.player.transform.position).magnitude > 6.4f){
+            AI.enabled = false;
+            character.direction = Vector2.zero;
+        }
+        else{
+            AI.enabled = true;
+        }
+    }
     public List<string> interact_methods = new List<string>{"Chat" , "Intimidate" , "Steal" , "Assassinate"};
     public int[] action_success_rate = {0 , 0 , 50 , 50};
     public int[] items_in_backpack = {0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0};

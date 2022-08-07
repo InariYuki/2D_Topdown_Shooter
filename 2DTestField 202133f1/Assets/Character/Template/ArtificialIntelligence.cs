@@ -36,6 +36,7 @@ public class ArtificialIntelligence : MonoBehaviour
                 search_mode();
                 break;
             default:
+                parent.direction = Vector2.zero;
                 break;
         }
     }
