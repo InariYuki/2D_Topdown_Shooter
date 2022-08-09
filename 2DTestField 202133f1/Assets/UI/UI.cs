@@ -46,6 +46,7 @@ public class UI : MonoBehaviour
         equipment.gameObject.SetActive(false);
         npc_backpack.gameObject.SetActive(false);
         money_display.text = player_money.ToString();
+        player_ctl.all_control_locked = true;
     }
     [SerializeField] GameObject player_computer;
     public void toggle_player_computer(){
@@ -75,7 +76,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public GameObject[] slots = new GameObject[46];
     [HideInInspector] public bool backpack_opened;
     public void toggle_backpack(){
-        for(int i = 0; i < 20 ; i++){
+        for(int i = 0; i < 26 ; i++){
             if(slots[i].transform.childCount == 1){
                 Destroy(slots[i].transform.GetChild(0).gameObject);
             }
@@ -297,6 +298,7 @@ public class UI : MonoBehaviour
         player_home.SetActive(true);
         move_player_to_position(new Vector2(1.7f , 0.5f));
         main_menu.SetActive(false);
+        player_ctl.all_control_locked = false;
     }
     [SerializeField] MissionMap mission_map;
     public void city_sector_button_pressed(){
@@ -304,6 +306,12 @@ public class UI : MonoBehaviour
         player_home.SetActive(false);
         close_player_computer();
         move_player_to_position(new Vector2(Random.Range(1 , 3) , Random.Range(1 , 3)) * 6.4f);
+    }
+    public void MainMenuButtonPressed(){
+        ReturnHome();
+        player_ctl.all_control_locked = true;
+        main_menu.SetActive(true);
+        pause_menu.SetActive(false);
     }
     [SerializeField] GameObject travel_terminal;
     public void ToggleTravelTerminal(){
