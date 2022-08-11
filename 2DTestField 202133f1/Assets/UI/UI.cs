@@ -189,7 +189,7 @@ public class UI : MonoBehaviour
         camera_controller.is_dynamic = true;
     }
     [SerializeField] TextMeshProUGUI money_display;
-    int player_money = 500;
+    [HideInInspector] public int player_money = 500;
     public void item_baught(int button_number){
         if(backpack_is_full()) return;
         if(player_money < Item_database.FindObject(current_shop.items_in_backpack[button_number]).price){
@@ -201,6 +201,9 @@ public class UI : MonoBehaviour
         money_display.text = player_money.ToString();
         current_shop.remove_item(button_number);
         Destroy(shop.transform.GetChild(button_number).GetChild(1).gameObject);
+    }
+    public void RefreshMoneyDisplay(){
+        money_display.text = player_money.ToString();
     }
     [SerializeField] GameObject coin_exchanger;
     public void ToggleCoinExchanger(){
@@ -312,6 +315,8 @@ public class UI : MonoBehaviour
         player_ctl.all_control_locked = true;
         main_menu.SetActive(true);
         pause_menu.SetActive(false);
+        player.unequip_armor();
+        player.unequip_weapon();
     }
     [SerializeField] GameObject travel_terminal;
     public void ToggleTravelTerminal(){

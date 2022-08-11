@@ -22,6 +22,7 @@ public class SaveLoadSystem : MonoBehaviour
         for(int i = 0; i < 20; i++){
             file_writer.WriteLine(player_stash.items_in_backpack[i]);
         }
+        file_writer.WriteLine(ui.player_money);
         file_writer.Close();
         save.Close();
     }
@@ -34,6 +35,7 @@ public class SaveLoadSystem : MonoBehaviour
         for(int i = 0; i < 20; i++){
             player_stash.items_in_backpack[i] = int.Parse(load_data[i + 26]);
         }
+        ui.player_money = int.Parse(load_data[46]);
         if(ui.items_in_backpack[24] != 0){
             ItemData target_item = ui.Item_database.FindObject(ui.items_in_backpack[24]);
             Instantiate(target_item.item_instanced , ui.player.weapon.position , Quaternion.identity , ui.player.weapon);
@@ -44,5 +46,6 @@ public class SaveLoadSystem : MonoBehaviour
         }
         ui.player.equip_armor();
         ui.player.equip_weapon();
+        ui.RefreshMoneyDisplay();
     }
 }
