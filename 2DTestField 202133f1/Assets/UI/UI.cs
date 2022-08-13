@@ -8,12 +8,14 @@ public class UI : MonoBehaviour
 {
     [HideInInspector] public Character player;
     [HideInInspector] public PlayerColtroller player_ctl;
+    [HideInInspector] public SelectBox select_box;  
     public ItemScriptable Item_database;
     public Transform object_holder;
     public CameraController camera_controller;
     Canvas canvas;
     private void Awake() {
         canvas = GetComponent<Canvas>();
+        select_box = GetComponent<SelectBox>();
         for(int i = 0; i < 46; i++){
             if(i < 20){ // 0-19
                 slots[i] = backpack.GetChild(i).gameObject;

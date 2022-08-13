@@ -43,6 +43,8 @@ public class Computer : MonoBehaviour
         if(action_menu_opened){
             toggle_action_menu();
             player.attack_locked = action_menu_opened;
+            player.control_state = 0;
+            player.ui.select_box.enabled = false;
         }
         if(_action_string == "Read E-mail") read_email();
         else if(_action_string == "Control doors") door_control();

@@ -71,3 +71,11 @@ MonoBehaviour:
     is_weapon: 0
     is_armor: 0
     usable: 1
+  - item_id: 7
+    price: 200
+    item_sprite: {fileID: 2100752365, guid: dd4529be7464f2344b2dbbb70b5ed3ec, type: 3}
+    ui_image: {fileID: -746385694, guid: 82b6bce08796b034e8f481668090db9a, type: 3}
+    item_instanced: {fileID: 0}
+    is_weapon: 0
+    is_armor: 0
+    usable: 1

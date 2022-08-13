@@ -33,49 +33,60 @@ public class PlayerColtroller : MonoBehaviour
     public UI ui;
     [HideInInspector] public bool attack_locked;
     [HideInInspector] public bool all_control_locked;
+    [HideInInspector] public int control_state = 0; //0 = normal, 1 = select mode
     void player_input(){
-        if(all_control_locked) return;
-        if(Input.GetKeyDown(KeyCode.Tab)){
-            ui.toggle_backpack();
-            if(ui.npc_backpack_opened){
-                if(ui.current_interacting_npc != null) ui.toggle_NPC_backpack(null);
-                else if(ui.current_interacting_stash != null) ui.toggle_stash(null);
-            }
-            if(ui.shop_opened){
-                ui.close_shop();
-                ui.CloseCoinExchanger();
-            }
-            ui.camera_controller.is_dynamic = !ui.backpack_opened;
-        }
-        if(ui.backpack_opened || ui.npc_backpack_opened || ui.shop_opened) return;
-        direction.x = Input.GetAxisRaw("Horizontal");
-        direction.y = Input.GetAxisRaw("Vertical");
-        character.direction = direction.normalized;
-        if(Input.GetKeyDown(KeyCode.Mouse0)){
-            if(attack_locked) return;
-            character.normal_attack();
-        }
-        else if(Input.GetKeyDown(KeyCode.Mouse1)){
-            if(attack_locked) return;
-            character.special_attack();
-        }
-        if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
-            nearest_interactable_object.GetComponent<InteractableBox>().interacted(this , 0);
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
-            ui.use_hotbar_item(20);
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2)){
-            ui.use_hotbar_item(21);
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha3)){
-            ui.use_hotbar_item(22);
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha4)){
-            ui.use_hotbar_item(23);
-        }
-        else if(Input.GetKeyDown(KeyCode.Escape)){
-            ui.toggle_pause_menu();
+        switch (control_state)
+        {
+            case 0:
+                if(all_control_locked) return;
+                if(Input.GetKeyDown(KeyCode.Tab)){
+                    ui.toggle_backpack();
+                    if(ui.npc_backpack_opened){
+                        if(ui.current_interacting_npc != null) ui.toggle_NPC_backpack(null);
+                        else if(ui.current_interacting_stash != null) ui.toggle_stash(null);
+                    }
+                    if(ui.shop_opened){
+                        ui.close_shop();
+                        ui.CloseCoinExchanger();
+                    }
+                    ui.camera_controller.is_dynamic = !ui.backpack_opened;
+                }
+                if(ui.backpack_opened || ui.npc_backpack_opened || ui.shop_opened) return;
+                direction.x = Input.GetAxisRaw("Horizontal");
+                direction.y = Input.GetAxisRaw("Vertical");
+                character.direction = direction.normalized;
+                if(Input.GetKeyDown(KeyCode.Mouse0)){
+                    if(attack_locked) return;
+                    character.normal_attack();
+                }
+                else if(Input.GetKeyDown(KeyCode.Mouse1)){
+                    if(attack_locked) return;
+                    character.special_attack();
+                }
+                if(Input.GetKeyDown(KeyCode.X) && nearest_interactable_object != null){
+                    nearest_interactable_object.GetComponent<InteractableBox>().interacted(this , 0);
+                }
+                if(Input.GetKeyDown(KeyCode.Alpha1)){
+                    ui.use_hotbar_item(20);
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha2)){
+                    ui.use_hotbar_item(21);
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha3)){
+                    ui.use_hotbar_item(22);
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha4)){
+                    ui.use_hotbar_item(23);
+                }
+                else if(Input.GetKeyDown(KeyCode.Escape)){
+                    ui.toggle_pause_menu();
+                }
+                break;
+            case 1:
+                if(Input.GetKeyDown(KeyCode.Mouse0)){
+                    ui.select_box.SelectObject();
+                }
+                break;
         }
     }
     public void hit(int damage , GameObject attacker){

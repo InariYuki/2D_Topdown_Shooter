@@ -9,4 +9,9 @@ public class UsableItem : MonoBehaviour
         ui.items_in_backpack[slot_id] = 0;
         Destroy(item_image.gameObject);
     }
+    public static void HackerComputer(UI ui){
+        ui.select_box.enabled = true;
+        ui.select_box.interact_object_type = 0;
+        ui.player_ctl.control_state = 1;
+    }
 }
