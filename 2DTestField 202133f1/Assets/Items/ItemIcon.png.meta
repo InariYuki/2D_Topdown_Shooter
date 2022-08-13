@@ -229,6 +229,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ItemIcon_6
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 315
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1fee08fd44ff734b8a8ce9771b53bf0
+      internalID: -428040861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ItemIcon_7
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 315
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6c775597b136bf40b7d8cc3b96bbc79
+      internalID: -746385694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -243,8 +285,10 @@ TextureImporter:
       ItemIcon_5: 1846669153
       ItemIcon_0: -2110279347
       ItemIcon_1: 1426934795
+      ItemIcon_7: -746385694
       ItemIcon_3: 207091648
       ItemIcon_2: 1388004459
+      ItemIcon_6: -428040861
       ItemIcon_4: -432751465
   spritePackingTag: 
   pSDRemoveMatte: 0

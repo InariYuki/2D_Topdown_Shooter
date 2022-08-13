@@ -296,10 +296,11 @@ public class UI : MonoBehaviour
         camera_controller.is_dynamic = false;
         main_menu.SetActive(false);
     }
+    Vector2 home_position = new Vector2(1.5f , 2f);
     [SerializeField] GameObject player_home;
     public void load_game_button_pressed(){
         player_home.SetActive(true);
-        move_player_to_position(new Vector2(1.7f , 0.5f));
+        move_player_to_position(home_position);
         main_menu.SetActive(false);
         player_ctl.all_control_locked = false;
     }
@@ -334,7 +335,7 @@ public class UI : MonoBehaviour
         mission_map.RemoveCitySector();
         ClearItemsOnGround();
         player_home.SetActive(true);
-        move_player_to_position(new Vector2(1.7f , 0.5f));
+        move_player_to_position(home_position);
     }
     void ClearItemsOnGround(){
         for(int i = 0 ; i < object_holder.childCount; i++){

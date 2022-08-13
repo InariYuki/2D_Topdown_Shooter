@@ -123,6 +123,8 @@ public class DragDrop : MonoBehaviour , IBeginDragHandler , IEndDragHandler , ID
     }
     public void use(){
         if(!usable) return;
-        print(current_in_slot_id + " " + item_id);
+        if(item_id == 6){
+            UsableItem.HealthPack(this , ui , current_in_slot_id);
+        }
     }
 }
